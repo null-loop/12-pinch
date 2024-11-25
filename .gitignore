@@ -163,4 +163,3 @@ cython_debug/
 
 .spotify-secrets
 .current-token
-current_image.jpg

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import time, sys, json
 import spotipy
-import requests
+
 from urllib.request import urlopen
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
@@ -34,7 +34,7 @@ try:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
             print(last_image_url)
-            image = Image.open(urlopen(last_image_url))
+            image = Image.open("current_image.jpg")
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
