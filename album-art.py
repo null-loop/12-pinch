@@ -31,10 +31,9 @@ try:
         current_album = current['item']['album']
         current_image_url = current_album['images'][0]['url']
         if current_image_url != last_image_url:
-            response = requests.get(current_image_url)
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            image = Image.open(response.raw)
+            image = Image.open(requests.get(current_image_url, stream=True).raw)
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
