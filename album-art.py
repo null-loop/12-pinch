@@ -23,8 +23,7 @@ auth_manager = SpotifyOAuth(client_id=secrets['client-id'], client_secret=secret
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 last_image_url = ""
-with open('current_image.jpg', 'r') as current_image_file:
-    print('OPENED!')
+
 try:
     print("Press CTRL-C to stop.")
     while True:
@@ -34,7 +33,10 @@ try:
         if current_image_url != last_image_url:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            image = Image.open('current_image.jpg', 'r')
+            with open('current_image.jpg', 'r') as current_image_file:
+                image = Image.open('current_image.jpg', 'r')
+
+            #image = Image.open('current_image.jpg', 'r')
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
