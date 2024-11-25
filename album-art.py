@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import time, sys, json
+import time, sys, json, os
 import spotipy
 
 from urllib.request import urlopen
@@ -23,7 +23,7 @@ auth_manager = SpotifyOAuth(client_id=secrets['client-id'], client_secret=secret
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 last_image_url = ""
-
+os.chmod("current_image.jpg", 0o777)
 try:
     print("Press CTRL-C to stop.")
     while True:
@@ -33,7 +33,6 @@ try:
         if current_image_url != last_image_url:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            print(last_image_url)
             image = Image.open("current_image.jpg")
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
