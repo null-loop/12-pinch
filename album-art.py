@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import time, sys, json
 import spotipy
 import urllib.request
