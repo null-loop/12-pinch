@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-import time, sys, json, os
+import time, sys, json
 import spotipy
 import requests
-from io import BytesIO
+from urllib.request import urlopen
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
@@ -33,7 +33,7 @@ try:
         if current_image_url != last_image_url:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            image = Image.open(requests.get(current_image_url, stream=True).raw)
+            image = Image.open(urlopen(last_image_url))
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
