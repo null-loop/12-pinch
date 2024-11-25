@@ -24,7 +24,7 @@ auth_manager = SpotifyOAuth(client_id=secrets['client-id'], client_secret=secret
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 last_image_url = ""
-image_file_name = "current_image.jpg"
+image_file_name = os.path.join(os.path.dirname(__file__), 'current_image.jpg')
 
 try:
     print("Press CTRL-C to stop.")
