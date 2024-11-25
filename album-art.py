@@ -33,8 +33,8 @@ try:
         if current_image_url != last_image_url:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            with open('current_image.jpg', 'r') as current_image_file:
-                image = Image.open('current_image.jpg', 'r')
+            with open('current_image.jpg', 'rb') as current_image_file:
+                image = Image.open(current_image_file)
 
             #image = Image.open('current_image.jpg', 'r')
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
