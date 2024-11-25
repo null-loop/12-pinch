@@ -1,10 +1,12 @@
 #!/usr/bin/env python
-import time, sys, json
+import time, sys, json, os
 import spotipy
 import urllib.request
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
+
+os.chdir()
 
 options = RGBMatrixOptions()
 options.rows = 64
