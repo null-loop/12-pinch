@@ -4,7 +4,7 @@ import spotipy
 from urllib.request import urlopen
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from PIL import Image, ImageFile
+from PIL import Image, ImageFile, JpegImagePlugin
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -35,6 +35,7 @@ try:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
             with open('current_image.jpg', 'rb') as image_file:
+                JpegImagePlugin.JpegImageFile(image_file)
                 image = Image.open(image_file)
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
