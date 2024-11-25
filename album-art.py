@@ -4,7 +4,7 @@ import spotipy
 from urllib.request import urlopen
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from PIL import Image
+from PIL import Image, ImageFile
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -14,6 +14,8 @@ options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 
 matrix = RGBMatrix(options = options)
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 with open('.spotify-secrets', 'r') as secrets_file:
     secrets = json.load(secrets_file)
