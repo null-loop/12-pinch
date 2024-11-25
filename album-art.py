@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 import time, sys, json, os
 import spotipy
-import urllib.request
+import requests
+from io import BytesIO
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
-
-print(os.path.dirname(__file__))
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -24,7 +23,6 @@ auth_manager = SpotifyOAuth(client_id=secrets['client-id'], client_secret=secret
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 last_image_url = ""
-image_file_name = os.path.join(os.path.dirname(__file__), 'current_image.jpg')
 
 try:
     print("Press CTRL-C to stop.")
@@ -33,10 +31,10 @@ try:
         current_album = current['item']['album']
         current_image_url = current_album['images'][0]['url']
         if current_image_url != last_image_url:
-            urllib.request.urlretrieve(current_image_url, image_file_name)
+            response = requests.get(current_image_url)
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            image = Image.open(image_file_name)
+            image = Image.open(BytesIO(response.content))
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
