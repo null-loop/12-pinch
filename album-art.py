@@ -34,7 +34,7 @@ try:
             response = requests.get(current_image_url)
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            image = Image.open(BytesIO(response.content))
+            image = Image.open(response.raw)
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
