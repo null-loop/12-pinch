@@ -6,7 +6,7 @@ from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
 
-os.chdir()
+os.chdir(os.path.dirname(__file__))
 
 options = RGBMatrixOptions()
 options.rows = 64
