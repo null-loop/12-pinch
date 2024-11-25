@@ -23,7 +23,8 @@ auth_manager = SpotifyOAuth(client_id=secrets['client-id'], client_secret=secret
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 last_image_url = ""
-os.chmod("current_image.jpg", 0o777)
+with open('current_image.jpg', 'r') as current_image_file:
+    print('OPENED!')
 try:
     print("Press CTRL-C to stop.")
     while True:
