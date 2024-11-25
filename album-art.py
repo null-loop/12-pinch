@@ -33,6 +33,7 @@ try:
         if current_image_url != last_image_url:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
+            print(last_image_url)
             image = Image.open(urlopen(last_image_url))
             image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
             matrix.SetImage(image.convert('RGB'))
