@@ -45,7 +45,7 @@ try:
             current_image_url = current_album['images'][0]['url']
             if current_image_url != last_image_url:
                 print("Updating image to " + current_album['name'])
-
+                current_image_url = last_image_url
                 image_id = urllib.parse.urlparse(current_image_url).path.split('/')[1]
                 cached_image_path = local_image_cache_dir +'/' + image_id + '.png'
 
