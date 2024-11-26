@@ -36,10 +36,9 @@ try:
         if current_image_url != last_image_url:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
-            with open('current_image.jpg', 'rb') as image_file:
-                image = Image.open(urlopen(last_image_url))
-                image.thumbnail((matrix.width, matrix.height))
-                matrix.SetImage(image.convert('RGB'))
+            image = Image.open(urlopen(last_image_url))
+            image.thumbnail((matrix.width, matrix.height))
+            matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
 except KeyboardInterrupt:
     sys.exit(0)
