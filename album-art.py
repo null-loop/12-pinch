@@ -11,7 +11,7 @@ options.rows = 64
 options.cols = 64
 options.chain_length = 1
 options.parallel = 1
-options.hardware_mapping = 'adafruit-hat'
+options.hardware_mapping = 'adafruit-hat-123'
 options.gpio_slowdown = 4
 options.disable_hardware_pulsing = True
 
