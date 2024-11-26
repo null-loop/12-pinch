@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 import time, sys, json
 import spotipy
-from urllib.request import urlopen
+import mahotas
+import urllib
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageFile
+
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -15,6 +17,7 @@ options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
 options.disable_hardware_pulsing = True
 options.limit_refresh_rate_hz = 60
+options.drop_privileges = False
 
 matrix = RGBMatrix(options = options)
 
@@ -33,13 +36,15 @@ try:
     while True:
         current = sp.current_user_playing_track()
         if current is not None:
-            # TODO: Handle when nothing is currently playing
             current_album = current['item']['album']
             current_image_url = current_album['images'][0]['url']
             if current_image_url != last_image_url:
                 last_image_url = current_image_url
+                urllib.request.urlretrieve(current_image_url, 'current-image.jpg')
                 print("Updating image to " + current_album['name'])
-                image = Image.open(urlopen(last_image_url))
+                jpg = mahotas.imread('current-image.jpg')
+                mahotas.imsave('current-image.png', jpg)
+                image = Image.open('current-image.png')
                 image.thumbnail((matrix.width, matrix.height))
                 matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
