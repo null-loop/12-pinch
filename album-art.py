@@ -37,7 +37,7 @@ try:
             with open('current_image.jpg', 'rb') as image_file:
                 JpegImagePlugin.JpegImageFile(image_file)
                 image = Image.open(image_file)
-            image.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+            image.thumbnail((matrix.width, matrix.height))
             matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
 except KeyboardInterrupt:
