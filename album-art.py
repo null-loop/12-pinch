@@ -4,7 +4,7 @@ import spotipy
 from urllib.request import urlopen
 from spotipy.oauth2 import SpotifyOAuth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from PIL import Image, ImageFile, JpegImagePlugin
+from PIL import Image, ImageFile
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -32,14 +32,16 @@ try:
     print("Press CTRL-C to stop.")
     while True:
         current = sp.current_user_playing_track()
-        current_album = current['item']['album']
-        current_image_url = current_album['images'][0]['url']
-        if current_image_url != last_image_url:
-            last_image_url = current_image_url
-            print("Updating image to " + current_album['name'])
-            image = Image.open(urlopen(last_image_url))
-            image.thumbnail((matrix.width, matrix.height))
-            matrix.SetImage(image.convert('RGB'))
+        if current is not None:
+            # TODO: Handle when nothing is currently playing
+            current_album = current['item']['album']
+            current_image_url = current_album['images'][0]['url']
+            if current_image_url != last_image_url:
+                last_image_url = current_image_url
+                print("Updating image to " + current_album['name'])
+                image = Image.open(urlopen(last_image_url))
+                image.thumbnail((matrix.width, matrix.height))
+                matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
 except KeyboardInterrupt:
     sys.exit(0)
