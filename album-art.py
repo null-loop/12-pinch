@@ -23,7 +23,10 @@ matrix = RGBMatrix(options = options)
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-os.mkdir('.local-image-cache')
+local_image_cache_dir = '.local-image-cache'
+
+if not os.path.isdir(local_image_cache_dir):
+    os.mkdir(local_image_cache_dir)
 
 with open('.spotify-secrets', 'r') as secrets_file:
     secrets = json.load(secrets_file)
@@ -44,11 +47,11 @@ try:
                 print("Updating image to " + current_album['name'])
 
                 image_id = urllib.parse.urlparse(current_image_url).path
-                cached_image_path = '.local-image-cache/' + image_id + '.png'
+                cached_image_path = local_image_cache_dir +'/' + image_id + '.png'
 
                 if not os.path.isfile(cached_image_path):
-                    urllib.request.urlretrieve(current_image_url, 'current-image.jpg')
-                    jpg = mahotas.imread('current-image.jpg')
+                    urllib.request.urlretrieve(current_image_url, 'temp-download.jpg')
+                    jpg = mahotas.imread('temp-download.jpg')
                     mahotas.imsave(cached_image_path, jpg)
 
                 image = Image.open(cached_image_path)
