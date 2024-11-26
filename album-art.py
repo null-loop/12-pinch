@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import time, sys, json
+import time, sys, json, os
 import spotipy
 import mahotas
 import urllib
@@ -23,6 +23,8 @@ matrix = RGBMatrix(options = options)
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
+os.mkdir('.local-image-cache')
+
 with open('.spotify-secrets', 'r') as secrets_file:
     secrets = json.load(secrets_file)
 
@@ -39,12 +41,17 @@ try:
             current_album = current['item']['album']
             current_image_url = current_album['images'][0]['url']
             if current_image_url != last_image_url:
-                last_image_url = current_image_url
-                urllib.request.urlretrieve(current_image_url, 'current-image.jpg')
                 print("Updating image to " + current_album['name'])
-                jpg = mahotas.imread('current-image.jpg')
-                mahotas.imsave('current-image.png', jpg)
-                image = Image.open('current-image.png')
+
+                image_id = urllib.parse.urlparse(current_image_url).path
+                cached_image_path = '.local-image-cache/' + image_id
+
+                if not os.path.isfile(cached_image_path):
+                    urllib.request.urlretrieve(current_image_url, 'current-image.jpg')
+                    jpg = mahotas.imread('current-image.jpg')
+                    mahotas.imsave(cached_image_path, jpg)
+
+                image = Image.open(cached_image_path)
                 image.thumbnail((matrix.width, matrix.height))
                 matrix.SetImage(image.convert('RGB'))
         time.sleep(1)

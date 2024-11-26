@@ -163,3 +163,5 @@ cython_debug/
 
 .spotify-secrets
 .current-token
+
+.local-image-cache/
