@@ -35,9 +35,7 @@ try:
             last_image_url = current_image_url
             print("Updating image to " + current_album['name'])
             with open('current_image.jpg', 'rb') as image_file:
-                #JpegImagePlugin.JpegImageFile(image_file)
                 image = Image.open(urlopen(last_image_url))
-                #image = Image.open(image_file)
                 image.thumbnail((matrix.width, matrix.height))
                 matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
