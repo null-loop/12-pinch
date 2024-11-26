@@ -44,7 +44,7 @@ try:
                 print("Updating image to " + current_album['name'])
 
                 image_id = urllib.parse.urlparse(current_image_url).path
-                cached_image_path = '.local-image-cache/' + image_id
+                cached_image_path = '.local-image-cache/' + image_id + '.png'
 
                 if not os.path.isfile(cached_image_path):
                     urllib.request.urlretrieve(current_image_url, 'current-image.jpg')
