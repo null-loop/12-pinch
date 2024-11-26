@@ -14,6 +14,7 @@ options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 4
 options.disable_hardware_pulsing = True
+options.show_refresh_rate = True
 
 matrix = RGBMatrix(options = options)
 
