@@ -55,7 +55,7 @@ try:
                     jpg = mahotas.imread('temp-download.jpg')
                     mahotas.imsave(cached_image_path, jpg)
                     image = Image.open(cached_image_path)
-                    image.thumbnail((128, 128))
+                    image.thumbnail((196, 196))
                     image.save(cached_image_path)
                 else:
                     image = Image.open(cached_image_path)
