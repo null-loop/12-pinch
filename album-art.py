@@ -70,7 +70,7 @@ try:
                 bottom_half = image.crop((0,64,128,128))
                 bottom_half.save("current-bottom.png");
 
-                stitched = Image.new('RGB', 256, 64)
+                stitched = Image.new('RGB', (256, 64))
                 stitched.paste(top_half, (0, 0))
                 stitched.paste(bottom_half, (128, 0))
 
