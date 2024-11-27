@@ -56,20 +56,21 @@ try:
                     mahotas.imsave(cached_image_path, jpg)
                     image = Image.open(cached_image_path)
                     image.thumbnail((128, 128))
-
-                    # attempt 1 - find a first path
-                    # take the bottom half (64) and make single row'ed image
-                    # ab
-                    # cd
-                    # becomes
-                    # abcd (256px)
-                    bottom_half = image[64:,:]
-                    image.save("current-bottom.png");
-
                     image.save(cached_image_path)
                 else:
                     image = Image.open(cached_image_path)
+
+                # attempt 1 - find a first path
+                # take the bottom half (64) and make single row'ed image
+                # ab
+                # cd
+                # becomes
+                # abcd (256px)
+                bottom_half = image.crop((0,64,128,128))
+                bottom_half.save("current-bottom.png");
+
                 rgb = image.convert('RGB')
+
                 matrix.SetImage(rgb)
         time.sleep(1)
 except KeyboardInterrupt:
