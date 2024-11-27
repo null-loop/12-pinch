@@ -66,10 +66,15 @@ try:
                 # cd
                 # becomes
                 # abcd (256px)
+                top_half = image.crop((0,0,128,63))
                 bottom_half = image.crop((0,64,128,128))
                 bottom_half.save("current-bottom.png");
 
-                rgb = image.convert('RGB')
+                stitched = Image.New('RGB', 256, 64)
+                stitched.paste(top_half, (0, 0))
+                stitched.paste(bottom_half, (128, 0))
+
+                rgb = stitched.convert('RGB')
 
                 matrix.SetImage(rgb)
         time.sleep(1)
