@@ -52,10 +52,13 @@ try:
                 if not os.path.isfile(cached_image_path):
                     urllib.request.urlretrieve(current_image_url, 'temp-download.jpg')
                     jpg = mahotas.imread('temp-download.jpg')
-                    resized = mahotas.imresize(jpg, [64, 64])
-                    mahotas.imsave(cached_image_path, resized)
+                    mahotas.imsave(cached_image_path, jpg)
+                    image = Image.open(cached_image_path)
+                    image.thumbnail((matrix.width, matrix.height))
+                    image.save(cached_image_path)
+                else:
+                    image = Image.open(cached_image_path)
 
-                image = Image.open(cached_image_path)
                 matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
 except KeyboardInterrupt:
