@@ -16,7 +16,7 @@ options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
 options.disable_hardware_pulsing = True
-options.limit_refresh_rate_hz = 60
+options.limit_refresh_rate_hz = 120
 options.drop_privileges = False
 
 matrix = RGBMatrix(options = options)
@@ -52,10 +52,10 @@ try:
                 if not os.path.isfile(cached_image_path):
                     urllib.request.urlretrieve(current_image_url, 'temp-download.jpg')
                     jpg = mahotas.imread('temp-download.jpg')
-                    mahotas.imsave(cached_image_path, jpg)
+                    resized = mahotas.imresize(jpg, [64, 64])
+                    mahotas.imsave(cached_image_path, resized)
 
                 image = Image.open(cached_image_path)
-                image.thumbnail((matrix.width, matrix.height))
                 matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
 except KeyboardInterrupt:
