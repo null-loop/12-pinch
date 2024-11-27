@@ -11,7 +11,7 @@ from PIL import Image, ImageFile
 options = RGBMatrixOptions()
 options.rows = 64
 options.cols = 64
-options.chain_length = 3
+options.chain_length = 4
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
@@ -55,7 +55,7 @@ try:
                     jpg = mahotas.imread('temp-download.jpg')
                     mahotas.imsave(cached_image_path, jpg)
                     image = Image.open(cached_image_path)
-                    image.thumbnail((196, 196))
+                    image.thumbnail((256, 256))
                     image.save(cached_image_path)
                 else:
                     image = Image.open(cached_image_path)
