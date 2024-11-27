@@ -9,8 +9,8 @@ from PIL import Image, ImageFile
 
 
 options = RGBMatrixOptions()
-options.rows = 64
-options.cols = 64
+options.rows = 128
+options.cols = 128
 options.chain_length = 4
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
