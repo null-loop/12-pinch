@@ -59,7 +59,8 @@ try:
                     image.save(cached_image_path)
                 else:
                     image = Image.open(cached_image_path)
-                matrix.SetImage(image.convert('RGB'))
+                rgb = image.convert('RGB')
+                matrix.SetImage(rgb)
         time.sleep(1)
 except KeyboardInterrupt:
     sys.exit(0)
