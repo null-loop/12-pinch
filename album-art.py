@@ -11,12 +11,11 @@ from PIL import Image, ImageFile
 options = RGBMatrixOptions()
 options.rows = 64
 options.cols = 64
-options.chain_length = 1
+options.chain_length = 4
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
 options.disable_hardware_pulsing = True
-options.limit_refresh_rate_hz = 120
 options.drop_privileges = False
 
 matrix = RGBMatrix(options = options)
@@ -24,6 +23,8 @@ matrix = RGBMatrix(options = options)
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 local_image_cache_dir = '.local-image-cache'
+
+#TODO:Purge cache arg
 
 if not os.path.isdir(local_image_cache_dir):
     os.mkdir(local_image_cache_dir)
