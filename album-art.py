@@ -55,7 +55,17 @@ try:
                     jpg = mahotas.imread('temp-download.jpg')
                     mahotas.imsave(cached_image_path, jpg)
                     image = Image.open(cached_image_path)
-                    image.thumbnail((256, 256))
+                    image.thumbnail((128, 128))
+
+                    # attempt 1 - find a first path
+                    # take the bottom half (64) and make single row'ed image
+                    # ab
+                    # cd
+                    # becomes
+                    # abcd (256px)
+                    bottom_half = image[64:,:]
+                    image.save("current-bottom.png");
+
                     image.save(cached_image_path)
                 else:
                     image = Image.open(cached_image_path)
