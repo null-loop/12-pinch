@@ -9,8 +9,8 @@ from PIL import Image, ImageFile
 
 
 options = RGBMatrixOptions()
-options.rows = 128
-options.cols = 128
+options.rows = 64
+options.cols = 64
 options.chain_length = 4
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
@@ -59,7 +59,6 @@ try:
                     image.save(cached_image_path)
                 else:
                     image = Image.open(cached_image_path)
-
                 matrix.SetImage(image.convert('RGB'))
         time.sleep(1)
 except KeyboardInterrupt:
