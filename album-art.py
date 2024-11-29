@@ -15,6 +15,7 @@ options.chain_length = 4
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
+options.brightness = 50
 options.disable_hardware_pulsing = True
 options.drop_privileges = False
 
