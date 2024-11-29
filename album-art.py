@@ -66,7 +66,7 @@ try:
                 # cd
                 # becomes
                 # abcd (256px)
-                top_half = image.crop((0,0,128,63))
+                top_half = image.crop((0,0,128,64))
                 bottom_half = image.crop((0,64,128,128))
                 bottom_half.save("current-bottom.png");
 
