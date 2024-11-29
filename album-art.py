@@ -15,7 +15,11 @@ options.chain_length = 4
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
+options.limit_refresh_rate_hz = 24
 options.brightness = 50
+
+#TODO:Can we limit the refresh rate?
+
 options.disable_hardware_pulsing = True
 options.drop_privileges = False
 
@@ -41,6 +45,7 @@ last_image_url = ""
 try:
     print("Press CTRL-C to stop.")
     while True:
+        #TODO:Handle spotify / network time outs gracefully!
         current = sp.current_user_playing_track()
         if current is not None:
             current_album = current['item']['album']
