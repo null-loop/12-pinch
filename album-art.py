@@ -15,7 +15,7 @@ options.chain_length = 4
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
-options.limit_refresh_rate_hz = 24
+options.limit_refresh_rate_hz = 32
 options.brightness = 50
 
 #TODO:Can we limit the refresh rate?
