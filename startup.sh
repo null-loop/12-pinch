@@ -1,2 +1,4 @@
 #!/bin/sh
-$(dirname "$0")/venv/bin/python3 $(dirname "$0")/album-art.py
+pushd $(dirname "$0")
+./venv/bin/python3 album-art.py
+popd
