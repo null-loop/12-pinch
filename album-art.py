@@ -17,9 +17,6 @@ options.hardware_mapping = 'adafruit-hat'
 options.gpio_slowdown = 2
 options.limit_refresh_rate_hz = 120
 options.brightness = 50
-
-#TODO:Can we limit the refresh rate?
-
 options.disable_hardware_pulsing = True
 options.drop_privileges = False
 
@@ -37,6 +34,9 @@ if not os.path.isdir(local_image_cache_dir):
 with open('.spotify-secrets', 'r') as secrets_file:
     secrets = json.load(secrets_file)
 
+with open('deny-artists.json', 'r') as deny_artists_file:
+    deny_artists = json.load(deny_artists_file)
+
 auth_manager = SpotifyOAuth(client_id=secrets['client-id'], client_secret=secrets['client-secret'], scope='user-read-playback-state', redirect_uri='http://localhost:8080/spotify/callback')
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
@@ -46,43 +46,51 @@ try:
     print("Press CTRL-C to stop.")
     while True:
         #TODO:Handle spotify / network time outs gracefully!
-        current = sp.current_user_playing_track()
-        if current is not None:
-            current_album = current['item']['album']
-            current_image_url = current_album['images'][0]['url']
-            if current_image_url != last_image_url:
-                print("Updating image to " + current_album['name'] + ' from ' + current_image_url)
-                last_image_url = current_image_url
-                image_id = urllib.parse.urlparse(current_image_url).path.split('/')[-1]
-                cached_image_path = local_image_cache_dir +'/' + image_id + '.png'
+        try:
+            current = sp.current_user_playing_track()
+            if current is not None:
+                current_album = current['item']['album']
+                artists = current['item']['artists']
+                # if any artist name is in the deny_artists list we don't update
+                denied = False
+                for artist in artists:
+                    if artist['name'].lower() in deny_artists:
+                        denied = True
 
-                if not os.path.isfile(cached_image_path):
-                    urllib.request.urlretrieve(current_image_url, 'temp-download.jpg')
-                    jpg = mahotas.imread('temp-download.jpg')
-                    mahotas.imsave(cached_image_path, jpg)
-                    image = Image.open(cached_image_path)
-                    image.thumbnail((128, 128))
-                    image.save(cached_image_path)
-                else:
-                    image = Image.open(cached_image_path)
+                if denied:
+                    continue
 
-                # attempt 1 - find a first path
-                # take the bottom half (64) and make single row'ed image
-                # ab
-                # cd
-                # becomes
-                # abcd (256px)
-                top_half = image.crop((0,0,128,64))
-                bottom_half = image.crop((0,64,128,128))
-                bottom_half.save("current-bottom.png");
+                current_image_url = current_album['images'][0]['url']
+                if current_image_url != last_image_url:
+                    print("Updating image to " + current_album['name'] + ' from ' + current_image_url)
+                    last_image_url = current_image_url
+                    image_id = urllib.parse.urlparse(current_image_url).path.split('/')[-1]
+                    cached_image_path = local_image_cache_dir +'/' + image_id + '.png'
 
-                stitched = Image.new('RGB', (256, 64))
-                stitched.paste(top_half, (0, 0))
-                stitched.paste(bottom_half, (128, 0))
+                    if not os.path.isfile(cached_image_path):
+                        urllib.request.urlretrieve(current_image_url, 'temp-download.jpg')
+                        jpg = mahotas.imread('temp-download.jpg')
+                        mahotas.imsave(cached_image_path, jpg)
+                        image = Image.open(cached_image_path)
+                        image.thumbnail((128, 128))
+                        image.save(cached_image_path)
+                    else:
+                        image = Image.open(cached_image_path)
 
-                rgb = stitched.convert('RGB')
+                    top_half = image.crop((0,0,128,64))
+                    bottom_half = image.crop((0,64,128,128))
+                    bottom_half.save("current-bottom.png");
 
-                matrix.SetImage(rgb)
+                    stitched = Image.new('RGB', (256, 64))
+                    stitched.paste(top_half, (0, 0))
+                    stitched.paste(bottom_half, (128, 0))
+
+                    rgb = stitched.convert('RGB')
+
+                    matrix.SetImage(rgb)
+        except:
+            print("Error updating image.")
+
         time.sleep(1)
 except KeyboardInterrupt:
     sys.exit(0)
