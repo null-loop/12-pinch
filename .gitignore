@@ -167,3 +167,5 @@ cython_debug/
 .local-image-cache/
 
 temp-download.jpg
+
+.github-secret
