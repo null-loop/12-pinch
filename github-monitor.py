@@ -21,7 +21,7 @@ def update_repo(repo_name, label):
             status.branch_count = repo.get_branches().totalCount
             return status
 
-def render_status(info, row):
+def render_status(info: BuildStatus, row):
     # todo: calc y offset from row
     y_offset = 2
     graphics.DrawText(matrix, font, 2, y_offset, white, info.label)
