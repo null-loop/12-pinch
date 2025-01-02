@@ -24,7 +24,7 @@ def update_repo(repo_name, label):
 def render_status(info: BuildStatus, row):
     # todo: calc y offset from row
     y_offset = 2
-    graphics.DrawCircle(matrix, 15, 15, 10, green)
+    graphics.DrawText(matrix, font, 2, y_offset, white, "Core")
 
 options = RGBMatrixOptions()
 options.rows = 64
