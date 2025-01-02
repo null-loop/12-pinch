@@ -40,6 +40,7 @@ options.drop_privileges = False
 
 matrix = RGBMatrix(options = options)
 
+font = graphics.Font()
 font = font.LoadFont("10x20.bdf")
 white = graphics.Color(0, 0, 0)
 red = graphics.Color(255, 0, 0)
