@@ -61,7 +61,7 @@ try:
         web = update_repo("pico.frontend", "Web")
         cms = update_repo("pico.payloadcms", "CMS")
 
-        outputImage = Image.new('RGB', (256, 64))
+        outputImage = Image.new('RGB', (128, 128))
         outputImageDraw = ImageDraw.Draw(outputImage)
 
         render_status(core, 0, outputImageDraw)
