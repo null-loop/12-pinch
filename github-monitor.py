@@ -2,6 +2,7 @@ import time, sys, json, os
 from github import Github
 from github import Auth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
+#from PIL import Image, ImageFile
 
 class BuildStatus:
     label = ""
@@ -41,7 +42,7 @@ options.drop_privileges = False
 matrix = RGBMatrix(options = options)
 
 font = graphics.Font()
-font = font.LoadFont("10x20.bdf")
+font = font.LoadFont("9x18B.bdf")
 white = graphics.Color(0, 0, 0)
 red = graphics.Color(255, 0, 0)
 green = graphics.Color(0, 255, 0)
