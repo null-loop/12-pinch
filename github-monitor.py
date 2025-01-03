@@ -37,8 +37,8 @@ def render_status(info: BuildStatus, row, draw):
     if info.state == 'pending': state_color = 'Yellow'
     if info.state == 'failed': state_color = 'Red'
 
-    draw.line([2, y_offset + row_height, 125, y_offset + row_height], fill=state_color)
-    draw.text([2, y_offset - 2], info.label, font=mono_font, fill=state_color)
+    draw.line([4, y_offset + row_height, 125, y_offset + row_height], fill=state_color)
+    draw.text([4, y_offset - 2], info.label, font=mono_font, fill=state_color)
 
 options = RGBMatrixOptions()
 options.rows = 64
