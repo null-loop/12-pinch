@@ -42,11 +42,11 @@ def render_status(info: BuildStatus, row, draw):
     draw.line([4, y_offset + row_height + 1, 125, y_offset + row_height + 1], fill=state_color)
     draw.text([4, y_offset - 2], info.label, font=big_font, fill=state_color)
 
-    draw.bitmap([78, y_offset], pr_icon)
-    draw.bitmap([78, y_offset + 12], branch_icon)
+    draw.bitmap([78, y_offset], pr_icon, fill='DarkGrey')
+    draw.bitmap([78, y_offset + 12], branch_icon, fill='DarkGrey')
 
-    draw.text([90, y_offset - 2], "{0}".format(info.pr_count), font=small_font, fill='White')
-    draw.text([90, y_offset + 10], "{0}".format(info.branch_count), font=small_font, fill='White')
+    draw.text([92, y_offset - 2], "{0}".format(info.pr_count), font=small_font, fill='White')
+    draw.text([92, y_offset + 10], "{0}".format(info.branch_count), font=small_font, fill='White')
 
 options = RGBMatrixOptions()
 options.rows = 64
