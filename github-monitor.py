@@ -12,12 +12,8 @@ class BuildStatus:
 
 def update_repo(github, repo_name, label) -> BuildStatus:
     user = github.get_user()
-    print(user.name)
-    print(user.email)
     repos = user.get_repos()
-    print(repos.totalCount)
     for repo in repos:
-        print (repo.name)
         if repo.name == repo_name:
             commit = repo.get_commit("main")
             status = BuildStatus()
@@ -25,16 +21,18 @@ def update_repo(github, repo_name, label) -> BuildStatus:
             status.state = commit.get_combined_status().state
             status.pr_count = repo.get_pulls().totalCount
             status.branch_count = repo.get_branches().totalCount
-            print("Found!")
             return status
 
 def render_status(info: BuildStatus, row, draw):
     # todo: calc offsets from row - remember it's 256 x 64
     row_height = 23
     y_offset = (row * row_height) + 2 + (row * 2)
-    print (info.state)
-    draw.line([2, y_offset, 125, y_offset], fill='Yellow')
-    draw.line([2, y_offset + row_height, 125, y_offset + row_height], fill='YellowGreen')
+
+    state_color = 'Green'
+    if info.state == 'pending': state_color = 'Yellow'
+    if info.state == 'failed': state_color = 'Red'
+
+    draw.line([2, y_offset + row_height, 125, y_offset + row_height], fill=state_color)
 
 options = RGBMatrixOptions()
 options.rows = 64
