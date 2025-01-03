@@ -7,7 +7,9 @@ from PIL import Image, ImageFile, ImageDraw, ImageFont, ImageColor
 def render_repo_state(repo_name, label, row, draw):
     print("Checking")
     print(repo_name)
-    repos = git.get_user().get_repos()
+    user = git.get_user()
+    print(user.name)
+    repos = user.get_repos()
     for repo in repos:
         print(repo.name)
         if repo.name == repo_name:
