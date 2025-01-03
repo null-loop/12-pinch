@@ -33,7 +33,7 @@ def update_repo(repos, repo_name, label) -> BuildStatus:
 def render_status(info: BuildStatus, row, draw):
     # todo: calc offsets from row - remember it's 256 x 64
     row_height = 23
-    y_offset = (row * row_height) + 2 + (row * 2)
+    y_offset = (row * row_height) + 1 + (row * 2)
 
     state_color = 'Green'
     if info.state == 'pending': state_color = 'Yellow'
