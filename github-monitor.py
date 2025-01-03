@@ -29,8 +29,6 @@ def render_status(info: BuildStatus, row, draw):
     draw.line([2, y_offset, 126, y_offset], fill='Yellow')
     draw.line([2, y_offset + row_height, 126, y_offset + row_height], fill='Yellow')
 
-    draw.text()
-
 options = RGBMatrixOptions()
 options.rows = 64
 options.cols = 64
