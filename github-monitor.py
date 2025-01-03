@@ -39,7 +39,7 @@ def render_status(info: BuildStatus, row, draw):
     if info.state == 'pending': state_color = 'Yellow'
     if info.state == 'failed': state_color = 'Red'
 
-    draw.line([4, y_offset + row_height, 125, y_offset + row_height], fill=state_color)
+    draw.line([4, y_offset + row_height + 1, 125, y_offset + row_height], fill=state_color)
     draw.text([4, y_offset - 2], info.label, font=big_font, fill=state_color)
 
     draw.bitmap([78, y_offset], pr_icon)
