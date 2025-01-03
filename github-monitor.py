@@ -5,14 +5,16 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageFile, ImageDraw, ImageFont, ImageColor
 
 def render_repo_state(repo_name, label, row, draw):
-    print("Checking %1".format(label))
+    print("Checking")
     repos = git.get_user().get_repos()
     for repo in repos:
         if repo.name == repo_name:
+            print("Found")
             commit = repo.get_commit("main")
             state = commit.get_combined_status().state
             pr_count = repo.get_pulls().totalCount
             branch_count = repo.get_branches().totalCount
+            print("Read")
             row_height = 23
             y_offset = (row * row_height) + 2 + (row * 2)
             build_color = 'Green'
