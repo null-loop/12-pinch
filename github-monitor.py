@@ -1,8 +1,8 @@
 import time, sys, json, os
 from github import Github
 from github import Auth
-from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
-#from PIL import Image, ImageFile
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from PIL import Image, ImageFile, ImageDraw, ImageFont, ImageColor
 
 class BuildStatus:
     label = ""
@@ -22,10 +22,14 @@ def update_repo(repo_name, label):
             status.branch_count = repo.get_branches().totalCount
             return status
 
-def render_status(info: BuildStatus, row):
-    # todo: calc y offset from row
-    y_offset = 2
-    graphics.DrawText(matrix, font, 2, y_offset, white, "Core")
+def render_status(info: BuildStatus, row, draw):
+    # todo: calc offsets from row - remember it's 256 x 64
+    row_height = 23
+    y_offset = (row * row_height) + 2
+    draw.line([2, y_offset, 126, y_offset], fill='Yellow')
+    draw.line([2, y_offset + row_height, 126, y_offset + row_height], fill='Yellow')
+
+    draw.text()
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -41,19 +45,14 @@ options.drop_privileges = False
 
 matrix = RGBMatrix(options = options)
 
-font = graphics.Font()
-font = font.LoadFont("9x18B.bdf")
-white = graphics.Color(0, 0, 0)
-red = graphics.Color(255, 0, 0)
-green = graphics.Color(0, 255, 0)
-blue = graphics.Color(0, 0, 255)
-
 with open('.github-secret', 'r') as github_secret_file:
     github_pat = github_secret_file.read().rstrip('\n')
 
 auth = Auth.Token(github_pat)
 
 git = Github(auth=auth)
+
+font = ImageFont.truetype("FreeMono.ttf", 12)
 
 try:
     print("Press CTRL-C to stop.")
@@ -64,7 +63,21 @@ try:
         web = update_repo("pico.frontend", "Web")
         cms = update_repo("pico.payloadcms", "CMS")
 
-        render_status(core, 1)
+        outputImage = Image.new('RGB', (256, 64))
+        outputImageDraw = ImageDraw.Draw(outputImage)
+
+        render_status(core, 1, outputImageDraw)
+
+        top_half = outputImage.crop((0, 0, 128, 64))
+        bottom_half = outputImage.crop((0, 64, 128, 128))
+
+        stitched = Image.new('RGB', (256, 64))
+        stitched.paste(top_half, (0, 0))
+        stitched.paste(bottom_half, (128, 0))
+
+        rgb = outputImage.convert('RGB')
+
+        matrix.SetImage(stitched)
 
         time.sleep(60)
 except KeyboardInterrupt:
