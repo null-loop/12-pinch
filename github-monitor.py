@@ -14,6 +14,7 @@ def update_repo(github, repo_name, label) -> BuildStatus:
     user = github.get_user()
     print(user.name)
     repos = user.get_repos()
+    print(repos.totalCount)
     for repo in repos:
         print (repo.name)
         if repo.name == repo_name:
