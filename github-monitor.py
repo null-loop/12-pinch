@@ -5,6 +5,7 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageFile, ImageDraw, ImageFont, ImageColor
 
 def render_repo_state(repo_name, label, row, draw):
+    print("Checking %1".format(label))
     repos = git.get_user().get_repos()
     for repo in repos:
         if repo.name == repo_name:
