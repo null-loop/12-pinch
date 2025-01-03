@@ -65,10 +65,10 @@ try:
         outputImageDraw = ImageDraw.Draw(outputImage)
 
         render_status(core, 0, outputImageDraw)
-        render_status(graph, 0, outputImageDraw)
-        render_status(sdk, 0, outputImageDraw)
-        render_status(web, 0, outputImageDraw)
-        render_status(cms, 0, outputImageDraw)
+        render_status(graph, 1, outputImageDraw)
+        render_status(sdk, 2, outputImageDraw)
+        render_status(web, 3, outputImageDraw)
+        render_status(cms, 4, outputImageDraw)
 
         top_half = outputImage.crop((0, 0, 128, 64))
         bottom_half = outputImage.crop((0, 64, 128, 128))
