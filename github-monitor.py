@@ -64,8 +64,8 @@ auth = Auth.Token(github_pat)
 
 git = Github(auth=auth)
 
-big_font = ImageFont.truetype("FreeMono.ttf", 23)
-small_font = ImageFont.truetype("FreeMono.ttf", 10)
+big_font = ImageFont.truetype("NotoSans-Regular.ttf", 23)
+small_font = ImageFont.truetype("NotoSans-Regular.ttf", 10)
 
 try:
     print("Press CTRL-C to stop.")
