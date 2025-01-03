@@ -9,20 +9,18 @@ def render_repo_state(repo_name, label, row, draw):
     for repo in repos:
         if repo.name == repo_name:
             commit = repo.get_commit("main")
-
             state = commit.get_combined_status().state
             pr_count = repo.get_pulls().totalCount
             branch_count = repo.get_branches().totalCount
-
             row_height = 23
             y_offset = (row * row_height) + 2 + (row * 2)
             build_color = 'Green'
-            if state == 'pending': build_color = 'Yellow'
-            if state == 'failed': build_color = 'Red'
-
+            if state == 'pending':
+                build_color = 'Yellow'
+            if state == 'failed':
+                build_color = 'Red'
             draw.line([2, y_offset + row_height + 2, 125, y_offset + row_height], fill=build_color)
             draw.rectangle([54, y_offset, 64, y_offset + 10], fill=build_color)
-
             print("Drew %1".format(label))
 
 options = RGBMatrixOptions()
