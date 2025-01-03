@@ -11,8 +11,11 @@ class BuildStatus:
     branch_count = 0
 
 def update_repo(github, repo_name, label) -> BuildStatus:
-    repos = github.get_user().get_repos()
+    user = github.get_user()
+    print(user.name)
+    repos = user.get_repos()
     for repo in repos:
+        print (repo.name)
         if repo.name == repo_name:
             commit = repo.get_commit("main")
             status = BuildStatus()
