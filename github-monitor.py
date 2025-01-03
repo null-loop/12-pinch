@@ -26,8 +26,15 @@ def render_status(info: BuildStatus, row, draw):
     # todo: calc offsets from row - remember it's 256 x 64
     row_height = 23
     y_offset = (row * row_height) + 2 + (row * 2)
-    draw.line([2, y_offset, 125, y_offset], fill='Yellow')
-    draw.line([2, y_offset + row_height, 125, y_offset + row_height], fill='YellowGreen')
+    print(info.state)
+    build_color = 'Green'
+    if info.state == 'pending': build_color = 'Yellow'
+    if info.state == 'failed': build_color = 'Red'
+
+    draw.line([2, y_offset + row_height + 2, 125, y_offset + row_height], fill=build_color)
+    draw.rectangle([54, y_offset, 64, y_offset + 10], fill=build_color)
+
+
 
 options = RGBMatrixOptions()
 options.rows = 64
