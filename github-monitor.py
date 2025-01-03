@@ -77,9 +77,9 @@ try:
         stitched.paste(top_half, (0, 0))
         stitched.paste(bottom_half, (128, 0))
 
-        rgb = outputImage.convert('RGB')
+        rgb = stitched.convert('RGB')
 
-        matrix.SetImage(stitched)
+        matrix.SetImage(rgb)
 
         time.sleep(60)
 except KeyboardInterrupt:
