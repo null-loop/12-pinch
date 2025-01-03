@@ -8,6 +8,8 @@ def render_repo_state(repo_name, label, row, draw):
     print("Checking")
     repos = git.get_user().get_repos()
     for repo in repos:
+        print(repo_name)
+        print(repo.name)
         if repo.name == repo_name:
             print("Found")
             commit = repo.get_commit("main")
