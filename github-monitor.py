@@ -45,8 +45,8 @@ def render_status(info: BuildStatus, row, draw):
     draw.bitmap([78, y_offset], pr_icon)
     draw.bitmap([78, y_offset + 12], branch_icon)
 
-    draw.text([90, y_offset - 1], "{0}".format(info.pr_count), font=small_font, fill='White')
-    draw.text([90, y_offset + 11], "{0}".format(info.branch_count), font=small_font, fill='White')
+    draw.text([90, y_offset - 2], "{0}".format(info.pr_count), font=small_font, fill='White')
+    draw.text([90, y_offset + 10], "{0}".format(info.branch_count), font=small_font, fill='White')
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -70,7 +70,7 @@ auth = Auth.Token(github_pat)
 git = Github(auth=auth)
 
 big_font = ImageFont.truetype("NotoSans-Regular.ttf", 23)
-small_font = ImageFont.truetype("NotoSans-Regular.ttf", 10)
+small_font = ImageFont.truetype("NotoSans-Regular.ttf", 12)
 
 pr_out = BytesIO()
 cairosvg.svg2png(url='git-pull-request.svg', write_to=pr_out)
