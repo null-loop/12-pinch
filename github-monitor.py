@@ -70,7 +70,8 @@ try:
         outputImageDraw = ImageDraw.Draw(outputImage)
 
         user = git.get_user()
-        all_repos = user.get_repos()
+        all_repos = list(user.get_repos())
+
 
         core = update_repo(all_repos, "pico", "Core")
         graph = update_repo(all_repos, "pico.supergraph", "Graph")
