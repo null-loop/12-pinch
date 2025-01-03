@@ -55,14 +55,15 @@ git = Github(auth=auth)
 try:
     print("Press CTRL-C to stop.")
     while True:
+
+        outputImage = Image.new('RGB', (128, 128))
+        outputImageDraw = ImageDraw.Draw(outputImage)
+
         core = update_repo("pico", "Core")
         graph = update_repo("pico.supergraph", "Graph")
         sdk = update_repo("pico.event.sdk", "SDK")
         web = update_repo("pico.frontend", "Web")
         cms = update_repo("pico.payloadcms", "CMS")
-
-        outputImage = Image.new('RGB', (128, 128))
-        outputImageDraw = ImageDraw.Draw(outputImage)
 
         render_status(core, 0, outputImageDraw)
         render_status(graph, 1, outputImageDraw)
