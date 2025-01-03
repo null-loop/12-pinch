@@ -40,8 +40,8 @@ def render_status(info: BuildStatus, row, draw):
     draw.line([4, y_offset + row_height, 125, y_offset + row_height], fill=state_color)
     draw.text([4, y_offset - 2], info.label, font=big_font, fill=state_color)
 
-    draw.text([96, y_offset], "{0}".format(info.pr_count), font=small_font, fill='White')
-    draw.text([96, y_offset + 12],  "{0}".format(info.branch_count), font=small_font, fill='White')
+    draw.text([72, y_offset], "{0}".format(info.pr_count), font=small_font, fill='White')
+    draw.text([72 + 24, y_offset], "{0}".format(info.branch_count), font=small_font, fill='White')
 
 options = RGBMatrixOptions()
 options.rows = 64
