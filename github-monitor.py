@@ -26,8 +26,8 @@ def render_status(info: BuildStatus, row, draw):
     # todo: calc offsets from row - remember it's 256 x 64
     row_height = 23
     y_offset = (row * row_height) + 2
-    draw.line([2, y_offset, 126, y_offset], fill='Yellow')
-    draw.line([2, y_offset + row_height, 126, y_offset + row_height], fill='Yellow')
+    draw.line([2, y_offset, 125, y_offset], fill='Yellow')
+    draw.line([2, y_offset + row_height, 125, y_offset + row_height], fill='YellowGreen')
 
 options = RGBMatrixOptions()
 options.rows = 64
