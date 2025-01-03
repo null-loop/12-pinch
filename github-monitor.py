@@ -21,6 +21,12 @@ def update_repo(github, repo_name, label) -> BuildStatus:
             status.state = commit.get_combined_status().state
             status.pr_count = repo.get_pulls().totalCount
             status.branch_count = repo.get_branches().totalCount
+
+            print(status.label)
+            print(status.state)
+            print(status.pr_count)
+            print(status.branch_count)
+
             return status
 
 def render_status(info: BuildStatus, row, draw):
