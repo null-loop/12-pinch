@@ -43,8 +43,9 @@ def render_status(info: BuildStatus, row, draw):
     draw.text([4, y_offset - 2], info.label, font=big_font, fill=state_color)
 
     draw.bitmap([78, y_offset], pr_icon)
+    draw.bitmap([78, y_offset + 12], branch_icon)
+
     draw.text([90, y_offset], "{0}".format(info.pr_count), font=small_font, fill='White')
-    #draw.bitmap([78, y_offset + 12], branch_icon)
     draw.text([90, y_offset + 12], "{0}".format(info.branch_count), font=small_font, fill='White')
 
 options = RGBMatrixOptions()
@@ -69,12 +70,15 @@ auth = Auth.Token(github_pat)
 git = Github(auth=auth)
 
 big_font = ImageFont.truetype("NotoSans-Regular.ttf", 23)
-small_font = ImageFont.truetype("NotoSans-Regular.ttf", 8)
+small_font = ImageFont.truetype("NotoSans-Regular.ttf", 10)
 
 pr_out = BytesIO()
 cairosvg.svg2png(url='git-pull-request.svg', write_to=pr_out)
 pr_icon = Image.open(pr_out)
 
+branch_out = BytesIO()
+cairosvg.svg2png(url='git-branch.svg', write_to=branch_out)
+branch_icon = Image.open(branch_out)
 
 try:
     print("Press CTRL-C to stop.")
