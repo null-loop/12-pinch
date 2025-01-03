@@ -40,8 +40,10 @@ def render_status(info: BuildStatus, row, draw):
     draw.line([4, y_offset + row_height, 125, y_offset + row_height], fill=state_color)
     draw.text([4, y_offset - 2], info.label, font=big_font, fill=state_color)
 
-    draw.text([78, y_offset], "{0} Pull Requests".format(info.pr_count), font=small_font, fill='White')
-    draw.text([78, y_offset + 12], "{0} Branches".format(info.branch_count), font=small_font, fill='White')
+    draw.bitmap([78, y_offset], pr_icon)
+    draw.text([90, y_offset], "{0}".format(info.pr_count), font=small_font, fill='White')
+    draw.bitmap([78, y_offset + 12], branch_icon)
+    draw.text([90, y_offset + 12], "{0}".format(info.branch_count), font=small_font, fill='White')
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -66,6 +68,8 @@ git = Github(auth=auth)
 
 big_font = ImageFont.truetype("NotoSans-Regular.ttf", 23)
 small_font = ImageFont.truetype("NotoSans-Regular.ttf", 8)
+pr_icon = Image.open('git-pull-request.svg')
+branch_icon = Image.open('git-branch.svg')
 
 try:
     print("Press CTRL-C to stop.")
