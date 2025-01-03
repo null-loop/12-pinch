@@ -10,7 +10,7 @@ class BuildStatus:
     pr_count = 0
     branch_count = 0
 
-def update_repo(repo_name, label):
+def update_repo(repo_name, label) -> BuildStatus:
     repos = git.get_user().get_repos()
     for repo in repos:
         if repo.name == repo_name:
@@ -26,6 +26,7 @@ def render_status(info: BuildStatus, row, draw):
     # todo: calc offsets from row - remember it's 256 x 64
     row_height = 23
     y_offset = (row * row_height) + 2 + (row * 2)
+    print (info.state)
     draw.line([2, y_offset, 125, y_offset], fill='Yellow')
     draw.line([2, y_offset + row_height, 125, y_offset + row_height], fill='YellowGreen')
 
