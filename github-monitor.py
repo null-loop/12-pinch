@@ -20,6 +20,7 @@ def update_repo(repo_name, label) -> BuildStatus:
             status.state = commit.get_combined_status().state
             status.pr_count = repo.get_pulls().totalCount
             status.branch_count = repo.get_branches().totalCount
+            print("Found!")
             return status
 
 def render_status(info: BuildStatus, row, draw):
