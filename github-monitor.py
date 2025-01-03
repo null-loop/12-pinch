@@ -13,6 +13,7 @@ class BuildStatus:
 def update_repo(github, repo_name, label) -> BuildStatus:
     user = github.get_user()
     print(user.name)
+    print(user.email)
     repos = user.get_repos()
     print(repos.totalCount)
     for repo in repos:
