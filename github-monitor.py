@@ -4,35 +4,28 @@ from github import Auth
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageFile, ImageDraw, ImageFont, ImageColor
 
-class BuildStatus:
-    label = ""
-    state = ""
-    pr_count = 0
-    branch_count = 0
-
-def update_repo(repo_name, label):
+def render_repo_state(repo_name, label, row, draw):
     repos = git.get_user().get_repos()
     for repo in repos:
         if repo.name == repo_name:
             commit = repo.get_commit("main")
-            status = BuildStatus()
-            status.label = label
-            status.state = commit.get_combined_status().state
-            status.pr_count = repo.get_pulls().totalCount
-            status.branch_count = repo.get_branches().totalCount
-            return status
+
+            state = commit.get_combined_status().state
+            pr_count = repo.get_pulls().totalCount
+            branch_count = repo.get_branches().totalCount
+
+            row_height = 23
+            y_offset = (row * row_height) + 2 + (row * 2)
+            build_color = 'Green'
+            if state == 'pending': build_color = 'Yellow'
+            if state == 'failed': build_color = 'Red'
+
+            draw.line([2, y_offset + row_height + 2, 125, y_offset + row_height], fill=build_color)
+            draw.rectangle([54, y_offset, 64, y_offset + 10], fill=build_color)
 
 def render_status(info, row, draw):
     # todo: calc offsets from row - remember it's 256 x 64
-    row_height = 23
-    y_offset = (row * row_height) + 2 + (row * 2)
-    print(info.state)
-    build_color = 'Green'
-    if info.state == 'pending': build_color = 'Yellow'
-    if info.state == 'failed': build_color = 'Red'
 
-    draw.line([2, y_offset + row_height + 2, 125, y_offset + row_height], fill=build_color)
-    draw.rectangle([54, y_offset, 64, y_offset + 10], fill=build_color)
 
 
 
@@ -62,20 +55,15 @@ git = Github(auth=auth)
 try:
     print("Press CTRL-C to stop.")
     while True:
-        core = update_repo("pico", "Core")
-        graph = update_repo("pico.supergraph", "Graph")
-        sdk = update_repo("pico.event.sdk", "SDK")
-        web = update_repo("pico.frontend", "Web")
-        cms = update_repo("pico.payloadcms", "CMS")
 
         outputImage = Image.new('RGB', (128, 128))
         outputImageDraw = ImageDraw.Draw(outputImage)
 
-        render_status(core, 0, outputImageDraw)
-        render_status(graph, 1, outputImageDraw)
-        render_status(sdk, 2, outputImageDraw)
-        render_status(web, 3, outputImageDraw)
-        render_status(cms, 4, outputImageDraw)
+        render_repo_state("pico", "Core", 0, outputImageDraw)
+        render_repo_state("pico.supergraph", "Graph", 1, outputImageDraw)
+        render_repo_state("pico.event.sdk", "SDK", 2, outputImageDraw)
+        render_repo_state("pico.frontend", "Web", 3, outputImageDraw)
+        render_repo_state("pico.payloadcms", "CMS", 4, outputImageDraw)
 
         top_half = outputImage.crop((0, 0, 128, 64))
         bottom_half = outputImage.crop((0, 64, 128, 128))
