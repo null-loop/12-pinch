@@ -10,9 +10,8 @@ class BuildStatus:
     pr_count = 0
     branch_count = 0
 
-def update_repo(repo_name, label) -> BuildStatus:
-    repos = git.get_user().get_repos()
-    print(repos.totalCount)
+def update_repo(github, repo_name, label) -> BuildStatus:
+    repos = github.get_user().get_repos()
     for repo in repos:
         if repo.name == repo_name:
             commit = repo.get_commit("main")
@@ -62,11 +61,11 @@ try:
         outputImage = Image.new('RGB', (128, 128))
         outputImageDraw = ImageDraw.Draw(outputImage)
 
-        core = update_repo("pico", "Core")
-        graph = update_repo("pico.supergraph", "Graph")
-        sdk = update_repo("pico.event.sdk", "SDK")
-        web = update_repo("pico.frontend", "Web")
-        cms = update_repo("pico.payloadcms", "CMS")
+        core = update_repo(git, "pico", "Core")
+        graph = update_repo(git, "pico.supergraph", "Graph")
+        sdk = update_repo(git, "pico.event.sdk", "SDK")
+        web = update_repo(git, "pico.frontend", "Web")
+        cms = update_repo(git, "pico.payloadcms", "CMS")
 
         render_status(core, 0, outputImageDraw)
         render_status(graph, 1, outputImageDraw)
