@@ -23,12 +23,6 @@ def render_repo_state(repo_name, label, row, draw):
             draw.line([2, y_offset + row_height + 2, 125, y_offset + row_height], fill=build_color)
             draw.rectangle([54, y_offset, 64, y_offset + 10], fill=build_color)
 
-def render_status(info, row, draw):
-    # todo: calc offsets from row - remember it's 256 x 64
-
-
-
-
 options = RGBMatrixOptions()
 options.rows = 64
 options.cols = 64
