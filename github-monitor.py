@@ -60,7 +60,7 @@ auth = Auth.Token(github_pat)
 
 git = Github(auth=auth)
 
-#font = ImageFont.truetype("FreeMono.ttf", 12)
+font = ImageFont.truetype("FreeMono.ttf", 12)
 
 try:
     print("Press CTRL-C to stop.")
@@ -70,9 +70,7 @@ try:
         outputImageDraw = ImageDraw.Draw(outputImage)
 
         user = git.get_user()
-        all_repos = list()
-        for repo in user.get_repos():
-            all_repos.append(repo)
+        all_repos = user.get_repos()
 
         core = update_repo(all_repos, "pico", "Core")
         graph = update_repo(all_repos, "pico.supergraph", "Graph")
