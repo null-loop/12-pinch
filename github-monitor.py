@@ -12,6 +12,7 @@ class BuildStatus:
 
 def update_repo(repo_name, label) -> BuildStatus:
     repos = git.get_user().get_repos()
+    print(repos.totalCount)
     for repo in repos:
         if repo.name == repo_name:
             commit = repo.get_commit("main")
