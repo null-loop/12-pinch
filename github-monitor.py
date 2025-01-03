@@ -38,6 +38,7 @@ def render_status(info: BuildStatus, row, draw):
     if info.state == 'failed': state_color = 'Red'
 
     draw.line([2, y_offset + row_height, 125, y_offset + row_height], fill=state_color)
+    draw.text([2, y_offset], info.label, font=mono_font, fill=state_color)
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -60,7 +61,7 @@ auth = Auth.Token(github_pat)
 
 git = Github(auth=auth)
 
-font = ImageFont.truetype("FreeMono.ttf", 12)
+mono_font = ImageFont.truetype("FreeMono.ttf", 12)
 
 try:
     print("Press CTRL-C to stop.")
