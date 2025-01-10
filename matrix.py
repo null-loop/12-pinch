@@ -31,8 +31,8 @@ def render_image_on_matrix(image: Image):
 def set_matrix_point(x, y, r, g, b):
     t_x = x
     t_y = y
-    if t_y >= 128:
+    if t_y >= 64:
         t_x = t_x + 64
-        t_y = t_y - 128
+        t_y = t_y - 64
     colour = graphics.Color(r, g, b)
     graphics.DrawLine(matrix, t_x, t_y, t_x, t_y, colour)
