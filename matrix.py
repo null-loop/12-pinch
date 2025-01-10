@@ -1,5 +1,5 @@
 from PIL import Image
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 
 options = RGBMatrixOptions()
 options.rows = 64
@@ -27,3 +27,10 @@ def render_image_on_matrix(image: Image):
     rgb = stitched.convert('RGB')
 
     matrix.SetImage(rgb)
+
+def set_matrix_point(x, y, r, g, b):
+    if y >= 128:
+        x = x + 64
+        y = y - 128
+    colour = graphics.Color(r, g, b)
+    graphics.DrawLine(matrix, x, y, x, y, colour)
