@@ -27,7 +27,6 @@ class GameOptions:
 
     def __starting_wall_positions(self)->List:
         # default shape - the edges
-        print("Setting up starting wall positions")
         positions = []
         for x in range(self.width):
             positions.append([x,0])
@@ -92,9 +91,9 @@ class ScoredMove:
 
 class Snake:
     def __init__(self, x, y, board: Board):
-        self.__last_head_position = [x, y]
+        self.__last_head_position = [x,y]
         self.__current_head_position = [x,y]
-        self.__current_tail_position = [x, y]
+        self.__current_tail_position = [x,y]
         self.__parts = [[x,y]]
         self.__board = board
         self.__board.set(x,y,EntityType.SNAKE)
@@ -159,10 +158,10 @@ class Snake:
         else:
             has_momentum = False
 
-        max_look_ahead = 10
-        food_weight = 100
-        snake_weight = -5
-        wall_weight = -10
+        max_look_ahead = 4
+        food_weight = 1
+        snake_weight = -1
+        wall_weight = -2
         current_score = float(0.1) if has_momentum else float(0)
         current_look_ahead = 1
         projected_head_position = self.__current_head_position
@@ -179,9 +178,6 @@ class Snake:
                 case EntityType.WALL:
                     projected_weight = wall_weight
             projected_weight = projected_weight * (1 / current_look_ahead)
-            if projected_entity == EntityType.WALL:
-                print("WALL")
-                print(projected_weight)
             current_score = current_score + projected_weight
             current_look_ahead = current_look_ahead + 1
         scored_move.score = current_score
