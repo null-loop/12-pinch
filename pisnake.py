@@ -1,6 +1,7 @@
 import sys
 from enum import Enum
 from random import randrange
+from time import sleep
 from typing import List
 
 from matrix import set_matrix_point
@@ -230,6 +231,7 @@ try:
     print("Press CTRL-C to stop.")
     while True:
         game_engine.turn()
+        sleep(0.01)
 
 except KeyboardInterrupt:
     sys.exit(0)
