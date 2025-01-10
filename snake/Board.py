@@ -18,7 +18,6 @@ class Board:
             self.__entities.append([EntityType.EMPTY] * options.height)
 
         for pos in options.starting_wall_positions:
-            print(f'Wall: {pos[0]},{pos[1]}')
             self.set(pos[0],pos[1],EntityType.WALL)
 
     def width(self)->int:
