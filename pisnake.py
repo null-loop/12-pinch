@@ -163,7 +163,7 @@ class Snake:
         food_weight = 1
         snake_weight = -1
         wall_weight = -2
-        current_score = float(1) if has_momentum else float(0)
+        current_score = float(0.1) if has_momentum else float(0)
         current_look_ahead = 1
         projected_head_position = self.__current_head_position
         while current_look_ahead <= max_look_ahead:
@@ -179,6 +179,9 @@ class Snake:
                 case EntityType.WALL:
                     projected_weight = wall_weight
             projected_weight = projected_weight * (1 / current_look_ahead)
+            if projected_entity == EntityType.WALL:
+                print("WALL")
+                print(projected_weight)
             current_score = current_score + projected_weight
             current_look_ahead = current_look_ahead + 1
         scored_move.score = current_score
