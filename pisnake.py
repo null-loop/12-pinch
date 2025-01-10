@@ -20,7 +20,6 @@ try:
     print("Press CTRL-C to stop.")
     while True:
         game_engine.turn()
-        sleep(0.04)
 
 except KeyboardInterrupt:
     sys.exit(0)
