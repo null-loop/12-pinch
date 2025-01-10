@@ -100,13 +100,11 @@ class Snake:
         self.__board.set(x,y,EntityType.SNAKE)
 
     def turn(self)->SnakeTurnResult:
-        last_dx = self.__current_head_position[0] - self.__last_head_position[0]
-        last_dy = self.__current_head_position[1] - self.__last_head_position[1]
         #Score the moves
-        move_one = self.__score_move(-1, 0, last_dx, last_dy)
-        move_two = self.__score_move(0, 1, last_dx, last_dy)
-        move_three = self.__score_move(1, 0, last_dx, last_dy)
-        move_four = self.__score_move(0, -1, last_dx, last_dy)
+        move_one = self.__score_move(dx=-1, dy=0)
+        move_two = self.__score_move(dx=1, dy=0)
+        move_three = self.__score_move(dx=0, dy=1)
+        move_four = self.__score_move(dx=0, dy=-1)
 
         move = move_one
         if move_two.score > move.score: move = move_two
@@ -149,7 +147,9 @@ class Snake:
         for part in self.__parts:
             self.__board.set(part[0], part[1], EntityType.EMPTY)
 
-    def __score_move(self, dx, dy, previous_dx, previous_dy)->ScoredMove:
+    def __score_move(self, dx, dy)->ScoredMove:
+        previous_dx = self.__current_head_position[0] - self.__last_head_position[0]
+        previous_dy = self.__current_head_position[1] - self.__last_head_position[1]
         scored_move = ScoredMove()
         scored_move.dx = dx
         scored_move.dy = dy
