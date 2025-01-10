@@ -62,8 +62,8 @@ class Board:
         return self.__height
 
     def get(self, x, y) -> EntityType:
-        print(x)
-        print(y)
+        #print(x)
+        #print(y)
         return self.__entities[x][y]
 
     def set(self, x, y, entity_type: EntityType):
