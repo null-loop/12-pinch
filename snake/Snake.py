@@ -1,3 +1,7 @@
+from random import randrange
+
+from PIL import ImageColor
+
 from snake.Board import Board
 from snake.Enums import EntityType, SnakeTurnResult
 from snake.ScoredMove import ScoredMove
@@ -10,7 +14,8 @@ class Snake:
         self.__current_tail_position = [x,y]
         self.__parts = [[x,y]]
         self.__board = board
-        self.__board.set(x,y,EntityType.SNAKE)
+        self.__colour = [randrange(230) + 25, randrange(230) + 25, randrange(230) + 25]
+        self.__board.set_with_colour(x,y,EntityType.SNAKE, self.__colour)
 
     def turn(self)->SnakeTurnResult:
         #Score the moves
@@ -57,7 +62,7 @@ class Snake:
     def __move_head(self, target_position):
         self.__last_head_position = self.__current_head_position.copy()
         self.__current_head_position = target_position
-        self.__board.set(target_position[0], target_position[1], EntityType.SNAKE)
+        self.__board.set_with_colour(target_position[0], target_position[1], EntityType.SNAKE, self.__colour)
         self.__parts.insert(0, target_position)
 
     def __clear_all_parts_from_board(self):

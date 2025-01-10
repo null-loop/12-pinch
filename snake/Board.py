@@ -32,11 +32,15 @@ class Board:
         return self.__entities[x][y]
 
     def set(self, x, y, entity_type: EntityType):
-        self.__entities[x][y] = entity_type
         colour = ImageColor.getrgb("Black")
         if entity_type == EntityType.SNAKE: colour = ImageColor.getrgb("Yellow")
         if entity_type == EntityType.FOOD: colour = ImageColor.getrgb("Green")
         if entity_type == EntityType.WALL: colour = ImageColor.getrgb("Red")
+        self.set_with_colour(x, y, entity_type, colour)
+
+    def set_with_colour(self, x, y, entity_type: EntityType, colour):
+
+        self.__entities[x][y] = entity_type
         set_matrix_point(x, y, colour[0], colour[1], colour[2])
 
     def get_random_empty_position(self)->List:
