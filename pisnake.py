@@ -228,7 +228,8 @@ game_engine.starting_spawn()
 
 try:
     print("Press CTRL-C to stop.")
-    game_engine.turn()
+    while True:
+        game_engine.turn()
 
 except KeyboardInterrupt:
     sys.exit(0)
