@@ -45,8 +45,8 @@ class Board:
         self.__height = options.height
         self.__width = options.width
 
-        for y in range(options.height):
-            self.__entities.append([EntityType.EMPTY] * options.width)
+        for y in range(options.width):
+            self.__entities.append([EntityType.EMPTY] * options.height)
 
         for pos in options.starting_wall_positions:
             self.set(pos[0],pos[1],EntityType.WALL)
@@ -187,6 +187,8 @@ class Snake:
                     projected_weight = wall_weight
             projected_weight = projected_weight * (1 / current_look_ahead)
             current_score = current_score + projected_weight
+            if dx==1 and dy==0:
+                print(f'Checked {projected_head_position[0]},{projected_head_position[1]} on look ahead {current_look_ahead}, found: {projected_entity}, weight: {projected_weight}, score: {current_score}')
             current_look_ahead = current_look_ahead + 1
         scored_move.score = current_score
 
