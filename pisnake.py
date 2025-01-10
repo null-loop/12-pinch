@@ -8,8 +8,8 @@ from snake.GameOptions import GameOptions
 
 
 game_options = GameOptions()
-game_options.start_snake_count = 60
-game_options.start_food_count = 200
+game_options.start_snake_count = 120
+game_options.start_food_count = 1000
 game_options.refresh_walls()
 game_board = Board(game_options)
 game_engine = Engine(game_board, game_options)
