@@ -24,9 +24,6 @@ class GameOptions:
     start_snake_count=20
     starting_wall_positions=[]
 
-    def __int__(self):
-        self.refresh_walls()
-
     def __starting_wall_positions(self)->List:
         # default shape - the edges
         print("Setting up starting wall positions")
@@ -222,6 +219,7 @@ class Engine:
         self.__spawn_snakes(snakes_to_spawn)
 
 game_options = GameOptions()
+game_options.refresh_walls()
 game_board = Board(game_options)
 game_engine = Engine(game_board, game_options)
 
