@@ -182,7 +182,6 @@ class Snake:
             current_score = current_score + projected_weight
             current_look_ahead = current_look_ahead + 1
         scored_move.score = current_score
-        print(current_score)
 
         return scored_move
 
