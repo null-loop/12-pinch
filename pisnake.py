@@ -58,8 +58,8 @@ class Board:
         return self.__height
 
     def get(self, x, y) -> EntityType:
-        print(x)
-        print(y)
+        if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
+            return EntityType.EMPTY
         return self.__entities[x][y]
 
     def set(self, x, y, entity_type: EntityType):
@@ -178,6 +178,7 @@ class Snake:
                     projected_weight = wall_weight
             projected_weight = projected_weight * (1 / current_look_ahead)
             current_score = current_score + projected_weight
+            current_look_ahead = current_look_ahead + 1
         scored_move.score = current_score
 
         return scored_move
