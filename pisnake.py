@@ -181,6 +181,7 @@ class Snake:
             current_score = current_score + projected_weight
             current_look_ahead = current_look_ahead + 1
         scored_move.score = current_score
+        print(current_score)
 
         return scored_move
 
@@ -221,6 +222,7 @@ class Engine:
         self.__spawn_snakes(snakes_to_spawn)
 
 game_options = GameOptions()
+game_options.start_snake_count = 1
 game_options.refresh_walls()
 game_board = Board(game_options)
 game_engine = Engine(game_board, game_options)
