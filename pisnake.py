@@ -110,6 +110,14 @@ class Snake:
         if move_three.score > move.score: move = move_three
         if move_four.score > move.score: move = move_four
 
+        print("---SCORES---")
+        print(move_one.score)
+        print(move_two.score)
+        print(move_three.score)
+        print(move_four.score)
+        print("---PICKED---")
+        print(move.dx)
+        print(move.dy)
         print(move.score)
 
         new_head_position = [self.__current_head_position[0] + move.dx, self.__current_head_position[1] + move.dy]
