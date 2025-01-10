@@ -173,6 +173,8 @@ class Snake:
         current_score = float(0.5) if has_momentum else float(0)
         current_look_ahead = 1
         projected_head_position = self.__current_head_position
+        if dx == 1 and dy == 0:
+            print(f'Head: {projected_head_position[0]},{projected_head_position[1]}')
         while current_look_ahead <= max_look_ahead:
             projected_head_position[0] = projected_head_position[0] + dx
             projected_head_position[1] = projected_head_position[1] + dy
