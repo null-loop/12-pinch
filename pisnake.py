@@ -159,10 +159,10 @@ class Snake:
         else:
             has_momentum = False
 
-        max_look_ahead = 4
+        max_look_ahead = 10
         food_weight = 1
-        snake_weight = -1
-        wall_weight = -2
+        snake_weight = -5
+        wall_weight = -10
         current_score = float(0.1) if has_momentum else float(0)
         current_look_ahead = 1
         projected_head_position = self.__current_head_position
