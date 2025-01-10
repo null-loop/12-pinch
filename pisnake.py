@@ -49,6 +49,7 @@ class Board:
             self.__entities.append([EntityType.EMPTY] * options.height)
 
         for pos in options.starting_wall_positions:
+            print(f'Wall: {pos[0]},{pos[1]}')
             self.set(pos[0],pos[1],EntityType.WALL)
 
     def width(self)->int:
@@ -174,7 +175,7 @@ class Snake:
         current_look_ahead = 1
         projected_head_position = self.__current_head_position
         if dx == 1 and dy == 0:
-            print(f'Head: {projected_head_position[0]},{projected_head_position[1]}')
+            print(f'Head: {self.__current_head_position[0]},{self.__current_head_position[1]}, Tail:{self.__current_tail_position[0]}.{self.__current_tail_position[1]}, Length: {len(self.__parts)}')
         while current_look_ahead <= max_look_ahead:
             projected_head_position[0] = projected_head_position[0] + dx
             projected_head_position[1] = projected_head_position[1] + dy
