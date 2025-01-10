@@ -108,12 +108,11 @@ class Snake:
         move_three = self.__score_move(1, 0, last_dx, last_dy)
         move_four = self.__score_move(0, -1, last_dx, last_dy)
 
-        all_moves = [move_one, move_two, move_three, move_four]
+        move = move_one
+        if move_two.score > move.score: move = move_two
+        if move_three.score > move.score: move = move_three
+        if move_four.score > move.score: move = move_four
 
-        all_moves.sort(key=lambda m: m.score)
-        all_moves.reverse()
-
-        move = all_moves[0]
         print(move.score)
         new_head_position = [self.__current_head_position[0] + move.dx, self.__current_head_position[1] + move.dy]
 
