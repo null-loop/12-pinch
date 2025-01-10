@@ -114,6 +114,7 @@ class Snake:
         all_moves.reverse()
 
         move = all_moves[0]
+        print(move.score)
         new_head_position = [self.__current_head_position[0] + move.dx, self.__current_head_position[1] + move.dy]
 
         target_entity = self.__board.get(new_head_position[0], new_head_position[1])
