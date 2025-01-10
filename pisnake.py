@@ -4,7 +4,7 @@ from random import randrange
 from time import sleep
 from typing import List
 
-from matrix import set_matrix_point
+#from matrix import set_matrix_point
 from PIL import ImageColor
 
 class EntityType(Enum):
@@ -69,7 +69,7 @@ class Board:
         if entity_type == EntityType.SNAKE: colour = ImageColor.getrgb("Yellow")
         if entity_type == EntityType.FOOD: colour = ImageColor.getrgb("Green")
         if entity_type == EntityType.WALL: colour = ImageColor.getrgb("Red")
-        set_matrix_point(x, y, colour[0], colour[1], colour[2])
+        #set_matrix_point(x, y, colour[0], colour[1], colour[2])
 
     def get_random_empty_position(self)->List:
         # Randomise x,y until you find an empty location
@@ -131,6 +131,7 @@ class Snake:
         elif target_entity == EntityType.FOOD:
             # we're going to grow - so we only move the head, not the tail
             self.__move_head(new_head_position)
+            print(f'ATE! {new_head_position[0],new_head_position[1]}')
             return SnakeTurnResult.ATE
         else:
             # we're not growing, so move the head and the tail
@@ -181,19 +182,15 @@ class Snake:
         current_look_ahead = 1
         projected_head_position = self.__current_head_position
         if dx == 1 and dy == 0:
-            print(f'Head: {self.__current_head_position[0]},{self.__current_head_position[1]}, Tail:{self.__current_tail_position[0]}.{self.__current_tail_position[1]}, Length: {len(self.__parts)}')
+            print(f'Head: {self.__current_head_position[0]},{self.__current_head_position[1]}, Tail: {self.__current_tail_position[0]},{self.__current_tail_position[1]}, Length: {len(self.__parts)}')
         while current_look_ahead <= max_look_ahead:
             projected_head_position[0] = projected_head_position[0] + dx
             projected_head_position[1] = projected_head_position[1] + dy
             projected_entity = self.__board.get(projected_head_position[0], projected_head_position[1])
             projected_weight = 0
-            match projected_entity:
-                case EntityType.SNAKE:
-                    projected_weight = snake_weight
-                case EntityType.FOOD:
-                    projected_weight = food_weight
-                case EntityType.WALL:
-                    projected_weight = wall_weight
+            if projected_entity == EntityType.SNAKE: projected_weight = snake_weight
+            if projected_entity == EntityType.WALL: projected_weight = wall_weight
+            if projected_entity == EntityType.FOOD: projected_weight = food_weight
             projected_weight = projected_weight * (1 / current_look_ahead)
             current_score = current_score + projected_weight
             if dx==1 and dy==0:
