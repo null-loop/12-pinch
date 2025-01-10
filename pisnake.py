@@ -29,6 +29,7 @@ class GameOptions:
 
     def __starting_wall_positions(self)->List:
         # default shape - the edges
+        print("Setting up starting wall positions")
         positions = []
         for x in range(self.width):
             positions.append([x,0])
@@ -51,8 +52,6 @@ class Board:
             self.__entities.append([EntityType.EMPTY] * options.width)
 
         for pos in options.starting_wall_positions:
-            print(pos[0])
-            print(pos[1])
             self.set(pos[0],pos[1],EntityType.WALL)
 
     def width(self)->int:
