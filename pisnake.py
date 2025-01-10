@@ -114,6 +114,7 @@ class Snake:
         if move_four.score > move.score: move = move_four
 
         print(move.score)
+
         new_head_position = [self.__current_head_position[0] + move.dx, self.__current_head_position[1] + move.dy]
 
         target_entity = self.__board.get(new_head_position[0], new_head_position[1])
@@ -235,7 +236,7 @@ try:
     print("Press CTRL-C to stop.")
     while True:
         game_engine.turn()
-        sleep(0.01)
+        sleep(0.04)
 
 except KeyboardInterrupt:
     sys.exit(0)
