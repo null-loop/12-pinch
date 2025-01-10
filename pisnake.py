@@ -140,10 +140,16 @@ class Snake:
 
     def __move_tail(self):
         self.__board.set(self.__current_tail_position[0], self.__current_tail_position[1], EntityType.EMPTY)
-        tail_index = len(self.__parts) - 1
-        self.__parts.pop(tail_index)
-        tail_index = tail_index - 1
-        self.__current_tail_position = [self.__parts[tail_index][0], self.__parts[tail_index][1]]
+
+        if len(self.__parts) == 2:
+            # if we're only 1 long - our tail is just our head
+            self.__current_tail_position = self.__current_head_position
+            self.__parts.pop(-1)
+        else:
+            # remove the last part
+            self.__parts.pop(-1)
+            # our tail pos is now the last item
+            self.__current_tail_position = self.__parts[-1]
 
     def __move_head(self, target_position):
         self.__last_head_position = self.__current_head_position
