@@ -76,7 +76,7 @@ class Snake:
         else:
             has_momentum = False
 
-        max_look_ahead = 4
+        max_look_ahead = 10
         food_weight = 1
         snake_weight = -1
         wall_weight = -2
