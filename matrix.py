@@ -29,8 +29,10 @@ def render_image_on_matrix(image: Image):
     matrix.SetImage(rgb)
 
 def set_matrix_point(x, y, r, g, b):
-    if y >= 128:
-        x = x + 64
-        y = y - 128
+    t_x = x
+    t_y = y
+    if t_y >= 128:
+        t_x = t_x + 64
+        t_y = t_y - 128
     colour = graphics.Color(r, g, b)
-    graphics.DrawLine(matrix, x, y, x, y, colour)
+    graphics.DrawLine(matrix, t_x, t_y, t_x, t_y, colour)
