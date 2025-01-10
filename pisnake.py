@@ -160,7 +160,7 @@ class Snake:
             has_momentum = False
 
         max_look_ahead = 10
-        food_weight = 1
+        food_weight = 100
         snake_weight = -5
         wall_weight = -10
         current_score = float(0.1) if has_momentum else float(0)
