@@ -14,7 +14,7 @@ class Snake:
         self.__current_tail_position = [x,y]
         self.__parts = [[x,y]]
         self.__board = board
-        self.__colour = [randrange(230) + 25, randrange(230) + 25, randrange(230) + 25]
+        self.__colour = [0, 0, randrange(230) + 25]
         self.__board.set_with_colour(x,y,EntityType.SNAKE, self.__colour)
 
     def turn(self)->SnakeTurnResult:
