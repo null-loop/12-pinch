@@ -11,3 +11,7 @@ class SnakeTurnResult(Enum):
     MOVED = 0
     ATE = 1
     DIED = 2
+
+class WallSets(Enum):
+    NONE = 0
+    SQUARE = 1

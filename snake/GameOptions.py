@@ -1,5 +1,7 @@
 from typing import List
 
+from snake.Enums import WallSets
+
 
 class GameOptions:
     height=128
@@ -7,6 +9,7 @@ class GameOptions:
     start_food_count=20
     start_snake_count=20
     starting_wall_positions=[]
+    wall_set=WallSets.NONE
 
     def __starting_wall_positions(self)->List:
         # default shape - the edges
@@ -20,4 +23,5 @@ class GameOptions:
         return positions
 
     def refresh_walls(self):
-        self.starting_wall_positions = self.__starting_wall_positions()
+        if self.wall_set == WallSets.SQUARE:
+            self.starting_wall_positions = self.__starting_wall_positions()

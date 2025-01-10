@@ -1,4 +1,5 @@
 from random import randrange
+from typing import List
 
 from PIL import ImageColor
 
@@ -30,6 +31,8 @@ class Snake:
         if move_four.score > move.score: move = move_four
 
         new_head_position = [self.__current_head_position[0] + move.dx, self.__current_head_position[1] + move.dy]
+
+        self.__overflow_position(new_head_position)
 
         target_entity = self.__board.get(new_head_position[0], new_head_position[1])
 
@@ -91,6 +94,9 @@ class Snake:
         while current_look_ahead <= max_look_ahead:
             projected_head_position[0] = projected_head_position[0] + dx
             projected_head_position[1] = projected_head_position[1] + dy
+
+            self.__overflow_position(projected_head_position)
+
             projected_entity = self.__board.get(projected_head_position[0], projected_head_position[1])
             projected_weight = 0
             if projected_entity == EntityType.SNAKE: projected_weight = snake_weight
@@ -102,3 +108,14 @@ class Snake:
         scored_move.score = current_score
 
         return scored_move
+
+    def __overflow_position(self, position:List):
+        if position[0] == self.__board.width():
+            position[0] = 0
+        elif position[0] == -1:
+            position[0] = self.__board.width() - 1
+
+        if position[1] == self.__board.height():
+            position[1] = 0
+        elif position[1] == -1:
+            position[1] = self.__board.height() - 1
