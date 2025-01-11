@@ -68,7 +68,7 @@ class Snake:
             self.__move_head(new_head_position)
 
             new_length = len(self.__parts)
-            if new_length == 20:
+            if new_length == 40:
                 return SnakeTurnResult.SPLIT
 
             return SnakeTurnResult.ATE
@@ -80,8 +80,8 @@ class Snake:
 
     def split(self):
         # split the parts of our current snake into ours and theirs
-        my_parts = self.__parts.copy()[:10]
-        their_parts = self.__parts.copy()[-10:]
+        my_parts = self.__parts.copy()[:20]
+        their_parts = self.__parts.copy()[-20:]
 
         # update our parts
         self.__last_head_position = my_parts[1]
