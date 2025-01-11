@@ -31,7 +31,10 @@ class Engine:
     def __print_state(self):
         print(f'Turn {self.__turn}')
         print(f'Snake count: {len(self.__snakes)}')
-        for snake in self.__snakes:
+        ordered_snakes = self.__snakes.copy()
+        ordered_snakes.sort(key=lambda x: x.colour_string())
+
+        for snake in ordered_snakes:
             snake.print_state()
 
     def turn(self):

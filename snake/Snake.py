@@ -113,6 +113,9 @@ class Snake:
             self.__move_tail()
             return SnakeTurnResult.MOVED
 
+    def colour_string(self):
+        return "{0}{1}{2}".format(self.__colour[0], self.__colour[1], self.__colour[2])
+
     def split(self):
         # split the parts of our current snake into ours and theirs
         my_parts = self.__parts.copy()[:15]
