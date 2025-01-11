@@ -36,7 +36,7 @@ class Engine:
 
     def turn(self):
 
-        if self.__turn % 1000 == 0:
+        if self.__turn % 100 == 0:
             self.__print_state()
         self.__turn = self.__turn + 1
 
