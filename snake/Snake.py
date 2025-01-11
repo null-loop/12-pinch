@@ -16,9 +16,9 @@ class Snake:
         return Snake([[x,y]], colour, board)
 
     @classmethod
-    def split_new_snake(cls, parts, colour, board):
-        colour[0] = 128
-        return Snake(parts, colour, board)
+    def split_new_snake(cls, new_parts:List, new_colour, board):
+        new_colour[0] = 128
+        return Snake(new_parts, new_colour, board)
 
     def __init__(self, parts:List, colour, board: Board):
 
