@@ -38,8 +38,6 @@ class Snake:
         self.__length_to_split = 20
         self.redraw_on_board()
 
-        print(f'Length:{len(self.__parts)}, Colour:{self.__colour[0]}')
-
     def redraw_on_board(self):
         for part in self.__parts:
             self.__board.set_with_colour(part[0], part[1], EntityType.SNAKE, self.__colour)
@@ -62,24 +60,14 @@ class Snake:
 
         target_entity = self.__board.get(new_head_position[0], new_head_position[1])
 
-        if self.__colour[0] == 128:
-            print(f'Current length: {len(self.__parts)}')
-
         if target_entity == EntityType.WALL or target_entity == EntityType.SNAKE:
             self.__clear_all_parts_from_board()
             return SnakeTurnResult.DIED
         elif target_entity == EntityType.FOOD:
-
-            old_length = len(self.__parts)
-
             # we're going to grow - so we only move the head, not the tail
             self.__move_head(new_head_position)
 
             new_length = len(self.__parts)
-
-            if self.__colour[0] == 128:
-                print(f'Old len : {old_length}, New len : {new_length}')
-
             if new_length == 20:
                 return SnakeTurnResult.SPLIT
 
@@ -95,12 +83,11 @@ class Snake:
         my_parts = self.__parts.copy()[:10]
         their_parts = self.__parts.copy()[-10:]
 
-        print(f'New snake parts: {len(their_parts)}')
-
         # update our parts
         self.__last_head_position = my_parts[1]
         self.__current_head_position = my_parts[0]
         self.__current_tail_position = my_parts[-1]
+        self.__parts = my_parts
 
         # we're going to create a new snake
         new_snake = Snake.split_new_snake(their_parts, self.__colour.copy(), self.__board)
