@@ -60,6 +60,9 @@ class Snake:
 
         target_entity = self.__board.get(new_head_position[0], new_head_position[1])
 
+        if self.__colour[0] == 128:
+            print(f'Current length: {len(self.__parts)}')
+
         if target_entity == EntityType.WALL or target_entity == EntityType.SNAKE:
             self.__clear_all_parts_from_board()
             return SnakeTurnResult.DIED
