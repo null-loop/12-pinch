@@ -7,6 +7,22 @@ from snake.Board import Board
 from snake.Enums import EntityType, SnakeTurnResult
 from snake.ScoredMove import ScoredMove
 
+class SnakeTraits:
+    food_weight:float(2)
+    wall_weight:float(-1.1)
+    snake_weight:float(-1.1)
+
+    def mutate(self):
+        trait = randrange(3)
+        trait_change = randrange(100) + 1 / float(1000)
+        neg = randrange(1)
+
+        if neg == 1:
+            trait_change = 0 - trait_change
+
+        if trait == 0: self.food_weight = self.food_weight + trait_change
+        if trait == 1: self.wall_weight = self.wall_weight + trait_change
+        if trait == 2: self.snake_weight = self.snake_weight + trait_change
 
 class Snake:
 
@@ -15,15 +31,24 @@ class Snake:
         colour_index = randrange(3)
         colour = [0, 0, 0]
         colour[colour_index] = randrange(230)+25
-        return Snake([[x,y]], colour, board)
+        traits = SnakeTraits()
+        return Snake([[x,y]], traits, colour, board)
 
     @classmethod
-    def split_new_snake(cls, new_parts:List, colour, board):
+    def split_new_snake(cls, new_parts:List, parent_traits, colour, board):
         #colour_index = randrange(3)
         #colour[colour_index] = randrange(230)+25
-        return Snake(new_parts, colour, board)
+        traits = SnakeTraits()
+        traits.snake_weight = parent_traits.snake_weight
+        traits.food_weight = parent_traits.food_weight
+        traits.wall_weight = parent_traits.wall_weight
+        traits.mutate()
 
-    def __init__(self, parts:List, colour, board: Board):
+        return Snake(new_parts, traits, colour, board)
+
+    def __init__(self, parts:List, traits, colour, board: Board):
+
+        self.__traits = traits
 
         head_part = parts[0]
         tail_part = parts[-1]
@@ -133,9 +158,9 @@ class Snake:
             has_momentum = False
 
         max_look_ahead = 5
-        food_weight = 2
-        snake_weight = -1.1
-        wall_weight = -1.1
+        food_weight = self.__traits.food_weight
+        snake_weight = self.__traits.snake_weight
+        wall_weight = self.__traits.wall_weight
         current_score = float(0.25) if has_momentum else float(0)
         current_look_ahead = 1
         projected_head_position = self.__current_head_position.copy()
