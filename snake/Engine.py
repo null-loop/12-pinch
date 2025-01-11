@@ -24,7 +24,7 @@ class Engine:
         if count != 0:
             for i in range(count):
                 pos = self.__board.get_random_empty_position()
-                snake = Snake(pos[0], pos[1], self.__board)
+                snake = Snake.from_xy(pos[0], pos[1], self.__board)
                 self.__snakes.append(snake)
 
     def turn(self):
@@ -33,6 +33,9 @@ class Engine:
             turn_result = snake.turn()
             if turn_result == SnakeTurnResult.ATE or turn_result == SnakeTurnResult.SPLIT:
                 food_to_spawn = food_to_spawn + 1
+            if turn_result == SnakeTurnResult.SPLIT:
+                split_snake = snake.split()
+                self.__snakes.append(split_snake)
             if turn_result == SnakeTurnResult.DIED:
                 self.__snakes.remove(snake)
 

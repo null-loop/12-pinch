@@ -9,15 +9,36 @@ from snake.ScoredMove import ScoredMove
 
 
 class Snake:
-    def __init__(self, x, y, board: Board):
-        self.__last_head_position = [x,y]
-        self.__current_head_position = [x,y]
-        self.__current_tail_position = [x,y]
-        self.__parts = [[x,y]]
+
+    @classmethod
+    def from_xy(cls, x, y, board):
+        return Snake([[x,y]],board)
+
+    @classmethod
+    def from_parts(cls, parts, board):
+        return Snake(parts, board)
+
+    def __init__(self, parts:List, board: Board):
+
+        head_part = parts[0]
+        tail_part = parts[-1]
+
+        if len(parts) == 1:
+            self.__last_head_position = head_part.copy()
+        else:
+            self.__last_head_position = parts[1].copy()
+
+        self.__current_head_position = head_part.copy()
+        self.__current_tail_position = tail_part.copy()
+        self.__parts = parts.copy()
         self.__board = board
         self.__colour = [0, 0, randrange(230) + 25]
-        self.__board.set_with_colour(x,y,EntityType.SNAKE, self.__colour)
         self.__length_to_split = 20
+        self.redraw_on_board()
+
+    def redraw_on_board(self):
+        for part in self.__parts:
+            self.__board.set_with_colour(part[0], part[1], EntityType.SNAKE, self.__colour)
 
     def turn(self)->SnakeTurnResult:
         #Score the moves
@@ -44,7 +65,7 @@ class Snake:
             # we're going to grow - so we only move the head, not the tail
             self.__move_head(new_head_position)
 
-            if len(self.__parts) > 20:
+            if len(self.__parts) == 20:
                 return SnakeTurnResult.SPLIT
 
             return SnakeTurnResult.ATE
@@ -53,6 +74,21 @@ class Snake:
             self.__move_head(new_head_position)
             self.__move_tail()
             return SnakeTurnResult.MOVED
+
+    def split(self):
+        # split the parts of our current snake into ours and theirs
+        my_parts = self.__parts[:10]
+        their_parts = self.__parts[-10:]
+
+        # update our parts
+        self.__last_head_position = my_parts[1]
+        self.__current_head_position = my_parts[0]
+        self.__current_tail_position = my_parts[-1]
+
+        # we're going to create a new snake
+        new_snake = Snake.from_parts(their_parts, self.__board)
+        new_snake.redraw_on_board()
+        return new_snake
 
     def __move_tail(self):
         self.__board.set(self.__current_tail_position[0], self.__current_tail_position[1], EntityType.EMPTY)
