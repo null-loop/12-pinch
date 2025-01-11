@@ -34,7 +34,7 @@ class Snake:
         self.__current_tail_position = tail_part.copy()
         self.__parts = parts.copy()
         self.__board = board
-        self.__colour = [0, 0, randrange(230) + 25]
+        self.__colour = colour
         self.__length_to_split = 20
         self.redraw_on_board()
 
@@ -103,7 +103,7 @@ class Snake:
         self.__current_tail_position = my_parts[-1]
 
         # we're going to create a new snake
-        new_snake = Snake.split_new_snake(their_parts, self.__colour, self.__board)
+        new_snake = Snake.split_new_snake(their_parts, self.__colour.copy(), self.__board)
         new_snake.redraw_on_board()
         return new_snake
 
