@@ -120,7 +120,7 @@ class Snake:
         self.__parts = my_parts
 
         # we're going to create a new snake
-        new_snake = Snake.split_new_snake(their_parts, self.__colour.copy(), self.__board)
+        new_snake = Snake.split_new_snake(their_parts, self.__traits, self.__colour.copy(), self.__board)
         new_snake.redraw_on_board()
         return new_snake
 
