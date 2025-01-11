@@ -22,6 +22,8 @@ class SnakeTraits:
         if neg == 1:
             trait_change = 0 - trait_change
 
+        print(f'Trait index: {trait} - delta: {trait_change} - neg : {neg}')
+
         if trait == 0: self.food_weight = self.food_weight + trait_change
         if trait == 1: self.wall_weight = self.wall_weight + trait_change
         if trait == 2: self.snake_weight = self.snake_weight + trait_change
