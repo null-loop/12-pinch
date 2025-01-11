@@ -90,6 +90,8 @@ class Snake:
         my_parts = self.__parts.copy()[:10]
         their_parts = self.__parts.copy()[-10:]
 
+        print(f'New snake parts: {len(their_parts)}')
+
         # update our parts
         self.__last_head_position = my_parts[1]
         self.__current_head_position = my_parts[0]
