@@ -77,11 +77,14 @@ class Snake:
             self.__board.set_with_colour(part[0], part[1], EntityType.SNAKE, self.__colour)
 
     def turn(self)->SnakeTurnResult:
+        previous_dx = self.__current_head_position[0] - self.__last_head_position[0]
+        previous_dy = self.__current_head_position[1] - self.__last_head_position[1]
+
         #Score the moves
-        move_one = self.__score_move(dx=-1, dy=0)
-        move_two = self.__score_move(dx=1, dy=0)
-        move_three = self.__score_move(dx=0, dy=1)
-        move_four = self.__score_move(dx=0, dy=-1)
+        move_one = self.__score_move(-1, 0, previous_dx, previous_dy)
+        move_two = self.__score_move(1, 0, previous_dx, previous_dy)
+        move_three = self.__score_move(0, 1, previous_dx, previous_dy)
+        move_four = self.__score_move(0, -1, previous_dx, previous_dy)
 
         move = move_one
         if move_two.score > move.score: move = move_two
@@ -155,30 +158,30 @@ class Snake:
         for part in self.__parts:
             self.__board.set(part[0], part[1], EntityType.EMPTY)
 
-    def __score_move(self, dx, dy)->ScoredMove:
-        previous_dx = self.__current_head_position[0] - self.__last_head_position[0]
-        previous_dy = self.__current_head_position[1] - self.__last_head_position[1]
+    def __score_move(self, dx, dy, previous_dx, previous_dy)->ScoredMove:
+
         scored_move = ScoredMove()
         scored_move.dx = dx
         scored_move.dy = dy
 
         if previous_dx == dx and previous_dy == dy:
-            has_momentum = True
+            current_score = float(0.25)
         else:
-            has_momentum = False
+            current_score = float(0)
 
         max_look_ahead = 5
-        current_score = float(0.25) if has_momentum else float(0)
         current_look_ahead = 1
-        projected_head_position = self.__current_head_position.copy()
+        projected_head_position_x = self.__current_head_position[0]
+        projected_head_position_y = self.__current_head_position[1]
         while current_look_ahead <= max_look_ahead:
-            projected_head_position[0] = projected_head_position[0] + dx
-            projected_head_position[1] = projected_head_position[1] + dy
+            projected_head_position_x = projected_head_position_x + dx
+            projected_head_position_y = projected_head_position_y + dy
 
-            self.__overflow_position(projected_head_position)
+            projected_head_position_x = self.__overflow_x(projected_head_position_x)
+            projected_head_position_y = self.__overflow_y(projected_head_position_y)
 
-            projected_entity = self.__board.get(projected_head_position[0], projected_head_position[1])
-            projected_weight = 0
+            projected_entity = self.__board.get(projected_head_position_x, projected_head_position_y)
+            projected_weight = float(0)
             if projected_entity == EntityType.SNAKE: projected_weight = self.__traits.snake_weight
             if projected_entity == EntityType.WALL: projected_weight = self.__traits.wall_weight
             if projected_entity == EntityType.FOOD: projected_weight = self.__traits.food_weight
@@ -189,13 +192,22 @@ class Snake:
 
         return scored_move
 
-    def __overflow_position(self, position:List):
-        if position[0] == self.__board.width():
-            position[0] = 0
-        elif position[0] == -1:
-            position[0] = self.__board.width() - 1
+    def __overflow_x(self, x):
+        if x == self.__board.width():
+            return 0
+        elif x == -1:
+            return self.__board.width() - 1
+        else:
+            return x
 
-        if position[1] == self.__board.height():
-            position[1] = 0
-        elif position[1] == -1:
-            position[1] = self.__board.height() - 1
+    def __overflow_y(self, y):
+        if y == self.__board.height():
+            return 0
+        elif y == -1:
+            return self.__board.height() - 1
+        else:
+            return y
+
+    def __overflow_position(self, position:List):
+        position[0] = self.__overflow_x(position[0])
+        position[1] = self.__overflow_y(position[1])
