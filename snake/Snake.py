@@ -38,6 +38,8 @@ class Snake:
         self.__length_to_split = 20
         self.redraw_on_board()
 
+        print(f'Length:{len(self.__parts)}, Colour:{self.__colour[0]}')
+
     def redraw_on_board(self):
         for part in self.__parts:
             self.__board.set_with_colour(part[0], part[1], EntityType.SNAKE, self.__colour)
