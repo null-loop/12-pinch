@@ -18,7 +18,6 @@ class Snake:
     @classmethod
     def split_new_snake(cls, parts, colour, board):
         colour[0] = 128
-        print(f'Split snake length:{len(parts)}')
         return Snake(parts, colour, board)
 
     def __init__(self, parts:List, colour, board: Board):
@@ -78,7 +77,10 @@ class Snake:
                 print(f'Grew more than 1! : {old_length} to {new_length}, a delta of {length_delta}')
 
             if new_length == 20:
+                print('Length 20 - Splitting!')
                 return SnakeTurnResult.SPLIT
+            else:
+                print(f'Length {new_length} - Not splitting!')
 
             return SnakeTurnResult.ATE
         else:
