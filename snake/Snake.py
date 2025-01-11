@@ -70,6 +70,8 @@ class Snake:
 
             if len(self.__parts) == 20:
                 return SnakeTurnResult.SPLIT
+            elif len(self.__parts) > 21:
+                print(f'Snake too long!:{len(self.__parts)}')
 
             return SnakeTurnResult.ATE
         else:
