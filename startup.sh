@@ -1,5 +1,5 @@
 #!/bin/bash
 
 pushd $(dirname "$0")
-./venv/bin/python3 12-pinch.py
+./venv/bin/python3 pisnake.py
 popd
