@@ -29,13 +29,13 @@ class Engine:
 
     def turn(self):
         food_to_spawn = 0
-        snakes_to_spawn = 0
         for snake in self.__snakes:
             turn_result = snake.turn()
-            if turn_result == SnakeTurnResult.ATE:
+            if turn_result == SnakeTurnResult.ATE or turn_result == SnakeTurnResult.SPLIT:
                 food_to_spawn = food_to_spawn + 1
             if turn_result == SnakeTurnResult.DIED:
-                snakes_to_spawn = snakes_to_spawn + 1
                 self.__snakes.remove(snake)
+
         self.__spawn_foods(food_to_spawn)
-        self.__spawn_snakes(snakes_to_spawn)
+        if len(self.__snakes) < self.__options.start_snake_count:
+            self.__spawn_snakes(self.__options.start_snake_count - len(self.__snakes))

@@ -17,6 +17,7 @@ class Snake:
         self.__board = board
         self.__colour = [0, 0, randrange(230) + 25]
         self.__board.set_with_colour(x,y,EntityType.SNAKE, self.__colour)
+        self.__length_to_split = 20
 
     def turn(self)->SnakeTurnResult:
         #Score the moves
@@ -42,6 +43,10 @@ class Snake:
         elif target_entity == EntityType.FOOD:
             # we're going to grow - so we only move the head, not the tail
             self.__move_head(new_head_position)
+
+            if len(self.__parts) > 20:
+                return SnakeTurnResult.SPLIT
+
             return SnakeTurnResult.ATE
         else:
             # we're not growing, so move the head and the tail
