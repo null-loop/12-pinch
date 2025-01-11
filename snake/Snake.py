@@ -12,13 +12,16 @@ class Snake:
 
     @classmethod
     def spawn_new_snake(cls, x, y, board):
-        colour = [0, 0, randrange(230) + 25]
+        colour_index = randrange(3)
+        colour = [0, 0, 0]
+        colour[colour_index] = randrange(230)+25
         return Snake([[x,y]], colour, board)
 
     @classmethod
-    def split_new_snake(cls, new_parts:List, new_colour, board):
-        new_colour[0] = 128
-        return Snake(new_parts, new_colour, board)
+    def split_new_snake(cls, new_parts:List, colour, board):
+        colour_index = randrange(3)
+        colour[colour_index] = randrange(230)+25
+        return Snake(new_parts, colour, board)
 
     def __init__(self, parts:List, colour, board: Board):
 
