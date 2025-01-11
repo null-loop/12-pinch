@@ -63,7 +63,7 @@ class Snake:
         self.__parts = parts.copy()
         self.__board = board
         self.__colour = colour
-        self.__length_to_split = 20
+        self.__length_to_split = 40
         self.redraw_on_board()
 
     def print_state(self):
@@ -99,7 +99,7 @@ class Snake:
             self.__move_head(new_head_position)
 
             new_length = len(self.__parts)
-            if new_length == 30:
+            if new_length == self.__length_to_split:
                 return SnakeTurnResult.SPLIT
 
             return SnakeTurnResult.ATE
@@ -114,8 +114,9 @@ class Snake:
 
     def split(self):
         # split the parts of our current snake into ours and theirs
-        my_parts = self.__parts.copy()[:15]
-        their_parts = self.__parts.copy()[-15:]
+        split_length = self.__length_to_split / 2
+        my_parts = self.__parts.copy()[:split_length]
+        their_parts = self.__parts.copy()[-split_length:]
 
         # update our parts
         self.__last_head_position = my_parts[1]
@@ -164,9 +165,6 @@ class Snake:
             has_momentum = False
 
         max_look_ahead = 5
-        food_weight = self.__traits.food_weight
-        snake_weight = self.__traits.snake_weight
-        wall_weight = self.__traits.wall_weight
         current_score = float(0.25) if has_momentum else float(0)
         current_look_ahead = 1
         projected_head_position = self.__current_head_position.copy()
@@ -178,9 +176,9 @@ class Snake:
 
             projected_entity = self.__board.get(projected_head_position[0], projected_head_position[1])
             projected_weight = 0
-            if projected_entity == EntityType.SNAKE: projected_weight = snake_weight
-            if projected_entity == EntityType.WALL: projected_weight = wall_weight
-            if projected_entity == EntityType.FOOD: projected_weight = food_weight
+            if projected_entity == EntityType.SNAKE: projected_weight = self.__traits.snake_weight
+            if projected_entity == EntityType.WALL: projected_weight = self.__traits.wall_weight
+            if projected_entity == EntityType.FOOD: projected_weight = self.__traits.food_weight
             projected_weight = projected_weight * (1 / current_look_ahead)
             current_score = current_score + projected_weight
             current_look_ahead = current_look_ahead + 1
