@@ -65,13 +65,20 @@ class Snake:
             self.__clear_all_parts_from_board()
             return SnakeTurnResult.DIED
         elif target_entity == EntityType.FOOD:
+
+            old_length = len(self.__parts)
+
             # we're going to grow - so we only move the head, not the tail
             self.__move_head(new_head_position)
 
-            if len(self.__parts) == 20:
+            new_length = len(self.__parts)
+
+            length_delta = new_length - old_length
+            if length_delta > 1:
+                print(f'Grew more than 1! : {old_length} to {new_length}, a delta of {length_delta}')
+
+            if new_length == 20:
                 return SnakeTurnResult.SPLIT
-            elif len(self.__parts) > 21:
-                print(f'Snake too long!:{len(self.__parts)}')
 
             return SnakeTurnResult.ATE
         else:
