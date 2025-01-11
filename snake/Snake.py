@@ -8,9 +8,11 @@ from snake.Enums import EntityType, SnakeTurnResult
 from snake.ScoredMove import ScoredMove
 
 class SnakeTraits:
-    food_weight:float(2)
-    wall_weight:float(-1.1)
-    snake_weight:float(-1.1)
+
+    def __init__(self):
+        self.food_weight = float(2)
+        self.wall_weight = float(-1.1)
+        self.snake_weight = float(-1.1)
 
     def mutate(self):
         trait = randrange(3)
