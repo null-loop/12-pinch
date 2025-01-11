@@ -72,14 +72,8 @@ class Snake:
 
             new_length = len(self.__parts)
 
-            length_delta = new_length - old_length
-            if length_delta > 1:
-                print(f'Grew more than 1! : {old_length} to {new_length}, a delta of {length_delta}')
-
-            if new_length == 20 and self.__colour[0] == 128:
-                print('Length 20 - Splitting!')
-            elif self.__colour[0] == 128:
-                print(f'Length {new_length} - Not splitting!')
+            if self.__colour[0] == 128:
+                print(f'Old len : {old_length}, New len : {new_length}')
 
             if new_length == 20:
                 return SnakeTurnResult.SPLIT
