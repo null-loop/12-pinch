@@ -40,7 +40,7 @@ class Snake:
         traits.snake_weight = parent_traits.snake_weight
         traits.food_weight = parent_traits.food_weight
         traits.wall_weight = parent_traits.wall_weight
-        traits.mutate()
+        #traits.mutate()
 
         return Snake(new_parts, traits, colour, board)
 
