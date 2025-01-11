@@ -9,6 +9,7 @@ class Engine:
         self.__board = board
         self.__snakes = []
         self.__options = options
+        self.__turn = 0
 
     def starting_spawn(self):
         self.__spawn_foods(self.__options.start_food_count)
@@ -27,7 +28,18 @@ class Engine:
                 snake = Snake.spawn_new_snake(pos[0], pos[1], self.__board)
                 self.__snakes.append(snake)
 
+    def __print_state(self):
+        print(f'Turn {self.__turn}')
+        print(f'Snake count: {len(self.__snakes)}')
+        for snake in self.__snakes:
+            snake.print_state()
+
     def turn(self):
+
+        if self.__turn % 10000 == 0:
+            self.__print_state()
+        self.__turn = self.__turn + 1
+
         food_to_spawn = 0
         for snake in self.__snakes:
             turn_result = snake.turn()

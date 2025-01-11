@@ -68,6 +68,9 @@ class Snake:
         self.__length_to_split = 20
         self.redraw_on_board()
 
+    def print_state(self):
+        print(f'Colour : {self.__colour[0]},{self.__colour[1]},{self.__colour[2]} - Snake_Weight : {self.__traits.snake_weight} - Food_Weight : {self.__traits.food_weight} - Wall_Weight : {self.__traits.wall_weight}')
+
     def redraw_on_board(self):
         for part in self.__parts:
             self.__board.set_with_colour(part[0], part[1], EntityType.SNAKE, self.__colour)
