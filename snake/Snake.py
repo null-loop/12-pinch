@@ -78,9 +78,11 @@ class Snake:
 
             if new_length == 20 and self.__colour[0] == 128:
                 print('Length 20 - Splitting!')
-                return SnakeTurnResult.SPLIT
             elif self.__colour[0] == 128:
                 print(f'Length {new_length} - Not splitting!')
+
+            if new_length == 20:
+                return SnakeTurnResult.SPLIT
 
             return SnakeTurnResult.ATE
         else:
