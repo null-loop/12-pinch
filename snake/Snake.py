@@ -1,3 +1,4 @@
+from math import floor
 from random import randrange
 from typing import List
 
@@ -114,7 +115,7 @@ class Snake:
 
     def split(self):
         # split the parts of our current snake into ours and theirs
-        split_length = self.__length_to_split / 2
+        split_length = floor(self.__length_to_split / 2)
         my_parts = self.__parts.copy()[:split_length]
         their_parts = self.__parts.copy()[-split_length:]
 
