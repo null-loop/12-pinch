@@ -4,11 +4,12 @@ from datetime import datetime, timedelta
 
 import matrix
 from gitScreen import GitScreen
+from snakeScreen import SnakeScreen
 from spotifyScreen import SpotifyScreen
 
 try:
     print("Press CTRL-C to stop.")
-    screens = [SpotifyScreen(),GitScreen()]
+    screens = [SnakeScreen(),SpotifyScreen(),GitScreen()]
     current_screen_index = 0
     current_screen = screens[0]
     screen_cycle_interval_seconds = 5 * 60 # how long until we switch to next screen
@@ -20,11 +21,18 @@ try:
             if current_screen_index == len(screens):
                 current_screen_index = 0
             current_screen = screens[current_screen_index]
-        image = current_screen.render()
-        if not image is None:
-            matrix.render_image_on_matrix(image)
+            if not current_screen.render_as_image:
+                current_screen.fresh_render()
 
-        time.sleep(current_screen.update_interval_seconds)
+        if current_screen.render_as_image:
+            image = current_screen.render()
+            if not image is None:
+                matrix.render_image_on_matrix(image)
+        else:
+            current_screen.render()
+
+        if current_screen.update_interval_seconds > 0:
+            time.sleep(current_screen.update_interval_seconds)
 
 except KeyboardInterrupt:
     sys.exit(0)

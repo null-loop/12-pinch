@@ -58,3 +58,8 @@ class Engine:
         self.__spawn_foods(food_to_spawn)
         if len(self.__snakes) < self.__options.start_snake_count:
             self.__spawn_snakes(self.__options.start_snake_count - len(self.__snakes))
+
+    def fresh_render(self):
+        self.__board.fresh_render()
+        for snake in self.__snakes:
+            snake.redraw_on_board()

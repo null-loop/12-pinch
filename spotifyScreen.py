@@ -11,6 +11,7 @@ from spotipy.oauth2 import SpotifyOAuth
 class SpotifyScreen:
     update_interval_seconds=5
     label="Spotify"
+    render_as_image = True
 
     def __init__(self):
         self.__local_image_cache_dir = '.local-image-cache'

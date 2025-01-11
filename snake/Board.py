@@ -56,3 +56,10 @@ class Board:
 
     def __get_random_y(self)->int:
         return randrange(self.height())
+
+    def fresh_render(self):
+        for x in range(self.width()):
+            for y in range(self.height()):
+                entity_type = self.get(x,y)
+                if entity_type != EntityType.SNAKE:
+                    self.set(x, y, entity_type)

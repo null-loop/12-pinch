@@ -16,6 +16,7 @@ class BuildStatus:
 class GitScreen:
     update_interval_seconds=60
     label = "GitHub"
+    render_as_image = True
     def __init__(self):
         with open('.github-secret', 'r') as github_secret_file:
             github_pat = github_secret_file.read().rstrip('\n')
