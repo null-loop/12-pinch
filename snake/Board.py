@@ -34,7 +34,7 @@ class Board:
     def set(self, x, y, entity_type: EntityType):
         colour = ImageColor.getrgb("Black")
         if entity_type == EntityType.SNAKE: colour = ImageColor.getrgb("Green")
-        if entity_type == EntityType.FOOD: colour = ImageColor.getrgb("White")
+        if entity_type == EntityType.FOOD: colour = ImageColor.getrgb("DarkYellow")
         if entity_type == EntityType.WALL: colour = ImageColor.getrgb("Red")
         self.set_with_colour(x, y, entity_type, colour)
 

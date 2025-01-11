@@ -12,7 +12,7 @@ try:
     screens = [SnakeScreen(),SpotifyScreen(),GitScreen()]
     current_screen_index = 0
     current_screen = screens[0]
-    screen_cycle_interval_seconds = 60 # how long until we switch to next screen
+    screen_cycle_interval_seconds = 5 * 60 # how long until we switch to next screen
     last_screen_cycle_time = datetime.now()
     while True:
         if datetime.now() > last_screen_cycle_time + timedelta(0, screen_cycle_interval_seconds):
