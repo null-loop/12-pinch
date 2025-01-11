@@ -31,9 +31,10 @@ class Engine:
         food_to_spawn = 0
         for snake in self.__snakes:
             turn_result = snake.turn()
-            if turn_result == SnakeTurnResult.ATE or turn_result == SnakeTurnResult.SPLIT:
+            if turn_result == SnakeTurnResult.ATE:
                 food_to_spawn = food_to_spawn + 1
             if turn_result == SnakeTurnResult.SPLIT:
+                food_to_spawn = food_to_spawn + 1
                 split_snake = snake.split()
                 self.__snakes.append(split_snake)
             if turn_result == SnakeTurnResult.DIED:
