@@ -24,7 +24,7 @@ class Engine:
         if count != 0:
             for i in range(count):
                 pos = self.__board.get_random_empty_position()
-                snake = Snake.from_xy(pos[0], pos[1], self.__board)
+                snake = Snake.spawn_new_snake(pos[0], pos[1], self.__board)
                 self.__snakes.append(snake)
 
     def turn(self):

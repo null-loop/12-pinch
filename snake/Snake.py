@@ -11,14 +11,17 @@ from snake.ScoredMove import ScoredMove
 class Snake:
 
     @classmethod
-    def from_xy(cls, x, y, board):
-        return Snake([[x,y]],board)
+    def spawn_new_snake(cls, x, y, board):
+        colour = [0, 0, randrange(230) + 25]
+        return Snake([[x,y]], colour, board)
 
     @classmethod
-    def from_parts(cls, parts, board):
-        return Snake(parts, board)
+    def split_new_snake(cls, parts, colour, board):
+        colour[0] = 128
+        print(f'Split snake length:{len(parts)}')
+        return Snake(parts, colour, board)
 
-    def __init__(self, parts:List, board: Board):
+    def __init__(self, parts:List, colour, board: Board):
 
         head_part = parts[0]
         tail_part = parts[-1]
@@ -86,7 +89,7 @@ class Snake:
         self.__current_tail_position = my_parts[-1]
 
         # we're going to create a new snake
-        new_snake = Snake.from_parts(their_parts, self.__board)
+        new_snake = Snake.split_new_snake(their_parts, self.__colour, self.__board)
         new_snake.redraw_on_board()
         return new_snake
 
