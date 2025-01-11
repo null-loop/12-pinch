@@ -1,9 +1,6 @@
 from math import floor
 from random import randrange
 from typing import List
-
-from PIL import ImageColor
-
 from snake.Board import Board
 from snake.Enums import EntityType, SnakeTurnResult
 from snake.ScoredMove import ScoredMove
@@ -39,8 +36,6 @@ class Snake:
 
     @classmethod
     def split_new_snake(cls, new_parts:List, parent_traits, colour, board):
-        #colour_index = randrange(3)
-        #colour[colour_index] = randrange(230)+25
         traits = SnakeTraits()
         traits.snake_weight = parent_traits.snake_weight
         traits.food_weight = parent_traits.food_weight
