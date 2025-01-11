@@ -16,7 +16,7 @@ class SnakeTraits:
 
     def mutate(self):
         trait = randrange(3)
-        trait_change = randrange(100) / float(1000)
+        trait_change = randrange(100) / float(200)
         neg = randrange(2)
 
         if neg == 1:
