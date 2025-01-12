@@ -61,7 +61,7 @@ class Snake:
         self.__parts = parts.copy()
         self.__board = board
         self.__colour = colour
-        self.__length_to_split = 40
+        self.__length_to_split = 30
         self.redraw_on_board()
 
     def print_state(self):
