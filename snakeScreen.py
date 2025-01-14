@@ -12,7 +12,7 @@ class SnakeScreen:
     def __init__(self):
         game_options = GameOptions()
         game_options.start_snake_count = 100
-        game_options.start_food_count = 100
+        game_options.start_food_count = 40
         game_options.wall_set = WallSets.NONE
         game_options.refresh_walls()
         game_board = Board(game_options)
