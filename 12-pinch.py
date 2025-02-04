@@ -9,7 +9,7 @@ from spotifyScreen import SpotifyScreen
 
 try:
     print("Press CTRL-C to stop.")
-    screens = [SnakeScreen(),SpotifyScreen(),GitScreen()]
+    screens = [GitScreen(),SnakeScreen(),SpotifyScreen()]
     current_screen_index = 0
     current_screen = screens[0]
     screen_cycle_interval_seconds = 5 * 60 # how long until we switch to next screen

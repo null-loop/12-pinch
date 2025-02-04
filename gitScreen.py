@@ -44,7 +44,7 @@ class GitScreen:
         core = self.__get_repo_status(all_repos, "pico", "Core",["Core API - Deploy to Production and Reference","Core Services - Analyse"])
         graph = self.__get_repo_status(all_repos, "pico.supergraph", "Graph",["Deploy Main"])
         sdk = self.__get_repo_status(all_repos, "pico.event.sdk", "SDK",["Publish NuGet Package", "Publish Avro Schema to Eventhub Schema Registry"])
-        web = self.__get_repo_status(all_repos, "pico.frontend", "Web",["github/workflows/build-deploy-picogym-world.yaml", ".github/workflows/build-deploy-picofitness-world.yaml"])
+        web = self.__get_repo_status(all_repos, "pico.frontend", "Web",["Build and deploy to Cloudflare Pages"])
         cms = self.__get_repo_status(all_repos, "pico.payloadcms", "CMS",[])
 
         self.__render_repo_status(cms, 4, output_image_draw)
