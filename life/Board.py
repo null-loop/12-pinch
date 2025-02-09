@@ -46,18 +46,20 @@ class Board:
 
     def count_neighbours(self, x, y):
         count = 0
-        count += self.is_neighbour(x - 1, y - 1)
-        count += self.is_neighbour(x - 1, y)
-        count += self.is_neighbour(x - 1, y + 1)
+        if x > 0:
+            count += self.is_neighbour(x - 1, y - 1)
+            count += self.is_neighbour(x - 1, y)
+            count += self.is_neighbour(x - 1, y + 1)
         count += self.is_neighbour(x, y - 1)
         count += self.is_neighbour(x, y + 1)
-        count += self.is_neighbour(x + 1, y - 1)
-        count += self.is_neighbour(x + 1, y)
-        count += self.is_neighbour(x + 1, y + 1)
+        if x <= self.__width:
+            count += self.is_neighbour(x + 1, y - 1)
+            count += self.is_neighbour(x + 1, y)
+            count += self.is_neighbour(x + 1, y + 1)
         return count
 
     def is_neighbour(self, x, y)->int:
-        if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
+        if y < 0 or y >= self.__height:
             return 0
         if self.__entities[x][y] == EntityType.CELL:
             return 1
