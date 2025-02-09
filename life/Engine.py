@@ -63,7 +63,10 @@ class Engine:
         if len(self.__death_history) > 100:
             self.__birth_history.pop(0)
 
-        if len(set(self.__death_history)) == 1 and len(set(self.__birth_history)):
+        if (len(self.__birth_history) == 100 and
+                len(self.__death_history) == 100 and
+                len(set(self.__death_history)) == 1 and
+                len(set(self.__birth_history)) == 1):
             # we're restarting!
             self.__birth_history.clear()
             self.__death_history.clear()
