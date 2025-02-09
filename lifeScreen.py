@@ -15,7 +15,6 @@ class LifeScreen:
         game_options.render_scale = 2
         game_board = Board(game_options)
         self.__game_engine = Engine(game_board, game_options)
-        self.__game_engine.starting_spawn()
 
     def fresh_render(self):
         self.__game_engine.reset()
