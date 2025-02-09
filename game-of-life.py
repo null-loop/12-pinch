@@ -6,7 +6,8 @@ from life.GameOptions import GameOptions
 
 game_options = GameOptions()
 game_options.height = 64
-game_options.width = 32
+game_options.width = 64
+game_options.render_scale = 2
 game_board = Board(game_options)
 game_engine = Engine(game_board, game_options)
 game_engine.starting_spawn()

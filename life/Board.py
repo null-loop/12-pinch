@@ -16,6 +16,7 @@ class Board:
         self.__entities = []
         self.__height = options.height
         self.__width = options.width
+        self.__render_scale = options.render_scale
 
         for y in range(options.width):
             self.__entities.append([EntityType.EMPTY] * options.height)
@@ -32,7 +33,17 @@ class Board:
 
     def set_with_colour(self, x, y, entity_type: EntityType, colour):
         self.__entities[x][y] = entity_type
-        set_matrix_point(x, y, colour[0], colour[1], colour[2])
+
+        if self.__render_scale == 1:
+            set_matrix_point(x, y, colour[0], colour[1], colour[2])
+        elif self.__render_scale == 2:
+            sx = x * 2
+            sy = y * 2
+            set_matrix_point(sx, sy, colour[0], colour[1], colour[2])
+            set_matrix_point(sx + 1, sy, colour[0], colour[1], colour[2])
+            set_matrix_point(sx, sy + 1, colour[0], colour[1], colour[2])
+            set_matrix_point(sx + 1, sy + 1, colour[0], colour[1], colour[2])
+
 
     def count_neighbours(self, x, y):
         count = 0
