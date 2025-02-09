@@ -21,4 +21,5 @@ class LifeScreen:
         self.__game_engine.reset()
 
     def render(self):
-        self.__game_engine.turn()
+        #self.__game_engine.turn()
+        x = 0
