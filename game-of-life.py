@@ -18,8 +18,7 @@ try:
     while True:
         turn_count+=1
         game_engine.turn()
-        if turn_count % 1000 == 0:
-            print(f"Turn {turn_count}")
+        print(f"Turn {turn_count}")
 
 except KeyboardInterrupt:
     sys.exit(0)
