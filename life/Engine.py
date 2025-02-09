@@ -33,8 +33,8 @@ class Engine:
         births = []
         deaths = []
         # For each position, evaluate rules
-        for ex in range(self.__options.width - 1):
-            for ey in range(self.__options.height - 1):
+        for ex in range(self.__options.width):
+            for ey in range(self.__options.height):
                 current = self.__board.get(ex, ey)
                 neighbour_count = self.__board.count_neighbours(ex, ey)
                 # Add death / birth to array
