@@ -45,6 +45,7 @@ class Board:
         count += self.is_neighbour(x + 1, y - 1)
         count += self.is_neighbour(x + 1, y)
         count += self.is_neighbour(x + 1, y + 1)
+        return count
 
     def is_neighbour(self, x, y)->int:
         if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
