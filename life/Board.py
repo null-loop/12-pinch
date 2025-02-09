@@ -39,8 +39,9 @@ class Board:
         self.__entities[x][y] = entity_type
         sx = x * self.__render_scale
         sy = y * self.__render_scale
-        for rx in range(sx, self.__render_scale):
-            for ry in range(sy, self.__render_scale):
+        border = 1 if self.__render_scale > 3 else 0
+        for rx in range(sx, self.__render_scale - border):
+            for ry in range(sy, self.__render_scale - border):
                 set_matrix_point(rx, ry, colour[0], colour[1], colour[2])
 
     def count_neighbours(self, x, y):
