@@ -40,7 +40,6 @@ class Board:
         count += self.is_neighbour(x - 1, y)
         count += self.is_neighbour(x - 1, y + 1)
         count += self.is_neighbour(x, y - 1)
-        count += self.is_neighbour(x, y)
         count += self.is_neighbour(x, y + 1)
         count += self.is_neighbour(x + 1, y - 1)
         count += self.is_neighbour(x + 1, y)
