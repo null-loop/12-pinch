@@ -62,3 +62,8 @@ class Board:
         if self.__entities[x][y] == EntityType.CELL:
             return 1
         return 0
+
+    def reset(self):
+        for x in range(self.__width):
+            for y in range(self.__height):
+                self.set(x, y, EntityType.EMPTY)

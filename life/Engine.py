@@ -14,6 +14,8 @@ class Engine:
     def __init__(self, board:Board, options:GameOptions):
         self.__board = board
         self.__options = options
+        self.__birth_history = []
+        self.__death_history = []
 
     def starting_spawn(self):
         total_cells = self.__options.height * self.__options.width
@@ -52,3 +54,18 @@ class Engine:
         for p in deaths:
             self.__board.set(p.x, p.y, EntityType.EMPTY)
 
+        self.__birth_history.append(len(births))
+        self.__death_history.append(len(deaths))
+
+        if len(self.__birth_history) > 100:
+            self.__birth_history.pop(0)
+
+        if len(self.__death_history) > 100:
+            self.__birth_history.pop(0)
+
+        if len(set(self.__death_history)) == 1 and len(set(self.__birth_history)):
+            # we're restarting!
+            self.__birth_history.clear()
+            self.__death_history.clear()
+            self.__board.reset()
+            self.starting_spawn()
