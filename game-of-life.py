@@ -6,4 +6,4 @@ options = GameOptions()
 board = Board(options)
 engine = Engine(board, options)
 
-options.seed(board)
+board.seed()
