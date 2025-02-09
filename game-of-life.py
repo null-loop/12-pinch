@@ -1,9 +1,18 @@
+import sys
+
 from life.Board import Board
 from life.Engine import Engine
 from life.GameOptions import GameOptions
 
-options = GameOptions()
-board = Board(options)
-engine = Engine(board, options)
+game_options = GameOptions()
+game_board = Board(game_options)
+game_engine = Engine(game_board, game_options)
+game_engine.starting_spawn()
 
-board.seed()
+try:
+    print("Press CTRL-C to stop.")
+    while True:
+        game_engine.turn()
+
+except KeyboardInterrupt:
+    sys.exit(0)

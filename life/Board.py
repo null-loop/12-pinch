@@ -1,12 +1,15 @@
-import math
-import random
-
 from PIL import ImageColor
 
 from life.Enums import EntityType
 from life.GameOptions import GameOptions
 
 from matrix import set_matrix_point
+from PIL import ImageColor
+
+from life.Enums import EntityType
+from life.GameOptions import GameOptions
+from matrix import set_matrix_point
+
 
 class Board:
     def __init__(self, options:GameOptions):
@@ -31,15 +34,3 @@ class Board:
         self.__entities[x][y] = entity_type
         set_matrix_point(x, y, colour[0], colour[1], colour[2])
 
-    def seed(self):
-        total_cells = self.__height * self.__width
-        population = math.floor(total_cells / 3)
-        for p in range(population):
-            populated = False
-            while not populated:
-                x = random.randint(0, self.__width - 1)
-                y = random.randint(0, self.__height - 1)
-                e = self.get(x, y)
-                if e == EntityType.EMPTY:
-                    self.set(x, y, EntityType.CELL)
-                    populated = True
