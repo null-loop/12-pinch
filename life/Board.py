@@ -34,3 +34,21 @@ class Board:
         self.__entities[x][y] = entity_type
         set_matrix_point(x, y, colour[0], colour[1], colour[2])
 
+    def count_neighbours(self, x, y):
+        count = 0
+        count += self.is_neighbour(x - 1, y - 1)
+        count += self.is_neighbour(x - 1, y)
+        count += self.is_neighbour(x - 1, y + 1)
+        count += self.is_neighbour(x, y - 1)
+        count += self.is_neighbour(x, y)
+        count += self.is_neighbour(x, y + 1)
+        count += self.is_neighbour(x + 1, y - 1)
+        count += self.is_neighbour(x + 1, y)
+        count += self.is_neighbour(x + 1, y + 1)
+
+    def is_neighbour(self, x, y)->int:
+        if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
+            return 0
+        if self.__entities[x][y] == EntityType.CELL:
+            return 1
+        return 0

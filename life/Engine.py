@@ -5,6 +5,10 @@ from life.Board import Board
 from life.Enums import EntityType
 from life.GameOptions import GameOptions
 
+class Position:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
 class Engine:
     def __init__(self, board:Board, options:GameOptions):
@@ -25,4 +29,26 @@ class Engine:
                     populated = True
 
     def turn(self):
-        x = 1
+        # Algo!
+        births = []
+        deaths = []
+        # For each position, evaluate rules
+        for ex in range(self.__options.width - 1):
+            for ey in range(self.__options.height - 1):
+                current = self.__board.get(ex, ey)
+                neighbour_count = self.__board.count_neighbours(ex, ey)
+                # Add death / birth to array
+                if current == EntityType.CELL:
+                    if neighbour_count < 2 or neighbour_count > 3:
+                        deaths.append(Position(ex, ey))
+                else:
+                    if neighbour_count == 3:
+                        births.add(Position(ex, ey))
+
+        # Once complete - apply the arrays to the board
+        for p in births:
+            self.__board.set(p.x, p.y, EntityType.CELL)
+
+        for p in deaths:
+            self.__board.set(p.x, p.y, EntityType.EMPTY)
+
