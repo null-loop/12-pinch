@@ -18,8 +18,7 @@ class LifeScreen:
         self.__game_engine.starting_spawn()
 
     def fresh_render(self):
-        #self.__game_engine.reset()
-        x = 100
+        self.__game_engine.reset()
 
     def render(self):
         self.__game_engine.turn()
