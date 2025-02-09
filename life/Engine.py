@@ -43,7 +43,7 @@ class Engine:
                         deaths.append(Position(ex, ey))
                 else:
                     if neighbour_count == 3:
-                        births.add(Position(ex, ey))
+                        births.append(Position(ex, ey))
 
         # Once complete - apply the arrays to the board
         for p in births:
