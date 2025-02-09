@@ -28,7 +28,11 @@ class Board:
 
     def set(self, x, y, entity_type: EntityType):
         colour = ImageColor.getrgb("Black")
-        if entity_type == EntityType.CELL: colour = ImageColor.getrgb("Red")
+        if entity_type == EntityType.CELL:
+            r = (x / self.__width) * 256
+            b = (y / self.__height) * 256
+            g = 50
+            colour = [r,g,b]
         self.set_with_colour(x, y, entity_type, colour)
 
     def set_with_colour(self, x, y, entity_type: EntityType, colour):
