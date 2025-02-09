@@ -13,6 +13,8 @@ try:
     screens = [LifeScreen(),GitScreen(),SnakeScreen(),SpotifyScreen()]
     current_screen_index = 0
     current_screen = screens[0]
+    if not current_screen.render_as_image:
+        current_screen.fresh_render()
     screen_cycle_interval_seconds = 2 * 60 # how long until we switch to next screen
     last_screen_cycle_time = datetime.now()
     while True:

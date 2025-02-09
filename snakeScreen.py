@@ -16,10 +16,14 @@ class SnakeScreen:
         game_options.wall_set = WallSets.NONE
         game_options.refresh_walls()
         game_board = Board(game_options)
+        # TODO: One day worry about the walls!
         self.__game_engine = Engine(game_board, game_options)
-        self.__game_engine.starting_spawn()
+        self.__spawned = False
 
     def fresh_render(self):
+        if not self.__spawned:
+            self.__game_engine.starting_spawn()
+            self.__spawned = True
         self.__game_engine.fresh_render()
 
     def render(self):
