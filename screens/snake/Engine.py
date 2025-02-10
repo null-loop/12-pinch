@@ -1,3 +1,6 @@
+from datetime import time
+from time import sleep
+
 from screens.snake.Board import Board
 from screens.snake.Enums import EntityType, SnakeTurnResult
 from screens.snake.GameOptions import GameOptions
@@ -63,6 +66,7 @@ class Engine:
     def fresh_render(self):
         self.__board.fresh_render()
         for snake in self.__snakes:
+            sleep(50/1000)
             snake.redraw_on_board()
 
     def reset(self):
