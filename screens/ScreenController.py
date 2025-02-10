@@ -24,22 +24,22 @@ class ScreenController:
     def key_pressed(self, scan_code):
         print(f'Scan_Code:{scan_code}')
         command = Command.NONE
-        if scan_code == "116": command = Command.POWER
-        if scan_code == "168": command = Command.REWIND
-        if scan_code == "208": command = Command.FAST_FORWARD
-        if scan_code == "165": command = Command.PREVIOUS
-        if scan_code == "163": command = Command.NEXT
-        if scan_code == "164": command = Command.PAUSE_PLAY
-        if scan_code == "2": command = Command.PRESET_1
-        if scan_code == "3": command = Command.PRESET_2
-        if scan_code == "4": command = Command.PRESET_3
-        if scan_code == "5": command = Command.PRESET_4
-        if scan_code == "6": command = Command.PRESET_5
-        if scan_code == "7": command = Command.PRESET_6
-        if scan_code == "8": command = Command.PRESET_7
-        if scan_code == "9": command = Command.PRESET_8
-        if scan_code == "10": command = Command.PRESET_9
-        if scan_code == "11": command = Command.PRESET_0
+        if scan_code == 116: command = Command.POWER
+        if scan_code == 168: command = Command.REWIND
+        if scan_code == 208: command = Command.FAST_FORWARD
+        if scan_code == 165: command = Command.PREVIOUS
+        if scan_code == 163: command = Command.NEXT
+        if scan_code == 164: command = Command.PAUSE_PLAY
+        if scan_code == 2: command = Command.PRESET_1
+        if scan_code == 3: command = Command.PRESET_2
+        if scan_code == 4: command = Command.PRESET_3
+        if scan_code == 5: command = Command.PRESET_4
+        if scan_code == 6: command = Command.PRESET_5
+        if scan_code == 7: command = Command.PRESET_6
+        if scan_code == 8: command = Command.PRESET_7
+        if scan_code == 9: command = Command.PRESET_8
+        if scan_code == 10: command = Command.PRESET_9
+        if scan_code == 11: command = Command.PRESET_0
         self.__command_queue.append(command)
 
     def run(self):
