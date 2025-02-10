@@ -66,7 +66,7 @@ class Engine:
     def fresh_render(self):
         self.__board.fresh_render()
         for snake in self.__snakes:
-            sleep(50/1000)
+            sleep(10/1000)
             snake.redraw_on_board()
 
     def reset(self):
