@@ -1,7 +1,7 @@
-from snake.Board import Board
-from snake.Enums import EntityType, SnakeTurnResult
-from snake.GameOptions import GameOptions
-from snake.Snake import Snake
+from screens.snake.Board import Board
+from screens.snake.Enums import EntityType, SnakeTurnResult
+from screens.snake.GameOptions import GameOptions
+from screens.snake.Snake import Snake
 
 
 class Engine:

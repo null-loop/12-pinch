@@ -3,10 +3,10 @@ from typing import List
 
 from PIL import ImageColor
 
-from snake.Enums import EntityType
-from snake.GameOptions import GameOptions
+from screens.snake.Enums import EntityType
+from screens.snake.GameOptions import GameOptions
 
-from matrix import set_matrix_point
+from utils.matrix import set_matrix_point
 
 class Board:
     def __init__(self, options:GameOptions):

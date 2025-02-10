@@ -1,7 +1,7 @@
-from snake.Board import Board
-from snake.Engine import Engine
-from snake.Enums import WallSets
-from snake.GameOptions import GameOptions
+from screens.snake.Board import Board
+from screens.snake.Engine import Engine
+from screens.snake.Enums import WallSets
+from screens.snake.GameOptions import GameOptions
 
 
 class SnakeScreen:

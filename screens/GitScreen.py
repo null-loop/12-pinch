@@ -18,19 +18,19 @@ class GitScreen:
     label = "GitHub"
     render_as_image = True
     def __init__(self):
-        with open('.github-secret', 'r') as github_secret_file:
+        with open('../secrets/.github-secret', 'r') as github_secret_file:
             github_pat = github_secret_file.read().rstrip('\n')
         auth = Auth.Token(github_pat)
         self.__git = Github(auth=auth)
-        self.__big_font = ImageFont.truetype("NotoSans-Regular.ttf", 23)
-        self.__small_font = ImageFont.truetype("NotoSans-Regular.ttf", 12)
+        self.__big_font = ImageFont.truetype("../assets/NotoSans-Regular.ttf", 23)
+        self.__small_font = ImageFont.truetype("../assets/NotoSans-Regular.ttf", 12)
 
         pr_out = BytesIO()
-        cairosvg.svg2png(url='git-pull-request.svg', write_to=pr_out)
+        cairosvg.svg2png(url='../assets/git-pull-request.svg', write_to=pr_out)
         self.__pr_icon = Image.open(pr_out)
 
         branch_out = BytesIO()
-        cairosvg.svg2png(url='git-branch.svg', write_to=branch_out)
+        cairosvg.svg2png(url='../assets/git-branch.svg', write_to=branch_out)
         self.__branch_icon = Image.open(branch_out)
 
     def render(self) -> Image:

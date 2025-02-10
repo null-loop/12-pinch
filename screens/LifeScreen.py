@@ -1,6 +1,6 @@
-from life.Board import Board
-from life.Engine import Engine
-from life.GameOptions import GameOptions
+from screens.life.Board import Board
+from screens.life.Engine import Engine
+from screens.life.GameOptions import GameOptions
 
 
 class LifeScreen:

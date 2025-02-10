@@ -2,11 +2,12 @@ import sys
 import time
 from datetime import datetime, timedelta
 
-import matrix
-from gitScreen import GitScreen
-from lifeScreen import LifeScreen
-from snakeScreen import SnakeScreen
-from spotifyScreen import SpotifyScreen
+from screens.GitScreen import GitScreen
+from screens.LifeScreen import LifeScreen
+from screens.SnakeScreen import SnakeScreen
+from screens.SpotifyScreen import SpotifyScreen
+from utils import matrix
+
 
 try:
     print("Press CTRL-C to stop.")

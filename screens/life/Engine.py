@@ -1,9 +1,9 @@
 import math
 import random
 
-from life.Board import Board
-from life.Enums import EntityType
-from life.GameOptions import GameOptions
+from screens.life.Board import Board
+from screens.life.Enums import EntityType
+from screens.life.GameOptions import GameOptions
 
 class Position:
     def __init__(self, x, y):

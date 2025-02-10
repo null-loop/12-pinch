@@ -44,7 +44,7 @@ options.drop_privileges = False
 
 matrix = RGBMatrix(options = options)
 
-with open('.github-secret', 'r') as github_secret_file:
+with open('../.github-secret', 'r') as github_secret_file:
     github_pat = github_secret_file.read().rstrip('\n')
 
 auth = Auth.Token(github_pat)

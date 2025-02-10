@@ -1,14 +1,8 @@
 from PIL import ImageColor
 
-from life.Enums import EntityType
-from life.GameOptions import GameOptions
-
-from matrix import set_matrix_point
-from PIL import ImageColor
-
-from life.Enums import EntityType
-from life.GameOptions import GameOptions
-from matrix import set_matrix_point
+from screens.life.Enums import EntityType
+from screens.life.GameOptions import GameOptions
+from utils.matrix import set_matrix_point
 
 
 class Board:

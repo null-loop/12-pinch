@@ -1,9 +1,9 @@
 from math import floor
 from random import randrange
 from typing import List
-from snake.Board import Board
-from snake.Enums import EntityType, SnakeTurnResult
-from snake.ScoredMove import ScoredMove
+from screens.snake.Board import Board
+from screens.snake.Enums import EntityType, SnakeTurnResult
+from screens.snake.ScoredMove import ScoredMove
 
 class SnakeTraits:
 

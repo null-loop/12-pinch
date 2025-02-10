@@ -1,6 +1,6 @@
 from typing import List
 
-from snake.Enums import WallSets
+from screens.snake.Enums import WallSets
 
 
 class GameOptions:
