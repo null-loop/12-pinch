@@ -19,7 +19,7 @@ class SpotifyScreen:
         if not os.path.isdir(self.__local_image_cache_dir):
             os.mkdir(self.__local_image_cache_dir)
 
-        with open('./secrets/spotify-secrets', 'r') as secrets_file:
+        with open('./secrets/.spotify-secrets', 'r') as secrets_file:
             secrets = json.load(secrets_file)
 
         with open('./config/deny-artists.json', 'r') as deny_artists_file:
