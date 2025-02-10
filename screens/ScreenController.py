@@ -45,7 +45,6 @@ class ScreenController:
         ## vol down - 114
         ## program up - 104
         ## program down - 109
-        ## reset - 113
         self.__command_queue.append(command)
 
     def run(self):

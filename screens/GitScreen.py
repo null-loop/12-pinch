@@ -16,7 +16,7 @@ class BuildStatus:
     branch_count = 0
 
 class GitScreen(ImageScreenBase):
-    update_interval_seconds=60
+    update_interval_seconds=5 * 60
     label = "GitHub"
     render_as_image = True
     def __init__(self):
