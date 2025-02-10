@@ -63,3 +63,8 @@ class Board:
                 entity_type = self.get(x,y)
                 if entity_type != EntityType.SNAKE:
                     self.set(x, y, entity_type)
+
+    def reset(self):
+        for x in range(self.__width):
+            for y in range(self.__height):
+                self.set(x, y, EntityType.EMPTY)

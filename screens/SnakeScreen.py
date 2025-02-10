@@ -28,3 +28,6 @@ class SnakeScreen:
 
     def tick(self):
         self.__game_engine.turn()
+
+    def reset(self):
+        self.__game_engine.reset()

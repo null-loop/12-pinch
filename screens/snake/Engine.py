@@ -12,6 +12,7 @@ class Engine:
         self.__turn = 0
 
     def starting_spawn(self):
+        # TODO: Walls add back in here!
         self.__spawn_foods(self.__options.start_food_count)
         self.__spawn_snakes(self.__options.start_snake_count)
 
@@ -63,3 +64,8 @@ class Engine:
         self.__board.fresh_render()
         for snake in self.__snakes:
             snake.redraw_on_board()
+
+    def reset(self):
+        self.__board.reset()
+        self.__snakes.clear()
+        self.starting_spawn()

@@ -1,6 +1,7 @@
 from enum import Enum
 
 class Command(Enum):
+    RESET = None
     NONE = 0
     POWER = 1
     REWIND = 2

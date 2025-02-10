@@ -40,6 +40,12 @@ class ScreenController:
         if scan_code == 9: command = Command.PRESET_8
         if scan_code == 10: command = Command.PRESET_9
         if scan_code == 11: command = Command.PRESET_0
+        if scan_code == 113: command = Command.RESET
+        ## vol up - 115
+        ## vol down - 114
+        ## program up - 104
+        ## program down - 109
+        ## reset - 113
         self.__command_queue.append(command)
 
     def run(self):
@@ -80,6 +86,8 @@ class ScreenController:
             next_index = self.__current_screen_index + 1
             if self.__current_screen_index == len(self.__screens) - 1: next_index = 0
             self.change_screen(next_index)
+        if command == Command.RESET:
+            self.current_screen().reset()
 
     def change_screen(self, index):
         self.__current_screen_index = index
