@@ -22,6 +22,7 @@ class ScreenController:
         return self.__screens[self.__current_screen_index]
 
     def key_pressed(self, scan_code):
+        print(f'Scan_Code:{scan_code}')
         command = Command.NONE
         if scan_code == "116": command = Command.POWER
         if scan_code == "168": command = Command.REWIND
@@ -60,6 +61,7 @@ class ScreenController:
             self.process_command(command)
 
     def process_command(self, command:Command):
+        print(f'Command:{command}')
         if command == Command.POWER:
             self.__paused = not self.__paused
             if self.__powered:
