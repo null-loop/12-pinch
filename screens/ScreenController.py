@@ -79,14 +79,17 @@ class ScreenController:
         if command == Command.PAUSE_PLAY:
             self.__paused = not self.__paused
         if command == Command.PREVIOUS:
+            matrix.clear()
             next_index = self.__current_screen_index - 1
             if self.__current_screen_index == -1: next_index = len(self.__screens) - 1
             self.change_screen(next_index)
         if command == Command.NEXT:
+            matrix.clear()
             next_index = self.__current_screen_index + 1
             if self.__current_screen_index == len(self.__screens) - 1: next_index = 0
             self.change_screen(next_index)
         if command == Command.RESET:
+            matrix.clear()
             self.current_screen().reset()
 
     def change_screen(self, index):
