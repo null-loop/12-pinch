@@ -7,13 +7,16 @@ import spotipy
 from PIL import Image
 from spotipy.oauth2 import SpotifyOAuth
 
+from screens.ScreenBase import ImageScreenBase
 
-class SpotifyScreen:
+
+class SpotifyScreen(ImageScreenBase):
     update_interval_seconds=5
     label="Spotify"
     render_as_image = True
 
     def __init__(self):
+        super().__init__()
         self.__local_image_cache_dir = '.local-image-cache'
 
         if not os.path.isdir(self.__local_image_cache_dir):
