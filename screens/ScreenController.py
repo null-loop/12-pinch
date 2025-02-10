@@ -80,7 +80,7 @@ class ScreenController:
             self.__paused = not self.__paused
         if command == Command.PREVIOUS:
             next_index = self.__current_screen_index - 1
-            if self.__current_screen_index == -1: next_index = len(self.__screens) - 1
+            if self.__current_screen_index == 0: next_index = len(self.__screens) - 1
             self.change_screen(next_index)
         if command == Command.NEXT:
             next_index = self.__current_screen_index + 1
@@ -92,5 +92,7 @@ class ScreenController:
 
     def change_screen(self, index):
         matrix.clear()
+        print(f'Setting screen index to {index}')
         self.__current_screen_index = index
         self.current_screen().focus()
+        print(f'Focused screen {self.current_screen().label}')
