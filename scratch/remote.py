@@ -7,5 +7,10 @@ while True:
 
 # Recorded scan codes
 
-# Rewind
-# Fastforward
+# Power - 116
+# Rewind - 168
+# Fastforward - 208
+# Previous - 165
+# Next - 163
+# Pause / Play - 164
+# 1 to 0 - 2 to 11 (n+1)

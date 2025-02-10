@@ -36,3 +36,6 @@ def set_matrix_point(x, y, r, g, b):
         t_y = t_y - 64
     colour = graphics.Color(r, g, b)
     graphics.DrawLine(matrix, t_x, t_y, t_x, t_y, colour)
+
+def clear():
+    matrix.Clear()

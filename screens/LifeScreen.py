@@ -16,8 +16,8 @@ class LifeScreen:
         game_board = Board(game_options)
         self.__game_engine = Engine(game_board, game_options)
 
-    def fresh_render(self):
+    def focus(self):
         self.__game_engine.reset()
 
-    def render(self):
+    def tick(self):
         self.__game_engine.turn()

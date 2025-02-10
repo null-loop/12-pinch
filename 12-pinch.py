@@ -4,10 +4,14 @@ from datetime import datetime, timedelta
 
 from screens.GitScreen import GitScreen
 from screens.LifeScreen import LifeScreen
+from screens.ScreenController import ScreenController
 from screens.SnakeScreen import SnakeScreen
 from screens.SpotifyScreen import SpotifyScreen
 from utils import matrix
 
+
+controller = ScreenController()
+controller.run()
 
 try:
     print("Press CTRL-C to stop.")
