@@ -31,3 +31,6 @@ class SnakeScreen:
 
     def reset(self):
         self.__game_engine.reset()
+
+    def preset(self, index):
+        a = None # no-op

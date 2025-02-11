@@ -1,11 +1,12 @@
+import sys
+
+import keyboard
+
 from screens.Enums import Command
 from screens.GitScreen import GitScreen
 from screens.LifeScreen import LifeScreen
 from screens.SnakeScreen import SnakeScreen
 from screens.SpotifyScreen import SpotifyScreen
-import keyboard
-import sys
-
 from utils import matrix
 
 
@@ -16,14 +17,15 @@ class ScreenController:
         self.__command_queue = []
         self.__paused = False
         self.__powered = True
-        keyboard.on_press(lambda key_event: self.key_pressed(key_event.scan_code))
+        keyboard.on_press(lambda key_event: self.key_pressed(key_event.scan_code, key_event.name))
 
     def current_screen(self):
         return self.__screens[self.__current_screen_index]
 
-    def key_pressed(self, scan_code):
+    def key_pressed(self, scan_code, name):
         print(f'Scan_Code:{scan_code}')
         command = Command.NONE
+        # TODO:TURN THESE INTO STRING CONSTANTS!
         if scan_code == 116: command = Command.POWER
         if scan_code == 168: command = Command.REWIND
         if scan_code == 208: command = Command.FAST_FORWARD
@@ -41,8 +43,8 @@ class ScreenController:
         if scan_code == 10: command = Command.PRESET_9
         if scan_code == 11: command = Command.PRESET_0
         if scan_code == 113: command = Command.RESET
-        ## vol up - 115
-        ## vol down - 114
+        ## vol up - 115 - brightness
+        ## vol down - 114 - brightness
         ## program up - 104
         ## program down - 109
         self.__command_queue.append(command)
@@ -88,6 +90,9 @@ class ScreenController:
         if command == Command.RESET:
             matrix.clear()
             self.current_screen().reset()
+        if command >= Command.PRESET_1:
+            preset = command - Command.PRESET_1 + 1
+            self.current_screen().preset(preset)
 
     def change_screen(self, index):
         matrix.clear()

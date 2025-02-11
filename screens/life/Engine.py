@@ -15,9 +15,10 @@ class Engine:
         self.__board = board
         self.__options = options
 
-    def starting_spawn(self):
+    def random_spawn(self, fraction):
+        self.__board.reset()
         total_cells = self.__options.height * self.__options.width
-        population = math.floor(total_cells / 3)
+        population = math.floor(total_cells / fraction)
         for p in range(population):
             populated = False
             while not populated:
@@ -27,6 +28,9 @@ class Engine:
                 if e == EntityType.EMPTY:
                     self.__board.set(x, y, EntityType.CELL)
                     populated = True
+
+    def spawn_from_array(self, spawn_positions):
+        self.__board.reset()
 
     def turn(self):
         # Algo!
@@ -52,6 +56,9 @@ class Engine:
         for p in deaths:
             self.__board.set(p.x, p.y, EntityType.EMPTY)
 
+    def fresh_render(self):
+        self.__board.fresh_render();
+
     def reset(self):
         self.__board.reset()
-        self.starting_spawn()
+        self.random_spawn(3)

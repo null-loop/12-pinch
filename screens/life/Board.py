@@ -63,3 +63,9 @@ class Board:
         for x in range(self.__width):
             for y in range(self.__height):
                 self.set(x, y, EntityType.EMPTY)
+
+    def fresh_render(self):
+        for x in range(self.__width):
+            for y in range(self.__height):
+                entity_type = self.get(x,y)
+                self.set(x, y, entity_type)

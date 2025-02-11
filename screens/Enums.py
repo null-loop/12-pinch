@@ -1,6 +1,7 @@
-from enum import Enum
+from enum import IntEnum
 
-class Command(Enum):
+
+class Command(IntEnum):
     RESET = None
     NONE = 0
     POWER = 1
@@ -9,13 +10,13 @@ class Command(Enum):
     PREVIOUS = 4
     NEXT = 5
     PAUSE_PLAY = 6
-    PRESET_1 = 7
-    PRESET_2 = 8
-    PRESET_3 = 9
-    PRESET_4 = 10
-    PRESET_5 = 11
-    PRESET_6 = 12
-    PRESET_7 = 13
-    PRESET_8 = 14
-    PRESET_9 = 15
-    PRESET_0 = 16
+    PRESET_1 = 100
+    PRESET_2 = 101
+    PRESET_3 = 102
+    PRESET_4 = 103
+    PRESET_5 = 104
+    PRESET_6 = 105
+    PRESET_7 = 106
+    PRESET_8 = 107
+    PRESET_9 = 108
+    PRESET_10 = 109
