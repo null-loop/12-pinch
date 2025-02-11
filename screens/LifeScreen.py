@@ -43,7 +43,7 @@ class LifeScreen:
         if preset == 'Random':
             self.__game_engine.random_spawn(3)
         else:
-            image = Image.open('./assets/' + preset)
+            image = Image.open('./assets/life_presets/' + preset)
             data = asarray(image)
             positions = []
             for x in range(len(data)):
