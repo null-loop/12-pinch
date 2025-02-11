@@ -50,7 +50,8 @@ class LifeScreen:
                 row = data[y]
                 for x in range(len(row)):
                     p = row[x]
-                    if p[0] == 0: positions.append(Position(x,y))
+                    print(p)
+                    if p[0] < 100: positions.append(Position(x,y))
             self.__game_engine.spawn_from_array(positions)
 
         self.__spawned = True
