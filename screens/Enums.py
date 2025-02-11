@@ -1,9 +1,8 @@
 from enum import IntEnum
 
-
 class Command(IntEnum):
-    RESET = None
-    NONE = 0
+    NONE = -1
+    RESET = 0
     POWER = 1
     REWIND = 2
     FAST_FORWARD = 3
