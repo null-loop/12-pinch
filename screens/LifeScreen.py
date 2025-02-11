@@ -46,11 +46,11 @@ class LifeScreen:
             image = Image.open('./assets/life_presets/' + preset)
             data = asarray(image)
             positions = []
-            for x in range(len(data)):
-                col = data[x]
-                for y in range(len(col)):
-                    p = col[y]
-                    if p[0] > 0: positions.append(Position(x,y))
+            for y in range(len(data)):
+                row = data[y]
+                for x in range(len(row)):
+                    p = row[x]
+                    if p[0] == 0: positions.append(Position(x,y))
             self.__game_engine.spawn_from_array(positions)
 
         self.__spawned = True
