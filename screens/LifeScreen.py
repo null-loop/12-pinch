@@ -35,8 +35,8 @@ class LifeScreen:
         self.__load_preset()
 
     def preset(self, index):
-        a = None # no-op
         self.__preset = index - 1
+        self.__load_preset()
 
     def __load_preset(self):
         preset = self.__presets[self.__preset]
