@@ -46,6 +46,7 @@ class LifeScreen:
             image = Image.open('./assets/life_presets/' + preset)
             data = asarray(image)
             positions = []
+            print(data)
             print(len(data))
             for y in range(len(data)):
                 row = data[y]
