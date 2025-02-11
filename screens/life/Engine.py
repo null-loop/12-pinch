@@ -31,6 +31,8 @@ class Engine:
 
     def spawn_from_array(self, spawn_positions):
         self.__board.reset()
+        for pos in spawn_positions:
+            self.__board.set(pos.x, pos.y, EntityType.CELL)
 
     def turn(self):
         # Algo!
@@ -57,7 +59,7 @@ class Engine:
             self.__board.set(p.x, p.y, EntityType.EMPTY)
 
     def fresh_render(self):
-        self.__board.fresh_render();
+        self.__board.fresh_render()
 
     def reset(self):
         self.__board.reset()
