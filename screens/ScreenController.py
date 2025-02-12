@@ -17,6 +17,7 @@ class ScreenController:
         self.__command_queue = []
         self.__paused = False
         self.__powered = True
+        self.__step_once = False
         keyboard.on_press(lambda key_event: self.key_pressed(key_event.scan_code, key_event.name))
 
     def current_screen(self):
@@ -54,8 +55,12 @@ class ScreenController:
             print("Press CTRL-C to stop.")
             self.current_screen().focus()
             while True:
-                if not self.__paused: self.current_screen().tick()
-                self.process_command_queue()
+                if self.__paused:
+                    if self.__step_once:
+                        self.__step_once = False
+                        self.current_screen().tick()
+                else:
+                    self.current_screen().tick()
 
         except KeyboardInterrupt:
             sys.exit(0)
@@ -90,6 +95,8 @@ class ScreenController:
         if command == Command.RESET:
             matrix.clear()
             self.current_screen().reset()
+        if command == Command.FAST_FORWARD:
+            self.__step_once = True
         if command >= Command.PRESET_1:
             preset = command - Command.PRESET_1 + 1
             self.current_screen().preset(preset)
