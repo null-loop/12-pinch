@@ -61,6 +61,7 @@ class ScreenController:
                         self.current_screen().tick()
                 else:
                     self.current_screen().tick()
+                self.process_command_queue()
 
         except KeyboardInterrupt:
             sys.exit(0)
