@@ -26,7 +26,6 @@ class ScreenController:
     def key_pressed(self, scan_code, name):
         print(f'Scan_Code:{scan_code}')
         command = Command.NONE
-        # TODO:TURN THESE INTO STRING CONSTANTS!
         if scan_code == 116: command = Command.POWER
         if scan_code == 168: command = Command.REWIND
         if scan_code == 208: command = Command.FAST_FORWARD
@@ -55,13 +54,13 @@ class ScreenController:
             print("Press CTRL-C to stop.")
             self.current_screen().focus()
             while True:
+                self.process_command_queue()
                 if self.__paused:
                     if self.__step_once:
                         self.__step_once = False
                         self.current_screen().tick()
                 else:
                     self.current_screen().tick()
-                self.process_command_queue()
 
         except KeyboardInterrupt:
             sys.exit(0)
@@ -76,11 +75,12 @@ class ScreenController:
     def process_command(self, command:Command):
         print(f'Command:{command}')
         if command == Command.POWER:
-            self.__paused = not self.__paused
             if self.__powered:
+                self.__paused = True
                 self.__powered = False
                 matrix.clear()
             else:
+                self.__paused = False
                 self.__powered = True
                 self.current_screen().focus()
         if command == Command.PAUSE_PLAY:
