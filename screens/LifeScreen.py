@@ -20,7 +20,7 @@ class LifeScreen:
         self.__game_engine = Engine(game_board, game_options)
         self.__spawned = False
         self.__preset = 0
-        self.__presets = ['Random','acorn.png','gosper-glider-gun.png','r-pentomino.png']
+        self.__presets = ['Random','acorn.png','gosper-glider-gun.png','r-pentomino.png','block-layer.png']
 
     def focus(self):
         if not self.__spawned:
