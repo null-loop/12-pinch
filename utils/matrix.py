@@ -16,15 +16,17 @@ options.drop_privileges = False
 matrix = RGBMatrix(options = options)
 
 def increase_brightness():
-    options.brightness = options.brightness + 10
-    if options.brightness >= 100:
-        options.brightness = 100
+    n = options.brightness + 5
+    if n <= 0:
+        n = 1
+    options.brightness = n
     matrix.brightness = options.brightness
 
 def decrease_brightness():
-    options.brightness = options.brightness - 10
-    if options.brightness <= 0:
-        options.brightness = 1
+    n = options.brightness - 5
+    if n <= 0:
+        n = 1
+    options.brightness = n
     matrix.brightness = options.brightness
 
 def render_image_on_matrix(image: Image):
