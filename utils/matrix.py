@@ -19,16 +19,13 @@ def increase_brightness():
     options.brightness = options.brightness + 1
     if options.brightness >= 100:
         options.brightness = 100
-    ##__reset_matrix()
+    matrix.brightness = options.brightness
 
 def decrease_brightness():
     options.brightness = options.brightness - 1
     if options.brightness <= 0:
         options.brightness = 1
-    ##__reset_matrix()
-
-##def __reset_matrix():
-  ##  matrix = RGBMatrix(options = options)
+    matrix.brightness = options.brightness
 
 def render_image_on_matrix(image: Image):
     # rearrange for rendering...
