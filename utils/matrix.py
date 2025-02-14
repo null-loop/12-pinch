@@ -16,14 +16,14 @@ options.drop_privileges = False
 matrix = RGBMatrix(options = options)
 
 def increase_brightness():
-    n = options.brightness + 5
+    n = options.brightness + 10
     if n <= 0:
         n = 1
     options.brightness = n
     matrix.brightness = options.brightness
 
 def decrease_brightness():
-    n = options.brightness - 5
+    n = options.brightness - 10
     if n <= 0:
         n = 1
     options.brightness = n
