@@ -15,6 +15,21 @@ options.drop_privileges = False
 
 matrix = RGBMatrix(options = options)
 
+def increase_brightness():
+    options.brightness = options.brightness + 1
+    if options.brightness >= 100:
+        options.brightness = 100
+    ##__reset_matrix()
+
+def decrease_brightness():
+    options.brightness = options.brightness - 1
+    if options.brightness <= 0:
+        options.brightness = 1
+    ##__reset_matrix()
+
+##def __reset_matrix():
+  ##  matrix = RGBMatrix(options = options)
+
 def render_image_on_matrix(image: Image):
     # rearrange for rendering...
     top_half = image.crop((0, 0, 128, 64))

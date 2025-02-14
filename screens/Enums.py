@@ -1,6 +1,7 @@
 from enum import IntEnum
 
 class Command(IntEnum):
+
     NONE = -1
     RESET = 0
     POWER = 1
@@ -9,6 +10,8 @@ class Command(IntEnum):
     PREVIOUS = 4
     NEXT = 5
     PAUSE_PLAY = 6
+    BRIGHTNESS_UP = 7
+    BRIGHTNESS_DOWN = 8
     PRESET_1 = 100
     PRESET_2 = 101
     PRESET_3 = 102

@@ -41,8 +41,10 @@ class ScreenController:
         if scan_code == 8: command = Command.PRESET_7
         if scan_code == 9: command = Command.PRESET_8
         if scan_code == 10: command = Command.PRESET_9
-        if scan_code == 11: command = Command.PRESET_0
+        if scan_code == 11: command = Command.PRESET_10
         if scan_code == 113: command = Command.RESET
+        if scan_code == 115: command = Command.BRIGHTNESS_UP
+        if scan_code == 114: command = Command.BRIGHTNESS_DOWN
         ## vol up - 115 - brightness
         ## vol down - 114 - brightness
         ## program up - 104
@@ -98,6 +100,10 @@ class ScreenController:
             self.current_screen().reset()
         if command == Command.FAST_FORWARD:
             self.__step_once = True
+        if command == Command.BRIGHTNESS_DOWN:
+            matrix.decrease_brightness()
+        if command == Command.BRIGHTNESS_UP:
+            matrix.increase_brightness()
         if command >= Command.PRESET_1:
             preset = command - Command.PRESET_1 + 1
             self.current_screen().preset(preset)
