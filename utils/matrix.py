@@ -57,8 +57,8 @@ class ScreenMatrix:
 
     def increase_brightness(self):
         n = self.__matrix.brightness + 20
-        if n <= 0:
-            n = 1
+        if n > 100:
+            n = 100
         self.__matrix.brightness = n
 
     def decrease_brightness(self):

@@ -28,9 +28,7 @@ class Snake:
 
     @classmethod
     def spawn_new_snake(cls, x, y, board):
-        #colour_index = randrange(3)
         colour = [randrange(235) + 20,randrange(235) + 20,randrange(235) + 20]
-        #colour[colour_index] = randrange(225) + 30
         traits = SnakeTraits()
         return Snake([[x,y]], traits, colour, board)
 
