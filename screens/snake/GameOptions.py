@@ -1,8 +1,3 @@
-from typing import List
-
-from screens.snake.Enums import WallSets
-
-
 class GameOptions:
     height=128
     width=128

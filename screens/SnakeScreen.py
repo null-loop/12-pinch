@@ -24,7 +24,7 @@ class SnakeScreen:
 
     def focus(self):
         if not self.__spawned:
-            self.__game_engine.starting_spawn()
+            self.__load_preset()
             self.__spawned = True
         self.__game_engine.fresh_render()
 
@@ -32,10 +32,11 @@ class SnakeScreen:
         self.__game_engine.turn()
 
     def reset(self):
-        self.__game_engine.reset()
+        self.__load_preset()
 
     def preset(self, index):
-        a = None # no-op
+        self.__preset = index - 1
+        self.__load_preset()
 
     def __load_preset(self):
         preset = self.__presets[self.__preset]
