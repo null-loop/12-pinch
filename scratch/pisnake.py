@@ -10,7 +10,7 @@ game_options.start_snake_count = 40
 game_options.start_food_count = 100
 game_options.wall_set = WallSets.NONE
 game_options.refresh_walls()
-game_board = Board(game_options)
+game_board = Board(game_options, matrix)
 game_engine = Engine(game_board, game_options)
 
 game_engine.starting_spawn()

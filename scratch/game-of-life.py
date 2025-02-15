@@ -8,7 +8,7 @@ game_options = GameOptions()
 game_options.height = 42
 game_options.width = 42
 game_options.render_scale = 3
-game_board = Board(game_options)
+game_board = Board(game_options, matrix)
 game_engine = Engine(game_board, game_options)
 game_engine.starting_spawn()
 

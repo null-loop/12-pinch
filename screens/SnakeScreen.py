@@ -2,6 +2,7 @@ from screens.snake.Board import Board
 from screens.snake.Engine import Engine
 from screens.snake.Enums import WallSets
 from screens.snake.GameOptions import GameOptions
+from utils.matrix import ScreenMatrix
 
 
 class SnakeScreen:
@@ -9,13 +10,13 @@ class SnakeScreen:
     label="Snake"
     render_as_image = False
 
-    def __init__(self):
+    def __init__(self, matrix: ScreenMatrix):
         game_options = GameOptions()
         game_options.start_snake_count = 100
         game_options.start_food_count = 40
         game_options.wall_set = WallSets.NONE
         game_options.refresh_walls()
-        game_board = Board(game_options)
+        game_board = Board(game_options, matrix)
         # TODO: One day worry about the walls! That day is coming! PRESETS.
         self.__game_engine = Engine(game_board, game_options)
         self.__spawned = False

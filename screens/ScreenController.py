@@ -8,11 +8,13 @@ from screens.LifeScreen import LifeScreen
 from screens.SnakeScreen import SnakeScreen
 from screens.SpotifyScreen import SpotifyScreen
 from utils import matrix
+from utils.matrix import ScreenMatrix
 
 
 class ScreenController:
     def __init__(self):
-        self.__screens = [LifeScreen(),GitScreen(),SnakeScreen(),SpotifyScreen()]
+        self.__matrix = ScreenMatrix()
+        self.__screens = [LifeScreen(self.__matrix),GitScreen(self.__matrix),SnakeScreen(self.__matrix),SpotifyScreen(self.__matrix)]
         self.__current_screen_index = 0
         self.__command_queue = []
         self.__paused = False
@@ -54,7 +56,7 @@ class ScreenController:
     def run(self):
         try:
             print("Press CTRL-C to stop.")
-            self.current_screen().focus()
+            self.__focus_current()
             while True:
                 self.process_command_queue()
                 if self.__paused:
@@ -80,37 +82,54 @@ class ScreenController:
             if self.__powered:
                 self.__paused = True
                 self.__powered = False
-                matrix.clear()
+                self.__matrix.clear()
             else:
                 self.__paused = False
                 self.__powered = True
-                self.current_screen().focus()
+                self.__focus_current()
         if command == Command.PAUSE_PLAY:
             self.__paused = not self.__paused
         if command == Command.PREVIOUS:
             next_index = self.__current_screen_index - 1
             if self.__current_screen_index == 0: next_index = len(self.__screens) - 1
-            self.change_screen(next_index)
+            self.__change_screen(next_index)
         if command == Command.NEXT:
             next_index = self.__current_screen_index + 1
             if self.__current_screen_index == len(self.__screens) - 1: next_index = 0
-            self.change_screen(next_index)
+            self.__change_screen(next_index)
         if command == Command.RESET:
-            matrix.clear()
-            self.current_screen().reset()
+            self.__reset_current()
         if command == Command.FAST_FORWARD:
             self.__step_once = True
         if command == Command.BRIGHTNESS_DOWN:
-            matrix.decrease_brightness()
+            self.__matrix.decrease_brightness()
+            self.__focus_current()
         if command == Command.BRIGHTNESS_UP:
-            matrix.increase_brightness()
+            self.__matrix.increase_brightness()
+            self.__focus_current()
         if command >= Command.PRESET_1:
             preset = command - Command.PRESET_1 + 1
-            self.current_screen().preset(preset)
+            self.__preset_current(preset)
 
-    def change_screen(self, index):
-        matrix.clear()
+    def __focus_current(self):
+        self.__matrix.start_new_canvas()
+        self.current_screen().focus()
+        self.__matrix.finish_canvas()
+
+    def __reset_current(self):
+        self.__matrix.start_new_canvas()
+        self.current_screen().reset()
+        self.__matrix.finish_canvas()
+
+    def __preset_current(self, preset_index:int):
+        self.__matrix.start_new_canvas()
+        self.current_screen().preset(preset_index)
+        self.__matrix.finish_canvas()
+
+    def __change_screen(self, index):
+        self.__matrix.clear()
         print(f'Setting screen index to {index}')
         self.__current_screen_index = index
-        self.current_screen().focus()
+
+        self.__focus_current()
         print(f'Focused screen {self.current_screen().label}')

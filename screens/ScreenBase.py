@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
-from utils import matrix
+from utils.matrix import ScreenMatrix
+
 
 class ImageScreenBase:
     update_interval_seconds = 60
-    def __init__(self):
+    def __init__(self, matrix: ScreenMatrix):
+        self.__matrix = matrix
         self.__last_refreshed = datetime.now()
         self.__last_image = None
 
@@ -18,7 +20,7 @@ class ImageScreenBase:
 
     def __draw_image(self):
         if not self.__last_image is None:
-            matrix.render_image_on_matrix(self.__last_image)
+            self.__matrix.render_image(self.__last_image)
 
     def render(self):
         return None

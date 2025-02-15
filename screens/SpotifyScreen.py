@@ -8,6 +8,7 @@ from PIL import Image
 from spotipy.oauth2 import SpotifyOAuth
 
 from screens.ScreenBase import ImageScreenBase
+from utils.matrix import ScreenMatrix
 
 
 class SpotifyScreen(ImageScreenBase):
@@ -15,8 +16,8 @@ class SpotifyScreen(ImageScreenBase):
     label="Spotify"
     render_as_image = True
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, matrix: ScreenMatrix):
+        super().__init__(matrix)
         self.__local_image_cache_dir = '.local-image-cache'
 
         if not os.path.isdir(self.__local_image_cache_dir):

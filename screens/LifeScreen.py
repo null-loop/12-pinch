@@ -11,12 +11,12 @@ class LifeScreen:
     label="Game of Life"
     render_as_image = False
 
-    def __init__(self):
+    def __init__(self, matrix):
         game_options = GameOptions()
         game_options.height = 64
         game_options.width = 64
         game_options.render_scale = 2
-        game_board = Board(game_options)
+        game_board = Board(game_options, matrix)
         self.__game_engine = Engine(game_board, game_options)
         self.__spawned = False
         self.__preset = 0
@@ -52,5 +52,4 @@ class LifeScreen:
                     p = row[x]
                     if p[0] < 100: positions.append(Position(x,y))
             self.__game_engine.spawn_from_array(positions)
-
         self.__spawned = True

@@ -2,15 +2,16 @@ from PIL import ImageColor
 
 from screens.life.Enums import EntityType
 from screens.life.GameOptions import GameOptions
-from utils.matrix import set_matrix_point
+from utils.matrix import ScreenMatrix
 
 
 class Board:
-    def __init__(self, options:GameOptions):
+    def __init__(self, options: GameOptions, matrix: ScreenMatrix):
         self.__entities = []
         self.__height = options.height
         self.__width = options.width
         self.__render_scale = options.render_scale
+        self.__matrix = matrix
 
         for y in range(options.width):
             self.__entities.append([EntityType.EMPTY] * options.height)
@@ -36,7 +37,7 @@ class Board:
         border = 1 if self.__render_scale > 3 else 0
         for rx in range(self.__render_scale - border):
             for ry in range(self.__render_scale - border):
-                set_matrix_point(rx + sx, ry + sy, colour[0], colour[1], colour[2])
+                self.__matrix.set_pixel(rx + sx, ry + sy, colour[0], colour[1], colour[2])
 
     def count_neighbours(self, x, y):
         count = 0

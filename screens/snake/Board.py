@@ -5,14 +5,15 @@ from PIL import ImageColor
 
 from screens.snake.Enums import EntityType
 from screens.snake.GameOptions import GameOptions
+from utils.matrix import ScreenMatrix
 
-from utils.matrix import set_matrix_point
 
 class Board:
-    def __init__(self, options:GameOptions):
+    def __init__(self, options: GameOptions, matrix: ScreenMatrix):
         self.__entities = []
         self.__height = options.height
         self.__width = options.width
+        self.__matrix = matrix
 
         for y in range(options.width):
             self.__entities.append([EntityType.EMPTY] * options.height)
@@ -41,7 +42,7 @@ class Board:
     def set_with_colour(self, x, y, entity_type: EntityType, colour):
 
         self.__entities[x][y] = entity_type
-        set_matrix_point(x, y, colour[0], colour[1], colour[2])
+        self.__matrix.set_pixel(x, y, colour[0], colour[1], colour[2])
 
     def get_random_empty_position(self)->List:
         # Randomise x,y until you find an empty location
