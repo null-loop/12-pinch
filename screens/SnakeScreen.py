@@ -49,14 +49,14 @@ class SnakeScreen:
 
     def program_up(self):
         if self.__preset == 3:
-            self.__game_options.food_count = self.__game_options.food_count + 5
+            self.__game_options.food_count = self.__game_options.food_count + 10
         else:
             self.__game_options.min_snake_count = self.__game_options.min_snake_count + 10
         self.__load_preset()
 
     def program_down(self):
         if self.__preset == 3:
-            self.__game_options.food_count = self.__game_options.food_count - 5
+            self.__game_options.food_count = self.__game_options.food_count - 10
             if self.__game_options.food_count <= 0:
                 self.__game_options.food_count = 1
         else:
