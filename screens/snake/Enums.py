@@ -11,7 +11,3 @@ class SnakeTurnResult(Enum):
     ATE = 1
     DIED = 2
     SPLIT = 3
-
-class WallSets(Enum):
-    NONE = 0
-    SQUARE = 1

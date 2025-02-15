@@ -15,9 +15,9 @@ class Engine:
         self.__turn = 0
 
     def starting_spawn(self):
-        # TODO: Walls add back in here!
         self.__spawn_foods(self.__options.start_food_count)
         self.__spawn_snakes(self.__options.start_snake_count)
+        self.__board.set_walls(self.__options.walls)
 
     def __spawn_foods(self, count:int):
         if count != 0:

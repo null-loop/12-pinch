@@ -1,6 +1,8 @@
+from PIL import Image
+from numpy import asarray
+
 from screens.snake.Board import Board
 from screens.snake.Engine import Engine
-from screens.snake.Enums import WallSets
 from screens.snake.GameOptions import GameOptions
 from utils.matrix import ScreenMatrix
 
@@ -11,15 +13,14 @@ class SnakeScreen:
     render_as_image = False
 
     def __init__(self, matrix: ScreenMatrix):
-        game_options = GameOptions()
-        game_options.start_snake_count = 100
-        game_options.start_food_count = 40
-        game_options.wall_set = WallSets.NONE
-        game_options.refresh_walls()
-        game_board = Board(game_options, matrix)
-        # TODO: One day worry about the walls! That day is coming! PRESETS.
-        self.__game_engine = Engine(game_board, game_options)
+        self.__game_options = GameOptions()
+        self.__game_options.start_snake_count = 100
+        self.__game_options.start_food_count = 40
+        self.__game_board = Board(self.__game_options, matrix)
+        self.__game_engine = Engine(self.__game_board, self.__game_options)
         self.__spawned = False
+        self.__preset = 0
+        self.__presets = ['NoWalls','snake_frame_1.png']
 
     def focus(self):
         if not self.__spawned:
@@ -35,3 +36,19 @@ class SnakeScreen:
 
     def preset(self, index):
         a = None # no-op
+
+    def __load_preset(self):
+        preset = self.__presets[self.__preset]
+        if preset != 'NoWalls':
+            walls = []
+            image = Image.open('./assets/snake_presets/' + preset)
+            data = asarray(image)
+            for y in range(len(data)):
+                row = data[y]
+                for x in range(len(row)):
+                    p = row[x]
+                    if p[0] < 100: walls.append([x,y])
+            self.__game_options.walls = walls
+        else:
+            self.__game_options.walls = []
+        self.__game_engine.reset()
