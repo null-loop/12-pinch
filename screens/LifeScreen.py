@@ -63,6 +63,6 @@ class LifeScreen:
     def program_down(self):
         if self.__preset == 0:
             self.__random_spawn_ratio = self.__random_spawn_ratio - 1
-            if self.__random_spawn_ratio <= 0:
-                self.__random_spawn_ratio = 1
+            if self.__random_spawn_ratio <= 1:
+                self.__random_spawn_ratio = 2
             self.__load_preset()
