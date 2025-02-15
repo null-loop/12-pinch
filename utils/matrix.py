@@ -21,7 +21,7 @@ class ScreenMatrix:
         self.__next_canvas = self.__matrix.CreateFrameCanvas()
 
     def finish_canvas(self):
-        self.__matrix.SwapOnVsync(self.__next_canvas)
+        self.__matrix.SwapOnVSync(self.__next_canvas)
         self.__next_canvas = None
 
     def render_image(self, image: Image):
@@ -39,7 +39,7 @@ class ScreenMatrix:
         else:
             canvas = self.__matrix.CreateFrameCanvas()
             canvas.SetImage(rgb)
-            self.__matrix.SwapOnVsync(canvas)
+            self.__matrix.SwapOnVSync(canvas)
 
     def set_pixel(self, x, y, r, g, b):
         t_x = x
