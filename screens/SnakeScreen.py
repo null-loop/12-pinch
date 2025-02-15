@@ -20,7 +20,7 @@ class SnakeScreen:
         self.__game_engine = Engine(self.__game_board, self.__game_options)
         self.__spawned = False
         self.__preset = 0
-        self.__presets = ['NoWalls','snake_frame_1.png']
+        self.__presets = ['NoWalls','ToggleReproduction']
 
     def focus(self):
         if not self.__spawned:
@@ -40,16 +40,9 @@ class SnakeScreen:
 
     def __load_preset(self):
         preset = self.__presets[self.__preset]
-        if preset != 'NoWalls':
-            walls = []
-            image = Image.open('./assets/snake_presets/' + preset)
-            data = asarray(image)
-            for y in range(len(data)):
-                row = data[y]
-                for x in range(len(row)):
-                    p = row[x]
-                    if p[0] < 100: walls.append([x,y])
-            self.__game_options.walls = walls
+        if preset == 'ToggleReproduction':
+            self.__game_options.reproduce = not self.__game_options.reproduce
+            self.__preset = 0
         else:
             self.__game_options.walls = []
         self.__game_engine.reset()

@@ -41,8 +41,9 @@ class Engine:
                 food_to_spawn = food_to_spawn + 1
             if turn_result == SnakeTurnResult.SPLIT:
                 food_to_spawn = food_to_spawn + 1
-                split_snake = snake.split()
-                self.__snakes.append(split_snake)
+                if self.__options.reproduce:
+                    split_snake = snake.split()
+                    self.__snakes.append(split_snake)
             if turn_result == SnakeTurnResult.DIED:
                 self.__snakes.remove(snake)
 
