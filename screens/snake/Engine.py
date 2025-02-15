@@ -15,8 +15,8 @@ class Engine:
         self.__turn = 0
 
     def starting_spawn(self):
-        self.__spawn_foods(self.__options.start_food_count)
-        self.__spawn_snakes(self.__options.start_snake_count)
+        self.__spawn_foods(self.__options.food_count)
+        self.__spawn_snakes(self.__options.min_snake_count)
         self.__board.set_walls(self.__options.walls)
 
     def __spawn_foods(self, count:int):
@@ -48,8 +48,8 @@ class Engine:
                 self.__snakes.remove(snake)
 
         self.__spawn_foods(food_to_spawn)
-        if len(self.__snakes) < self.__options.start_snake_count:
-            self.__spawn_snakes(self.__options.start_snake_count - len(self.__snakes))
+        if len(self.__snakes) < self.__options.min_snake_count:
+            self.__spawn_snakes(self.__options.min_snake_count - len(self.__snakes))
 
     def fresh_render(self):
         self.__board.fresh_render()

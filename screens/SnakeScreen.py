@@ -14,13 +14,13 @@ class SnakeScreen:
 
     def __init__(self, matrix: ScreenMatrix):
         self.__game_options = GameOptions()
-        self.__game_options.start_snake_count = 100
-        self.__game_options.start_food_count = 40
+        self.__game_options.min_snake_count = 100
+        self.__game_options.food_count = 40
         self.__game_board = Board(self.__game_options, matrix)
         self.__game_engine = Engine(self.__game_board, self.__game_options)
         self.__spawned = False
         self.__preset = 0
-        self.__presets = ['NoWalls','ToggleReproduction']
+        self.__presets = ['NoWalls','ToggleReproduction','SnakeCount','FoodCount']
 
     def focus(self):
         if not self.__spawned:
@@ -48,11 +48,19 @@ class SnakeScreen:
         self.__game_engine.reset()
 
     def program_up(self):
-        self.__game_options.start_snake_count = self.__game_options.start_snake_count + 10
+        if self.__preset == 3:
+            self.__game_options.food_count = self.__game_options.food_count + 5
+        else:
+            self.__game_options.min_snake_count = self.__game_options.min_snake_count + 10
         self.__load_preset()
 
     def program_down(self):
-        self.__game_options.start_snake_count = self.__game_options.start_snake_count - 10
-        if self.__game_options.start_snake_count <= 0:
-            self.__game_options.start_snake_count = 1
+        if self.__preset == 3:
+            self.__game_options.food_count = self.__game_options.food_count - 5
+            if self.__game_options.food_count <= 0:
+                self.__game_options.food_count = 1
+        else:
+            self.__game_options.min_snake_count = self.__game_options.min_snake_count - 10
+            if self.__game_options.min_snake_count <= 0:
+                self.__game_options.min_snake_count = 1
         self.__load_preset()
