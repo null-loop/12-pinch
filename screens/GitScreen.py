@@ -6,7 +6,7 @@ from github import Auth
 from github import Github
 from github.Repository import Repository
 
-from screens.ScreenBase import ImageScreenBase
+from screens.ImageScreenBase import ImageScreenBase
 from utils.matrix import ScreenMatrix
 
 

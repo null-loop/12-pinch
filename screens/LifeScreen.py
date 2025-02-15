@@ -20,6 +20,7 @@ class LifeScreen:
         self.__game_engine = Engine(game_board, game_options)
         self.__spawned = False
         self.__preset = 0
+        self.__random_spawn_ratio = 3
         self.__presets = ['Random','acorn.png','gosper-glider-gun.png','r-pentomino.png','block-layer.png']
 
     def focus(self):
@@ -41,7 +42,7 @@ class LifeScreen:
     def __load_preset(self):
         preset = self.__presets[self.__preset]
         if preset == 'Random':
-            self.__game_engine.random_spawn(3)
+            self.__game_engine.random_spawn(self.__random_spawn_ratio)
         else:
             image = Image.open('./assets/life_presets/' + preset)
             data = asarray(image)
@@ -53,3 +54,15 @@ class LifeScreen:
                     if p[0] < 100: positions.append(Position(x,y))
             self.__game_engine.spawn_from_array(positions)
         self.__spawned = True
+
+    def program_up(self):
+        if self.__preset == 0:
+            self.__random_spawn_ratio = self.__random_spawn_ratio + 1
+            self.__load_preset()
+
+    def program_down(self):
+        if self.__preset == 0:
+            self.__random_spawn_ratio = self.__random_spawn_ratio - 1
+            if self.__random_spawn_ratio <= 0:
+                self.__random_spawn_ratio = 1
+            self.__load_preset()

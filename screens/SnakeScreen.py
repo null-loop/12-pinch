@@ -53,3 +53,13 @@ class SnakeScreen:
         else:
             self.__game_options.walls = []
         self.__game_engine.reset()
+
+    def program_up(self):
+        self.__game_options.start_snake_count = self.__game_options.start_snake_count + 1
+        self.__load_preset()
+
+    def program_down(self):
+        self.__game_options.start_snake_count = self.__game_options.start_snake_count + 1
+        if self.__game_options.start_snake_count <= 0:
+            self.__game_options.start_snake_count = 1
+        self.__load_preset()

@@ -47,10 +47,8 @@ class ScreenController:
         if scan_code == 113: command = Command.RESET
         if scan_code == 115: command = Command.BRIGHTNESS_UP
         if scan_code == 114: command = Command.BRIGHTNESS_DOWN
-        ## vol up - 115 - brightness
-        ## vol down - 114 - brightness
-        ## program up - 104
-        ## program down - 109
+        if scan_code == 104: command = Command.PROGRAM_UP
+        if scan_code == 109: command = Command.PROGRAM_DOWN
         self.__command_queue.append(command)
 
     def run(self):
@@ -107,6 +105,14 @@ class ScreenController:
         if command == Command.BRIGHTNESS_UP:
             self.__matrix.increase_brightness()
             self.__focus_current()
+        if command == Command.PROGRAM_UP:
+            self.__matrix.start_new_canvas()
+            self.current_screen().program_up()
+            self.__matrix.finish_canvas()
+        if command == Command.PROGRAM_DOWN:
+            self.__matrix.start_new_canvas()
+            self.current_screen().program_down()
+            self.__matrix.finish_canvas()
         if command >= Command.PRESET_1:
             preset = command - Command.PRESET_1 + 1
             self.__preset_current(preset)

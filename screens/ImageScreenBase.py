@@ -33,3 +33,9 @@ class ImageScreenBase:
 
     def preset(self, index):
         a = None # no-op
+
+    def program_up(self):
+        a = None
+
+    def program_down(self):
+        a = None

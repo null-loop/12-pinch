@@ -7,7 +7,7 @@ import spotipy
 from PIL import Image
 from spotipy.oauth2 import SpotifyOAuth
 
-from screens.ScreenBase import ImageScreenBase
+from screens.ImageScreenBase import ImageScreenBase
 from utils.matrix import ScreenMatrix
 
 
