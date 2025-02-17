@@ -1,3 +1,6 @@
+from random import randrange
+from typing import List
+
 from PIL import ImageColor
 
 from games.Enums import EntityType
@@ -37,6 +40,25 @@ class GameBoard:
         for rx in range(self.__render_scale - border):
             for ry in range(self.__render_scale - border):
                 self.__matrix.set_pixel(rx + sx, ry + sy, colour[0], colour[1], colour[2])
+
+    def get_random_empty_position(self)->List:
+        # Randomise x,y until you find an empty location
+        while True:
+            x = self.__get_random_x()
+            y = self.__get_random_y()
+            if self.get(x,y) == EntityType.EMPTY:
+                return [x,y]
+
+    def width(self)->int:
+        return self.__width
+    def height(self)->int:
+        return self.__height
+
+    def __get_random_x(self)->int:
+        return randrange(self.width())
+
+    def __get_random_y(self)->int:
+        return randrange(self.height())
 
     def count_neighbours(self, x, y):
         count = 0
