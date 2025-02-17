@@ -49,6 +49,10 @@ class GameBoard:
             if self.get(x,y) == EntityType.EMPTY:
                 return [x,y]
 
+    def set_many(self, positions, entity_type: EntityType):
+        for pos in positions:
+            self.set(pos[0],pos[1],entity_type)
+
     def width(self)->int:
         return self.__width
     def height(self)->int:

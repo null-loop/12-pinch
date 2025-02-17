@@ -18,7 +18,7 @@ class Engine:
     def starting_spawn(self):
         self.__spawn_foods(self.__options.food_count)
         self.__spawn_snakes(self.__options.min_snake_count)
-        self.__board.set_walls(self.__options.walls)
+        self.__board.set_many(self.__options.walls, EntityType.WALL)
 
     def __spawn_foods(self, count:int):
         if count != 0:
