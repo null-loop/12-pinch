@@ -1,9 +1,6 @@
-from PIL import Image
-from numpy import asarray
-
-from screens.snake.Board import Board
-from screens.snake.Engine import Engine
-from screens.snake.GameOptions import GameOptions
+from games.GameBoard import GameBoard
+from games.snake.Engine import Engine
+from games.snake.GameOptions import GameOptions
 from utils.matrix import ScreenMatrix
 
 
@@ -16,7 +13,7 @@ class SnakeScreen:
         self.__game_options = GameOptions()
         self.__game_options.min_snake_count = 100
         self.__game_options.food_count = 40
-        self.__game_board = Board(self.__game_options, matrix)
+        self.__game_board = GameBoard(self.__game_options.width, self.__game_options.height, 1, matrix)
         self.__game_engine = Engine(self.__game_board, self.__game_options)
         self.__spawned = False
         self.__preset = 0

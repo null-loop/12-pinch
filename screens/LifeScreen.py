@@ -1,9 +1,9 @@
 from PIL import Image
 from numpy import asarray
 
-from screens.life.Board import Board
-from screens.life.Engine import Engine, Position
-from screens.life.GameOptions import GameOptions
+from games.GameBoard import GameBoard
+from games.life.Engine import Engine, Position
+from games.life.GameOptions import GameOptions
 
 
 class LifeScreen:
@@ -12,11 +12,11 @@ class LifeScreen:
     render_as_image = False
 
     def __init__(self, matrix):
-        game_options = GameOptions()
+        game_options = GameOptions() # TODO:Remove these!
         game_options.height = 64
         game_options.width = 64
         game_options.render_scale = 2
-        game_board = Board(game_options, matrix)
+        game_board = GameBoard(game_options.width, game_options.height, game_options.render_scale, matrix)
         self.__game_engine = Engine(game_board, game_options)
         self.__spawned = False
         self.__preset = 0

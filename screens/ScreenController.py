@@ -7,7 +7,6 @@ from screens.GitScreen import GitScreen
 from screens.LifeScreen import LifeScreen
 from screens.SnakeScreen import SnakeScreen
 from screens.SpotifyScreen import SpotifyScreen
-from utils import matrix
 from utils.matrix import ScreenMatrix
 
 

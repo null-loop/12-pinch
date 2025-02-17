@@ -1,15 +1,16 @@
-from datetime import time
-from time import sleep
+from PIL import ImageColor
 
-from screens.snake.Board import Board
-from screens.snake.Enums import EntityType, SnakeTurnResult
-from screens.snake.GameOptions import GameOptions
-from screens.snake.Snake import Snake
+from games import GameBoard
+from games.Enums import EntityType
+from games.snake.Enums import SnakeTurnResult
+from games.snake.GameOptions import GameOptions
+from games.snake.Snake import Snake
 
 
 class Engine:
-    def __init__(self, board: Board, options: GameOptions):
+    def __init__(self, board: GameBoard, options: GameOptions):
         self.__board = board
+        self.__board.set_cell_colour_func(self.__colour_cell_func)
         self.__snakes = []
         self.__options = options
         self.__turn = 0
@@ -31,6 +32,13 @@ class Engine:
                 pos = self.__board.get_random_empty_position()
                 snake = Snake.spawn_new_snake(pos[0], pos[1], self.__board)
                 self.__snakes.append(snake)
+
+    def __colour_cell_func(self, x, y, entity_type):
+        colour = ImageColor.getrgb("Black")
+        if entity_type == EntityType.SNAKE: colour = ImageColor.getrgb("Green")
+        if entity_type == EntityType.FOOD: colour = ImageColor.getrgb("Yellow")
+        if entity_type == EntityType.WALL: colour = ImageColor.getrgb("Red")
+        return colour
 
     def turn(self):
 

@@ -1,9 +1,9 @@
 import sys
 
-from screens.snake.Board import Board
-from screens.snake.Engine import Engine
-from screens.snake.Enums import WallSets
-from screens.snake.GameOptions import GameOptions
+from games.snake.Board import Board
+from games.snake.Engine import Engine
+from games.snake.Enums import WallSets
+from games.snake.GameOptions import GameOptions
 
 game_options = GameOptions()
 game_options.min_snake_count = 40

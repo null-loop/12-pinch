@@ -1,20 +1,23 @@
 from PIL import ImageColor
 
-from screens.life.Enums import EntityType
-from screens.life.GameOptions import GameOptions
+from games.Enums import EntityType
+from games.life.GameOptions import GameOptions
 from utils.matrix import ScreenMatrix
 
-
-class Board:
-    def __init__(self, options: GameOptions, matrix: ScreenMatrix):
+class GameBoard:
+    def __init__(self, width, height, render_scale, matrix: ScreenMatrix):
         self.__entities = []
-        self.__height = options.height
-        self.__width = options.width
-        self.__render_scale = options.render_scale
+        self.__height = width
+        self.__width =height
+        self.__render_scale = render_scale
         self.__matrix = matrix
+        self.__cell_colour_func = None
 
-        for y in range(options.width):
-            self.__entities.append([EntityType.EMPTY] * options.height)
+        for y in range(width):
+            self.__entities.append([EntityType.EMPTY] * height)
+
+    def set_cell_colour_func(self, func):
+        self.__cell_colour_func = func
 
     def get(self, x, y) -> EntityType:
         if x < 0 or x >= self.__width or y < 0 or y >= self.__height:
@@ -22,12 +25,8 @@ class Board:
         return self.__entities[x][y]
 
     def set(self, x, y, entity_type: EntityType):
-        colour = ImageColor.getrgb("Black")
-        if entity_type == EntityType.CELL:
-            r = (x / self.__width) * 256
-            b = (y / self.__height) * 256
-            g = 50
-            colour = [r,g,b]
+        colour = self.__cell_colour_func(x, y, entity_type)
+
         self.set_with_colour(x, y, entity_type, colour)
 
     def set_with_colour(self, x, y, entity_type: EntityType, colour):

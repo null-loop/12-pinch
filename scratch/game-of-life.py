@@ -1,8 +1,8 @@
 import sys
 
-from screens.life.Board import Board
-from screens.life.Engine import Engine
-from screens.life.GameOptions import GameOptions
+from games.life.Board import Board
+from games.life.Engine import Engine
+from games.life.GameOptions import GameOptions
 
 game_options = GameOptions()
 game_options.height = 42

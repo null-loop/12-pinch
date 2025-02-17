@@ -1,9 +1,11 @@
 from math import floor
 from random import randrange
 from typing import List
-from screens.snake.Board import Board
-from screens.snake.Enums import EntityType, SnakeTurnResult
-from screens.snake.ScoredMove import ScoredMove
+
+from games import GameBoard
+from games.Enums import EntityType
+from games.snake.Enums import SnakeTurnResult
+from games.snake.ScoredMove import ScoredMove
 
 class SnakeTraits:
 
@@ -42,7 +44,7 @@ class Snake:
 
         return Snake(new_parts, traits, colour, board)
 
-    def __init__(self, parts:List, traits, colour, board: Board):
+    def __init__(self, parts:List, traits, colour, board: GameBoard):
 
         self.__traits = traits
 

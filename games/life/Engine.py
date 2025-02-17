@@ -1,9 +1,11 @@
 import math
 import random
 
-from screens.life.Board import Board
-from screens.life.Enums import EntityType
-from screens.life.GameOptions import GameOptions
+from PIL import ImageColor
+
+from games import GameBoard
+from games.Enums import EntityType
+from games.life.GameOptions import GameOptions
 
 class Position:
     def __init__(self, x, y):
@@ -11,9 +13,10 @@ class Position:
         self.y = y
 
 class Engine:
-    def __init__(self, board:Board, options:GameOptions):
+    def __init__(self, board:GameBoard, options:GameOptions):
         self.__board = board
         self.__options = options
+        self.__board.set_cell_colour_func(self.__colour_cell_func)
 
     def random_spawn(self, fraction):
         self.__board.reset()
@@ -33,6 +36,15 @@ class Engine:
         self.__board.reset()
         for pos in spawn_positions:
             self.__board.set(pos.x, pos.y, EntityType.CELL)
+
+    def __colour_cell_func(self, x, y, entity_type):
+        colour = ImageColor.getrgb("Black")
+        if entity_type == EntityType.CELL:
+            r = (x / self.__options.width) * 256
+            b = (y / self.__options.height) * 256
+            g = 50
+            colour = [r, g, b]
+        return colour
 
     def turn(self):
         # Algo!
