@@ -1,4 +1,4 @@
-from random import randrange
+from random import randrange, choice
 import sys
 import time
 from enum import Enum
