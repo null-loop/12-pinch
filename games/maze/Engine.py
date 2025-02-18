@@ -159,6 +159,7 @@ class Engine:
 
         # check when we've solved the maze - and start another one!
         if fin:
+            self.__board.set(self.__maze_exit[0], self.__maze_exit[1], EntityType.SOLVER)
             time.sleep(10)
             self.spawn_maze()
         else:
