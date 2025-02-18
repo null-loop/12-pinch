@@ -32,6 +32,23 @@ class GameBoard:
 
         self.set_with_colour(x, y, entity_type, colour)
 
+    def __add_if_entity_type(self,x,y,entity_type:EntityType,target:List):
+        if self.get(x,y) == entity_type:target.append((x,y))
+
+    def get_neighbours(self, x, y, entity_type:EntityType)->List:
+        neighbours = []
+        if x > 0:
+            self.__add_if_entity_type(x - 1, y - 1,entity_type,neighbours)
+            self.__add_if_entity_type(x - 1, y,entity_type,neighbours)
+            self.__add_if_entity_type(x - 1, y + 1,entity_type,neighbours)
+        self.__add_if_entity_type(x, y - 1,entity_type,neighbours)
+        self.__add_if_entity_type(x, y + 1,entity_type,neighbours)
+        if x < self.__width - 1:
+            self.__add_if_entity_type(x + 1, y - 1,entity_type,neighbours)
+            self.__add_if_entity_type(x + 1, y,entity_type,neighbours)
+            self.__add_if_entity_type(x + 1, y + 1,entity_type,neighbours)
+        return neighbours
+
     def set_with_colour(self, x, y, entity_type: EntityType, colour):
         self.__entities[x][y] = entity_type
         sx = x * self.__render_scale

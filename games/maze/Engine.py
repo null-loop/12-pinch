@@ -32,7 +32,6 @@ class MazeGenerator:
     def generate(self):
         self.__visited = [(1, 1)]
         self.__visit(1,1)
-        print('MazeGenerator-Complete')
 
     def __visit(self, x, y):
         self.__board.set(x, y, EntityType.EMPTY)
@@ -83,6 +82,7 @@ class Engine:
         self.__trail = []
         self.__turns = []
         self.__state = State.NOT_STARTED
+        self.__returning_to = None
 
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")
@@ -97,8 +97,46 @@ class Engine:
 
     def turn(self):
         # The solver runs in here! Consider a slowdown
-        a = None
-        #print("MazeEngine-turn")
+        if self.__state == State.NOT_STARTED:
+            self.__trail.append(self.__maze_entrance)
+            self.__board.set(self.__maze_entrance[0], self.__maze_entrance[1], EntityType.SOLVER)
+            self.__state = State.PROGRESSING
+        elif self.__state == State.PROGRESSING:
+            current = self.__trail[-1]
+            can_move = self.__board.get_neighbours(current[0], current[1], EntityType.EMPTY)
+            # if we've returned to a previous turn - remove those turns from the possible moves
+            if self.__returning_to is not None:
+                for already_turned in self.__returning_to.turns:
+                    can_move.remove(already_turned)
+            next_move = can_move[0]
+            if self.__returning_to is not None:
+                # now record the next turn we're making
+                self.__returning_to.turns.append(next_move)
+                self.__returning_to = None
+            else:
+                # if this is a turn we need to add that to our list
+                if len(can_move) > 1:
+                    this_turn = Turn()
+                    this_turn.x = current[0]
+                    this_turn.y = current[1]
+                    this_turn.turns.append(next_move)
+                    self.__turns.append(this_turn)
+            self.__trail.append(next_move)
+            self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
+        elif self.__state == State.RETURNING:
+            # keep trimming __trail until we hit __returning_to
+            head = self.__trail[-1]
+            if head[0] != self.__returning_to.x and head[1] != self.__returning_to.y:
+                trimmed = self.__trail.pop()
+                self.__board.set(trimmed[0],trimmed[1],EntityType.EMPTY)
+            else:
+                self.__state = State.PROGRESSING
+        # check when we've solved the maze - and start another one!
+        if self.__trail[-1] == self.__maze_exit:
+            time.sleep(10)
+            self.spawn_maze()
+        else:
+            time.sleep(self.__solver_step)
 
     def spawn_maze(self):
         # reset the board to all walls
