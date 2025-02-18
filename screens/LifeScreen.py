@@ -17,7 +17,7 @@ class LifeScreen(GameScreen):
     label="Game of Life"
 
     def __init__(self, matrix):
-        super().__init__(matrix, calculate_board_size, lambda: Engine(super(LifeScreen, self)._game_board))
+        super().__init__(matrix, calculate_board_size, lambda: Engine(self._game_board))
         self.__spawned = False
         self.__preset = 0
         self.__random_spawn_ratio = 3
