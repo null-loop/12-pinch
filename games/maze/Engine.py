@@ -135,18 +135,19 @@ class Engine:
                         self.__turns.append(this_turn)
                 self.__trail.append(next_move)
                 self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
-                print(f'Moved to {current[0]},{current[1]}')
+                print(f'Moved to {next_move[0]},{next_move[1]}')
         elif self.__state == State.RETURNING:
             # keep trimming __trail until we hit __returning_to
-            print(f"Returning to {self.__returning_to.x},{self.__returning_to.y}")
-            head = self.__trail[-1]
-            if head[0] != self.__returning_to.x and head[1] != self.__returning_to.y:
+            current = self.__trail[-1]
+            print(f"Returning to {self.__returning_to.x},{self.__returning_to.y} - we're at {current[0]},{current[1]}")
+            if current[0] == self.__returning_to.x and current[1] == self.__returning_to.y:
+                self.__state = State.PROGRESSING
+                print('Continuing')
+            else:
                 trimmed = self.__trail.pop()
                 self.__board.set(trimmed[0],trimmed[1],EntityType.EMPTY)
                 print(f'Trimmed {trimmed[0]},{trimmed[1]}')
-            else:
-                self.__state = State.PROGRESSING
-                print('Continuing')
+
         # check when we've solved the maze - and start another one!
         if self.__trail[-1] == self.__maze_exit:
             time.sleep(10)
