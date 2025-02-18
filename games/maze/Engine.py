@@ -117,7 +117,7 @@ class Engine:
                 # we're now returning to the last turn
                 self.__state = State.RETURNING
                 self.__returning_to = self.__turns[-1]
-                print(f"Can't move - returning to {self.__returning_to[0]},{self.__returning_to[1]}")
+                print(f"Can't move - returning to {self.__returning_to.x},{self.__returning_to.y}")
             else:
                 next_move = can_move[0]
                 if self.__returning_to is not None:
