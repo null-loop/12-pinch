@@ -86,9 +86,9 @@ class Engine:
 
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")
-        if entity_type == EntityType.WALL:
+        if entity_type == EntityType.SOLVER:
             colour = [10,10,255]
-        if entity_type == EntityType.CELL:
+        if entity_type == EntityType.WALL:
             r = (x / self.__board.width()) * 256
             b = 50
             g = (y / self.__board.height()) * 256
@@ -112,6 +112,7 @@ class Engine:
         # The generator runs in here - write to the board as it goes
         generator = MazeGenerator(self.__board, self.__generation_step)
         generator.generate()
+        time.sleep(5)
         print("Engine-spawn_maze-Complete")
         # Carves out the maze. Consider a slowdown
         # Then pick an entrance and an exit - carve from board - set __maze_entrance and __maze_exit

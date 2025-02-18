@@ -1,4 +1,5 @@
 import math
+import time
 
 from games.maze.Engine import Engine
 from screens.GameScreen import GameScreen
@@ -24,6 +25,7 @@ class MazeScreen(GameScreen):
             self.__spawned = True
         else:
             self._game_board.fresh_render()
+        time.sleep(5)
         print("MazeScreen-focus-Complete")
 
     def tick(self):
