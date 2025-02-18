@@ -1,4 +1,5 @@
 import random
+import sys
 import time
 from enum import Enum
 
@@ -26,6 +27,7 @@ class MazeGenerator:
         self.__step = step
         self.__board = board
         self.__visited = []
+        sys.setrecursionlimit(5000)
 
     def generate(self):
         self.__visited = [(1, 1)]
