@@ -76,7 +76,7 @@ class Engine:
     def __init__(self, board: GameBoard):
         self.__board = board
         self.__board.set_cell_colour_func(self.__colour_cell_func)
-        self.__generation_step = 1/100
+        self.__generation_step = 1/500
         self.__solver_step = 1/10
         self.__maze_entrance = ()
         self.__maze_exit = ()
