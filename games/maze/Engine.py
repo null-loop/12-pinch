@@ -108,21 +108,30 @@ class Engine:
             if self.__returning_to is not None:
                 for already_turned in self.__returning_to.turns:
                     can_move.remove(already_turned)
-            next_move = can_move[0]
-            if self.__returning_to is not None:
-                # now record the next turn we're making
-                self.__returning_to.turns.append(next_move)
-                self.__returning_to = None
+
+            if len(can_move) == 0:
+                # if we're already returning to a turn, then trim that turn
+                if self.__returning_to is not None:
+                    self.__returning_to.pop()
+                # we're now returning to the last turn
+                self.__state = State.RETURNING
+                self.__returning_to = self.__turns[-1]
             else:
-                # if this is a turn we need to add that to our list
-                if len(can_move) > 1:
-                    this_turn = Turn()
-                    this_turn.x = current[0]
-                    this_turn.y = current[1]
-                    this_turn.turns.append(next_move)
-                    self.__turns.append(this_turn)
-            self.__trail.append(next_move)
-            self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
+                next_move = can_move[0]
+                if self.__returning_to is not None:
+                    # now record the next turn we're making
+                    self.__returning_to.turns.append(next_move)
+                    self.__returning_to = None
+                else:
+                    # if this is a turn we need to add that to our list
+                    if len(can_move) > 1:
+                        this_turn = Turn()
+                        this_turn.x = current[0]
+                        this_turn.y = current[1]
+                        this_turn.turns.append(next_move)
+                        self.__turns.append(this_turn)
+                self.__trail.append(next_move)
+                self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
         elif self.__state == State.RETURNING:
             # keep trimming __trail until we hit __returning_to
             head = self.__trail[-1]
