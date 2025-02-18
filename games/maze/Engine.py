@@ -103,7 +103,7 @@ class Engine:
             self.__state = State.PROGRESSING
         elif self.__state == State.PROGRESSING:
             current = self.__trail[-1]
-            can_move = self.__board.get_neighbours(current[0], current[1], EntityType.EMPTY)
+            can_move = self.__board.get_immediate_neighbours(current[0], current[1], EntityType.EMPTY)
             # if we've returned to a previous turn - remove those turns from the possible moves
             if self.__returning_to is not None:
                 for already_turned in self.__returning_to.turns:
