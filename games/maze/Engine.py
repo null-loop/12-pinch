@@ -71,7 +71,6 @@ class MazeGenerator:
 
                 self.__visited.append((next_x, next_y))
                 self.__visit(next_x, next_y)
-                time.sleep(self.__step)
 
 class Engine:
     def __init__(self, board: GameBoard):
