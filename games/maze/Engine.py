@@ -87,7 +87,7 @@ class Engine:
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")
         if entity_type == EntityType.SOLVER:
-            colour = [200,200,200]
+            colour = [150,150,150]
         if entity_type == EntityType.WALL:
             r = (x / self.__board.width()) * 256
             b = 50
