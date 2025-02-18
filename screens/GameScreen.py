@@ -13,8 +13,8 @@ class GameScreen:
 
     def _rebuild_board_and_engine(self):
         size = self.__board_size_func(self.zoom_level)
-        self.__game_board = GameBoard(size, size, self.zoom_level, self.__matrix)
-        self.__game_engine = self.__engine_func()
+        self._game_board = GameBoard(size, size, self.zoom_level, self.__matrix)
+        self._game_engine = self.__engine_func()
 
     def zoom_in(self):
         self.zoom_level = self.zoom_level + 1
