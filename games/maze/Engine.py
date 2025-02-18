@@ -87,7 +87,10 @@ class Engine:
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")
         if entity_type == EntityType.SOLVER:
-            colour = [150,150,150]
+            g = (x / self.__board.width()) * 256
+            b = 50
+            r = (y / self.__board.height()) * 256
+            colour = [r, g, b]
         if entity_type == EntityType.WALL:
             r = (x / self.__board.width()) * 256
             b = 50
@@ -110,8 +113,6 @@ class Engine:
                 #print(f'Excluding existing turns from pos {self.__returning_to.x},{self.__returning_to.y}')
                 #print(f'{self.__returning_to.turns}')
                 for already_turned in self.__returning_to.turns:
-                    print(can_move)
-                    print(already_turned)
                     can_move.remove(already_turned)
             if len(can_move) == 0:
                 # if we're already returning to a turn, then trim that turn
