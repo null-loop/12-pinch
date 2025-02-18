@@ -26,8 +26,6 @@ class MazeScreen(GameScreen):
             self.__spawned = True
         else:
             self._game_board.fresh_render()
-        time.sleep(5)
-        print("MazeScreen-focus-Complete")
 
     def tick(self):
         self._game_engine.turn()
