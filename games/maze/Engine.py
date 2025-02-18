@@ -98,6 +98,7 @@ class Engine:
     def turn(self):
         # The solver runs in here! Consider a slowdown
         a = None
+        print("MazeEngine-turn")
 
     def spawn_maze(self):
         # reset the board to all walls
