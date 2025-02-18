@@ -27,7 +27,7 @@ class MazeGenerator:
         self.__step = step
         self.__board = board
         self.__visited = []
-        sys.setrecursionlimit(5000)
+        sys.setrecursionlimit(10000)
 
     def generate(self):
         self.__visited = [(1, 1)]
