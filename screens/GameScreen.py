@@ -29,6 +29,3 @@ class GameScreen:
 
     def reset(self):
         a = None
-
-    def rebuild_engine(self):
-        a = None

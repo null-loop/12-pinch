@@ -28,10 +28,10 @@ class LifeScreen(GameScreen):
             super(LifeScreen, self)._rebuild_board_and_engine()
             self.__load_preset()
         else:
-            self.__game_engine.fresh_render()
+            self._game_engine.fresh_render()
 
     def tick(self):
-        self.__game_engine.turn()
+        self._game_engine.turn()
 
     def reset(self):
         self.__load_preset()
@@ -43,7 +43,7 @@ class LifeScreen(GameScreen):
     def __load_preset(self):
         preset = self.__presets[self.__preset]
         if preset == 'Random':
-            self.__game_engine.random_spawn(self.__random_spawn_ratio)
+            self._game_engine.random_spawn(self.__random_spawn_ratio)
         else:
             image = Image.open('./assets/life_presets/' + preset)
             data = asarray(image)
@@ -53,7 +53,7 @@ class LifeScreen(GameScreen):
                 for x in range(len(row)):
                     p = row[x]
                     if p[0] < 100: positions.append(Position(x,y))
-            self.__game_engine.spawn_from_array(positions)
+            self._game_engine.spawn_from_array(positions)
         self.__spawned = True
 
     def program_up(self):
