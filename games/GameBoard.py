@@ -36,7 +36,8 @@ class GameBoard:
         self.__entities[x][y] = entity_type
         sx = x * self.__render_scale
         sy = y * self.__render_scale
-        border = 1 if self.__render_scale > 3 else 0
+        #border = 1 if self.__render_scale > 3 else 0
+        border = 0
         for rx in range(self.__render_scale - border):
             for ry in range(self.__render_scale - border):
                 self.__matrix.set_pixel(rx + sx, ry + sy, colour[0], colour[1], colour[2])
