@@ -120,13 +120,13 @@ class ScreenController:
             self.current_screen().program_down()
             self.__matrix.finish_canvas()
         if command == Command.ZOOM_IN:
-            self.__matrix.start_new_canvas()
+            if not self.current_screen().controls_own_canvas:self.__matrix.start_new_canvas()
             self.current_screen().zoom_in()
-            self.__matrix.finish_canvas()
+            if not self.current_screen().controls_own_canvas:self.__matrix.finish_canvas()
         if command == Command.ZOOM_OUT:
-            self.__matrix.start_new_canvas()
+            if not self.current_screen().controls_own_canvas:self.__matrix.start_new_canvas()
             self.current_screen().zoom_out()
-            self.__matrix.finish_canvas()
+            if not self.current_screen().controls_own_canvas:self.__matrix.finish_canvas()
         if command >= Command.PRESET_1:
             preset = command - Command.PRESET_1 + 1
             self.__preset_current(preset)
