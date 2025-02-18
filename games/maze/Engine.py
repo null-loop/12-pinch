@@ -86,12 +86,9 @@ class Engine:
 
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")
-        if entity_type == EntityType.SOLVER:
-            g = (x / self.__board.width()) * 256
-            b = 50
-            r = (y / self.__board.height()) * 256
-            colour = [r, g, b]
         if entity_type == EntityType.WALL:
+            colour = [100,100,100]
+        if entity_type == EntityType.SOLVER:
             r = (x / self.__board.width()) * 256
             b = 50
             g = (y / self.__board.height()) * 256
@@ -110,8 +107,8 @@ class Engine:
             can_move = self.__board.get_immediate_neighbours(current[0], current[1], EntityType.EMPTY)
             # if we've returned to a previous turn - remove those turns from the possible moves
             if self.__returning_to is not None:
-                #print(f'Excluding existing turns from pos {self.__returning_to.x},{self.__returning_to.y}')
-                #print(f'{self.__returning_to.turns}')
+                print(f'Excluding existing turns from pos {self.__returning_to.x},{self.__returning_to.y}')
+                print(f'{self.__returning_to.turns}')
                 for already_turned in self.__returning_to.turns:
                     can_move.remove(already_turned)
             if len(can_move) == 0:
@@ -124,7 +121,7 @@ class Engine:
                     fin = True
                 else:
                     self.__returning_to = self.__turns[-1]
-                    #print(f"Can't move - returning to {self.__returning_to.x},{self.__returning_to.y}")
+                    print(f"Can't move - returning to {self.__returning_to.x},{self.__returning_to.y}")
             else:
                 if self.__maze_exit in can_move:
                     fin = True
@@ -137,7 +134,7 @@ class Engine:
                     else:
                         # if this is a turn we need to add that to our list
                         if len(can_move) > 1:
-                            #print(f"Adding new turn at {current[0]},{current[1]} - first move to {next_move[0]},{next_move[1]}")
+                            print(f"Adding new turn at {current[0]},{current[1]} - first move to {next_move[0]},{next_move[1]}")
                             this_turn = Turn()
                             this_turn.x = current[0]
                             this_turn.y = current[1]
@@ -145,18 +142,18 @@ class Engine:
                             self.__turns.append(this_turn)
                     self.__trail.append(next_move)
                     self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
-                    #print(f'Moved to {next_move[0]},{next_move[1]}')
+                    print(f'Moved to {next_move[0]},{next_move[1]}')
         elif self.__state == State.RETURNING:
             # keep trimming __trail until we hit __returning_to
             current = self.__trail[-1]
-            #print(f"Returning to {self.__returning_to.x},{self.__returning_to.y} - we're at {current[0]},{current[1]}")
+            print(f"Returning to {self.__returning_to.x},{self.__returning_to.y} - we're at {current[0]},{current[1]}")
             if current[0] == self.__returning_to.x and current[1] == self.__returning_to.y:
                 self.__state = State.PROGRESSING
-                #print('Continuing')
+                print('Continuing')
             else:
                 trimmed = self.__trail.pop()
                 self.__board.set(trimmed[0],trimmed[1],EntityType.EMPTY)
-                #print(f'Trimmed {trimmed[0]},{trimmed[1]}')
+                print(f'Trimmed {trimmed[0]},{trimmed[1]}')
 
         # check when we've solved the maze - and start another one!
         if fin:
@@ -174,6 +171,7 @@ class Engine:
         self.__trail.clear()
         self.__turns.clear()
         self.__state = State.NOT_STARTED
+        self.__returning_to = None
         # The generator runs in here - write to the board as it goes
         generator = MazeGenerator(self.__board, self.__generation_step)
         generator.generate()
