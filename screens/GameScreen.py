@@ -4,12 +4,12 @@ from utils.matrix import ScreenMatrix
 
 class GameScreen:
     zoom_level = 1
+    _game_engine = None
+    _game_board = None
     def __init__(self, matrix: ScreenMatrix, board_size_func, engine_func):
         self.__board_size_func = board_size_func
         self.__engine_func = engine_func
         self.__matrix = matrix
-        self._game_board = None
-        self._game_engine = None
 
     def _rebuild_board_and_engine(self):
         size = self.__board_size_func(self.zoom_level)
