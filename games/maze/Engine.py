@@ -87,7 +87,9 @@ class Engine:
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")
         if entity_type == EntityType.WALL:
-            colour = [100,100,100]
+            colour = [200,200,200]
+        if entity_type == EntityType.SOLVER_VISITED:
+            colour = [40,40,40]
         if entity_type == EntityType.SOLVER:
             r = (x / self.__board.width()) * 256
             b = 50
@@ -152,7 +154,7 @@ class Engine:
                 print('Continuing')
             else:
                 trimmed = self.__trail.pop()
-                self.__board.set(trimmed[0],trimmed[1],EntityType.EMPTY)
+                self.__board.set(trimmed[0],trimmed[1],EntityType.SOLVER_VISITED)
                 print(f'Trimmed {trimmed[0]},{trimmed[1]}')
 
         # check when we've solved the maze - and start another one!
