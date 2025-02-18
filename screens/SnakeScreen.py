@@ -24,7 +24,7 @@ class SnakeScreen(GameScreen):
 
     def focus(self):
         if not self.__spawned:
-            self.__rebuild_board_and_engine()
+            super(SnakeScreen, self).rebuild_board_and_engine()
             self.__load_preset()
         self.__game_engine.fresh_render()
 

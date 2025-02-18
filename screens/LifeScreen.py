@@ -26,7 +26,7 @@ class LifeScreen(GameScreen):
 
     def focus(self):
         if not self.__spawned:
-            self.__rebuild_board_and_engine()
+            super(LifeScreen, self).rebuild_board_and_engine()
             self.__load_preset()
         else:
             self.__game_engine.fresh_render()
