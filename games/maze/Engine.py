@@ -135,6 +135,7 @@ class Engine:
                         self.__turns.append(this_turn)
                 self.__trail.append(next_move)
                 self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
+                print(f'Moved to {current[0]},{current[1]}')
         elif self.__state == State.RETURNING:
             # keep trimming __trail until we hit __returning_to
             print(f"Returning to {self.__returning_to.x},{self.__returning_to.y}")
