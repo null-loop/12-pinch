@@ -113,10 +113,11 @@ class Engine:
             if len(can_move) == 0:
                 # if we're already returning to a turn, then trim that turn
                 if self.__returning_to is not None:
-                    self.__returning_to.pop()
+                    self.__turns.pop()
                 # we're now returning to the last turn
                 self.__state = State.RETURNING
                 self.__returning_to = self.__turns[-1]
+                print(f"Can't move - returning to {self.__returning_to[0]},{self.__returning_to[1]}")
             else:
                 next_move = can_move[0]
                 if self.__returning_to is not None:
@@ -126,6 +127,7 @@ class Engine:
                 else:
                     # if this is a turn we need to add that to our list
                     if len(can_move) > 1:
+                        print(f"Adding new turn at {current[0]},{current[1]}")
                         this_turn = Turn()
                         this_turn.x = current[0]
                         this_turn.y = current[1]
@@ -135,6 +137,7 @@ class Engine:
                 self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
         elif self.__state == State.RETURNING:
             # keep trimming __trail until we hit __returning_to
+            print(f"Returning to {self.__returning_to.x},{self.__returning_to.y}")
             head = self.__trail[-1]
             if head[0] != self.__returning_to.x and head[1] != self.__returning_to.y:
                 trimmed = self.__trail.pop()
