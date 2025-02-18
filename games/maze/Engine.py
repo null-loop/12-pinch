@@ -34,7 +34,7 @@ class MazeGenerator:
         self.__visit(1,1)
 
     def __visit(self, x, y):
-        self.__board.set(x, y, EntityType.EMPTY)
+        self.__board.set_with_colour(x, y, EntityType.EMPTY, [40,40,40])
         while True:
             unvisited = []
             # find which of our neighbouring spaces we've not visited before...
@@ -57,16 +57,16 @@ class MazeGenerator:
 
                 if next_direction == self._UP:
                     next_y = y - 2
-                    self.__board.set(x, y - 1, EntityType.EMPTY) # connection
+                    self.__board.set_with_colour(x, y - 1, EntityType.EMPTY, [40,40,40]) # connection
                 if next_direction == self._DOWN:
                     next_y = y + 2
-                    self.__board.set(x, y + 1, EntityType.EMPTY) # connection
+                    self.__board.set_with_colour(x, y + 1, EntityType.EMPTY, [40,40,40]) # connection
                 if next_direction == self._LEFT:
                     next_x = x - 2
-                    self.__board.set(x - 1, y, EntityType.EMPTY) # connection
+                    self.__board.set_with_colour(x - 1, y, EntityType.EMPTY, [40,40,40]) # connection
                 if next_direction == self._RIGHT:
                     next_x = x + 2
-                    self.__board.set(x + 1, y, EntityType.EMPTY) # connection
+                    self.__board.set_with_colour(x + 1, y, EntityType.EMPTY, [40,40,40]) # connection
 
                 self.__visit(next_x, next_y)
                 time.sleep(self.__step)
@@ -88,8 +88,6 @@ class Engine:
         colour = ImageColor.getrgb("Black")
         if entity_type == EntityType.WALL:
             colour = [200,200,200]
-        if entity_type == EntityType.SOLVER_VISITED:
-            colour = [40,40,40]
         if entity_type == EntityType.SOLVER:
             r = (x / self.__board.width()) * 256
             b = 50
@@ -154,7 +152,7 @@ class Engine:
                 print('Continuing')
             else:
                 trimmed = self.__trail.pop()
-                self.__board.set(trimmed[0],trimmed[1],EntityType.SOLVER_VISITED)
+                self.__board.set(trimmed[0],trimmed[1],EntityType.EMPTY)
                 print(f'Trimmed {trimmed[0]},{trimmed[1]}')
 
         # check when we've solved the maze - and start another one!
