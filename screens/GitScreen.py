@@ -19,6 +19,7 @@ class BuildStatus:
 class GitScreen(ImageScreenBase):
     update_interval_seconds=5 * 60
     label = "GitHub"
+    controls_own_canvas = False
 
     def __init__(self, matrix: ScreenMatrix):
         super().__init__(matrix)

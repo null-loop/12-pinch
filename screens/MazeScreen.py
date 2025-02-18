@@ -12,6 +12,7 @@ def calculate_board_size(zoom_level:int):
 
 class MazeScreen(GameScreen):
     update_interval_seconds=0
+    controls_own_canvas=True
     label="Maze Runner"
 
     def __init__(self, matrix):

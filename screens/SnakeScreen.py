@@ -11,6 +11,7 @@ def calculate_board_size(zoom_level:int):
 
 class SnakeScreen(GameScreen):
     update_interval_seconds=0
+    controls_own_canvas = False
     label="Snake"
 
     def __init__(self, matrix: ScreenMatrix):

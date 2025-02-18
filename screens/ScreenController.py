@@ -132,19 +132,19 @@ class ScreenController:
             self.__preset_current(preset)
 
     def __focus_current(self):
-        self.__matrix.start_new_canvas()
+        if not self.current_screen().controls_own_canvas: self.__matrix.start_new_canvas()
         self.current_screen().focus()
-        self.__matrix.finish_canvas()
+        if not self.current_screen().controls_own_canvas:self.__matrix.finish_canvas()
 
     def __reset_current(self):
-        self.__matrix.start_new_canvas()
+        if not self.current_screen().controls_own_canvas:self.__matrix.start_new_canvas()
         self.current_screen().reset()
-        self.__matrix.finish_canvas()
+        if not self.current_screen().controls_own_canvas:self.__matrix.finish_canvas()
 
     def __preset_current(self, preset_index:int):
-        self.__matrix.start_new_canvas()
+        if not self.current_screen().controls_own_canvas:self.__matrix.start_new_canvas()
         self.current_screen().preset(preset_index)
-        self.__matrix.finish_canvas()
+        if not self.current_screen().controls_own_canvas:self.__matrix.finish_canvas()
 
     def __change_screen(self, index):
         self.__matrix.clear()

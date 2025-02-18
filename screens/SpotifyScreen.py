@@ -14,6 +14,7 @@ from utils.matrix import ScreenMatrix
 class SpotifyScreen(ImageScreenBase):
     update_interval_seconds=5
     label="Spotify"
+    controls_own_canvas = False
 
     def __init__(self, matrix: ScreenMatrix):
         super().__init__(matrix)

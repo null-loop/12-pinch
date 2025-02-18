@@ -12,6 +12,7 @@ def calculate_board_size(zoom_level:int):
 
 class LifeScreen(GameScreen):
     update_interval_seconds=0
+    controls_own_canvas = False
     label="Game of Life"
 
     def __init__(self, matrix):
