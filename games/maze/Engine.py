@@ -107,8 +107,9 @@ class Engine:
             # if we've returned to a previous turn - remove those turns from the possible moves
             if self.__returning_to is not None:
                 for already_turned in self.__returning_to.turns:
+                    print(can_move)
+                    print(already_turned)
                     can_move.remove(already_turned)
-
             if len(can_move) == 0:
                 # if we're already returning to a turn, then trim that turn
                 if self.__returning_to is not None:
