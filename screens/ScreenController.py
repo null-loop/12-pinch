@@ -48,6 +48,8 @@ class ScreenController:
         if scan_code == 114: command = Command.BRIGHTNESS_DOWN
         if scan_code == 104: command = Command.PROGRAM_UP
         if scan_code == 109: command = Command.PROGRAM_DOWN
+        if scan_code == 418: command = Command.ZOOM_IN
+        if scan_code == 419: command = Command.ZOOM_OUT
         self.__command_queue.append(command)
 
     def run(self):
@@ -111,6 +113,14 @@ class ScreenController:
         if command == Command.PROGRAM_DOWN:
             self.__matrix.start_new_canvas()
             self.current_screen().program_down()
+            self.__matrix.finish_canvas()
+        if command == Command.ZOOM_IN:
+            self.__matrix.start_new_canvas()
+            self.current_screen().zoom_in()
+            self.__matrix.finish_canvas()
+        if command == Command.ZOOM_OUT:
+            self.__matrix.start_new_canvas()
+            self.current_screen().zoom_out()
             self.__matrix.finish_canvas()
         if command >= Command.PRESET_1:
             preset = command - Command.PRESET_1 + 1

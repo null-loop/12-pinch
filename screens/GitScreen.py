@@ -19,7 +19,7 @@ class BuildStatus:
 class GitScreen(ImageScreenBase):
     update_interval_seconds=5 * 60
     label = "GitHub"
-    render_as_image = True
+
     def __init__(self, matrix: ScreenMatrix):
         super().__init__(matrix)
         with open('./secrets/.github-secret', 'r') as github_secret_file:

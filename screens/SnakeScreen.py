@@ -1,28 +1,31 @@
+import math
+
 from games.GameBoard import GameBoard
 from games.snake.Engine import Engine
 from games.snake.GameOptions import GameOptions
+from screens.GameScreen import GameScreen
 from utils.matrix import ScreenMatrix
 
+def calculate_board_size(zoom_level:int):
+    return math.floor(128 / zoom_level)
 
-class SnakeScreen:
+class SnakeScreen(GameScreen):
     update_interval_seconds=0
     label="Snake"
-    render_as_image = False
 
     def __init__(self, matrix: ScreenMatrix):
+        super().__init__(matrix, calculate_board_size, lambda : Engine(self.__game_board, self.__game_options))
         self.__game_options = GameOptions()
         self.__game_options.min_snake_count = 100
         self.__game_options.food_count = 40
-        self.__game_board = GameBoard(self.__game_options.width, self.__game_options.height, 1, matrix)
-        self.__game_engine = Engine(self.__game_board, self.__game_options)
         self.__spawned = False
         self.__preset = 0
         self.__presets = ['NoWalls','ToggleReproduction','SnakeCount','FoodCount']
 
     def focus(self):
         if not self.__spawned:
+            self.__rebuild_board_and_engine()
             self.__load_preset()
-            self.__spawned = True
         self.__game_engine.fresh_render()
 
     def tick(self):
@@ -43,6 +46,7 @@ class SnakeScreen:
         else:
             self.__game_options.walls = []
         self.__game_engine.reset()
+        self.__spawned = True
 
     def program_up(self):
         if self.__preset == 3:

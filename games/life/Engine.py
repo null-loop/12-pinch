@@ -13,20 +13,19 @@ class Position:
         self.y = y
 
 class Engine:
-    def __init__(self, board:GameBoard, options:GameOptions):
+    def __init__(self, board:GameBoard):
         self.__board = board
-        self.__options = options
         self.__board.set_cell_colour_func(self.__colour_cell_func)
 
     def random_spawn(self, fraction):
         self.__board.reset()
-        total_cells = self.__options.height * self.__options.width
+        total_cells = self.__board.height() * self.__board.width()
         population = math.floor(total_cells / fraction)
         for p in range(population):
             populated = False
             while not populated:
-                x = random.randint(0, self.__options.width - 1)
-                y = random.randint(0, self.__options.height - 1)
+                x = random.randint(0, self.__board.width() - 1)
+                y = random.randint(0, self.__board.height() - 1)
                 e = self.__board.get(x, y)
                 if e == EntityType.EMPTY:
                     self.__board.set(x, y, EntityType.CELL)
@@ -40,8 +39,8 @@ class Engine:
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")
         if entity_type == EntityType.CELL:
-            r = (x / self.__options.width) * 256
-            b = (y / self.__options.height) * 256
+            r = (x / self.__board.width()) * 256
+            b = (y / self.__board.height()) * 256
             g = 50
             colour = [r, g, b]
         return colour
@@ -51,8 +50,8 @@ class Engine:
         births = []
         deaths = []
         # For each position, evaluate rules
-        for ex in range(self.__options.width):
-            for ey in range(self.__options.height):
+        for ex in range(self.__board.width()):
+            for ey in range(self.__board.height()):
                 current = self.__board.get(ex, ey)
                 neighbour_count = self.__board.count_neighbours(ex, ey)
                 # Add death / birth to array

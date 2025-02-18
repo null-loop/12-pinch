@@ -13,6 +13,8 @@ class Command(IntEnum):
     BRIGHTNESS_DOWN = 8
     PROGRAM_UP = 9
     PROGRAM_DOWN = 10
+    ZOOM_IN = 11
+    ZOOM_OUT = 12
     PRESET_1 = 100
     PRESET_2 = 101
     PRESET_3 = 102

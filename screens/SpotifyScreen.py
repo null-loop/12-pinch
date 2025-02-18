@@ -1,4 +1,5 @@
 import json
+import math
 import os
 import urllib
 
@@ -10,11 +11,9 @@ from spotipy.oauth2 import SpotifyOAuth
 from screens.ImageScreenBase import ImageScreenBase
 from utils.matrix import ScreenMatrix
 
-
 class SpotifyScreen(ImageScreenBase):
     update_interval_seconds=5
     label="Spotify"
-    render_as_image = True
 
     def __init__(self, matrix: ScreenMatrix):
         super().__init__(matrix)
