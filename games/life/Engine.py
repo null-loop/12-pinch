@@ -34,7 +34,8 @@ class Engine:
     def spawn_from_array(self, spawn_positions):
         self.__board.reset()
         for pos in spawn_positions:
-            self.__board.set(pos.x, pos.y, EntityType.CELL)
+            if not (pos.x < 0 or pos.x >= self.__board.width() or pos.y < 0 or pos.y >= self.__board.height()):
+                self.__board.set(pos.x, pos.y, EntityType.CELL)
 
     def __colour_cell_func(self, x, y, entity_type):
         colour = ImageColor.getrgb("Black")

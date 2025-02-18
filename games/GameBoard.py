@@ -86,12 +86,21 @@ class GameBoard:
         return 0
 
     def reset(self):
+        self.reset_to_type(EntityType.EMPTY)
+
+    def reset_to_type(self, entity_type: EntityType):
         for x in range(self.__width):
             for y in range(self.__height):
-                self.set(x, y, EntityType.EMPTY)
+                self.set(x, y, entity_type)
 
     def fresh_render(self):
         for x in range(self.__width):
             for y in range(self.__height):
                 entity_type = self.get(x,y)
                 self.set(x, y, entity_type)
+
+    def start_new_canvas(self):
+        self.__matrix.start_new_canvas()
+
+    def finish_canvas(self):
+        self.__matrix.finish_canvas()

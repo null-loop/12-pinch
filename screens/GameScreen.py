@@ -18,6 +18,7 @@ class GameScreen:
 
     def zoom_in(self):
         self.zoom_level = self.zoom_level + 1
+        if self.zoom_level > 10: self.zoom_level = 10
         self._rebuild_board_and_engine()
         self.reset()
 

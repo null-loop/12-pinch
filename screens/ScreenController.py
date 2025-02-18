@@ -5,6 +5,7 @@ import keyboard
 from screens.Enums import Command
 from screens.GitScreen import GitScreen
 from screens.LifeScreen import LifeScreen
+from screens.MazeScreen import MazeScreen
 from screens.SnakeScreen import SnakeScreen
 from screens.SpotifyScreen import SpotifyScreen
 from utils.matrix import ScreenMatrix
@@ -13,7 +14,11 @@ from utils.matrix import ScreenMatrix
 class ScreenController:
     def __init__(self):
         self.__matrix = ScreenMatrix()
-        self.__screens = [LifeScreen(self.__matrix),GitScreen(self.__matrix),SnakeScreen(self.__matrix),SpotifyScreen(self.__matrix)]
+        self.__screens = [MazeScreen(self.__matrix),
+                          LifeScreen(self.__matrix),
+                          GitScreen(self.__matrix),
+                          SnakeScreen(self.__matrix),
+                          SpotifyScreen(self.__matrix)]
         self.__current_screen_index = 0
         self.__command_queue = []
         self.__paused = False

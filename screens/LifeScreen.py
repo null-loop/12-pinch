@@ -8,9 +8,7 @@ from screens.GameScreen import GameScreen
 
 
 def calculate_board_size(zoom_level:int):
-    size = math.floor(128 / zoom_level)
-    if size % 2 == 0: size = size - 1
-    return size
+    return math.floor(128 / zoom_level)
 
 class LifeScreen(GameScreen):
     update_interval_seconds=0
@@ -28,7 +26,7 @@ class LifeScreen(GameScreen):
             super(LifeScreen, self)._rebuild_board_and_engine()
             self.__load_preset()
         else:
-            self._game_engine.fresh_render()
+            self._game_board.fresh_render()
 
     def tick(self):
         self._game_engine.turn()
