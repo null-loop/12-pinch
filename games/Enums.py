@@ -7,3 +7,4 @@ class EntityType(Enum):
     FOOD = 3
     CELL = 3
     SOLVER = 5
+    SOLVER_VISITED = 6
