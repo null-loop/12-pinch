@@ -84,7 +84,7 @@ class Engine:
         self.__returning_to = None
 
     def __colour_cell_func(self, x, y, entity_type):
-        colour = [255,255,255]
+        colour = [200,200,200]
         if entity_type == EntityType.WALL:
             colour = [0,0,0]
         if entity_type == EntityType.SOLVER:
@@ -95,8 +95,8 @@ class Engine:
         fin = False
         # The solver runs in here! Consider a slowdown
         if self.__state == State.NOT_STARTED:
-            print(f'Entrance:{self.__maze_entrance}')
-            print(f'Exit:{self.__maze_exit}')
+            #print(f'Entrance:{self.__maze_entrance}')
+            #print(f'Exit:{self.__maze_exit}')
             self.__trail.append(self.__maze_entrance)
             self.__board.set(self.__maze_entrance[0], self.__maze_entrance[1], EntityType.SOLVER)
             self.__state = State.PROGRESSING
@@ -182,7 +182,7 @@ class Engine:
             if self.__board.get(1, pos_y) == EntityType.EMPTY:
                 found_entrance = True
                 self.__maze_entrance = (0, pos_y)
-                self.__board.set(0, pos_y, EntityType.EMPTY)
+                self.__board.set_with_colour(0, pos_y, EntityType.EMPTY,(255,255,255))
 
         found_exit = False
         while not found_exit:
@@ -190,4 +190,4 @@ class Engine:
             if self.__board.get(self.__board.width() - 2, pos_y) == EntityType.EMPTY:
                 found_exit = True
                 self.__maze_exit = (self.__board.width() - 1, pos_y)
-                self.__board.set(self.__board.width() - 1, pos_y, EntityType.EMPTY)
+                self.__board.set_with_colour(self.__board.width() - 1, pos_y, EntityType.EMPTY, (255,255,255))
