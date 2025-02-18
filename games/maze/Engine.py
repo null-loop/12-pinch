@@ -52,7 +52,7 @@ class MazeGenerator:
                 # we've hit a dead end
                 return
             else:
-                next_direction = random.choice(unvisited)
+                next_direction = choice(unvisited)
                 next_x = x
                 next_y = y
 
