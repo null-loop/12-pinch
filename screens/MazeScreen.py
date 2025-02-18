@@ -21,6 +21,7 @@ class MazeScreen(GameScreen):
         if not self.__spawned:
             super(MazeScreen, self)._rebuild_board_and_engine()
             self._game_engine.spawn_maze()
+            self.__spawned = True
             print("MazeScreen-focus-Complete")
         else:
             self._game_board.fresh_render()
@@ -29,6 +30,7 @@ class MazeScreen(GameScreen):
         self._game_engine.turn()
 
     def reset(self):
+        self.__spawned = True
         self._game_engine.spawn_maze()
 
     def preset(self, index):
