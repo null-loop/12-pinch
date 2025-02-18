@@ -34,7 +34,7 @@ class MazeGenerator:
         self.__visit(1,1)
 
     def __visit(self, x, y):
-        self.__board.set_with_colour(x, y, EntityType.EMPTY, [40,40,40])
+        self.__board.set(x, y, EntityType.EMPTY)
         while True:
             unvisited = []
             # find which of our neighbouring spaces we've not visited before...
@@ -57,16 +57,16 @@ class MazeGenerator:
 
                 if next_direction == self._UP:
                     next_y = y - 2
-                    self.__board.set_with_colour(x, y - 1, EntityType.EMPTY, [40,40,40]) # connection
+                    self.__board.set(x, y - 1, EntityType.EMPTY) # connection
                 if next_direction == self._DOWN:
                     next_y = y + 2
-                    self.__board.set_with_colour(x, y + 1, EntityType.EMPTY, [40,40,40]) # connection
+                    self.__board.set(x, y + 1, EntityType.EMPTY) # connection
                 if next_direction == self._LEFT:
                     next_x = x - 2
-                    self.__board.set_with_colour(x - 1, y, EntityType.EMPTY, [40,40,40]) # connection
+                    self.__board.set(x - 1, y, EntityType.EMPTY) # connection
                 if next_direction == self._RIGHT:
                     next_x = x + 2
-                    self.__board.set_with_colour(x + 1, y, EntityType.EMPTY, [40,40,40]) # connection
+                    self.__board.set(x + 1, y, EntityType.EMPTY) # connection
 
                 self.__visit(next_x, next_y)
                 time.sleep(self.__step)
