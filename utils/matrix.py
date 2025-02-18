@@ -53,6 +53,7 @@ class ScreenMatrix:
             self.__matrix.SetPixel(t_x, t_y, r, g, b)
 
     def clear(self):
+        print("ScreenMatrix-clear")
         self.__matrix.Clear()
 
     def increase_brightness(self):
