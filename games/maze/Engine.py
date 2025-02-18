@@ -133,7 +133,7 @@ class Engine:
                         this_turn = Turn()
                         this_turn.x = current[0]
                         this_turn.y = current[1]
-                        this_turn.turns.append(next_move)
+                        this_turn.turns = [next_move]
                         self.__turns.append(this_turn)
                 self.__trail.append(next_move)
                 self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
