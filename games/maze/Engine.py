@@ -106,6 +106,7 @@ class Engine:
             can_move = self.__board.get_immediate_neighbours(current[0], current[1], EntityType.EMPTY)
             # if we've returned to a previous turn - remove those turns from the possible moves
             if self.__returning_to is not None:
+                print(f'Excluding existing turns from pos {self.__returning_to.x},{self.__returning_to.y}')
                 for already_turned in self.__returning_to.turns:
                     print(can_move)
                     print(already_turned)
@@ -127,7 +128,7 @@ class Engine:
                 else:
                     # if this is a turn we need to add that to our list
                     if len(can_move) > 1:
-                        print(f"Adding new turn at {current[0]},{current[1]}")
+                        print(f"Adding new turn at {current[0]},{current[1]} - first move to {next_move[0]},{next_move[1]}")
                         this_turn = Turn()
                         this_turn.x = current[0]
                         this_turn.y = current[1]

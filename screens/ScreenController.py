@@ -14,8 +14,8 @@ from utils.matrix import ScreenMatrix
 class ScreenController:
     def __init__(self):
         self.__matrix = ScreenMatrix()
-        self.__screens = [LifeScreen(self.__matrix),
-                          MazeScreen(self.__matrix),
+        self.__screens = [MazeScreen(self.__matrix),
+                          LifeScreen(self.__matrix),
                           GitScreen(self.__matrix),
                           SnakeScreen(self.__matrix),
                           SpotifyScreen(self.__matrix)]
