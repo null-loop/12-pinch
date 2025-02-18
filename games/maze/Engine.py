@@ -39,13 +39,13 @@ class MazeGenerator:
         while True:
             unvisited = []
             # find which of our neighbouring spaces we've not visited before...
-            if y > 1 and (x, y - 2) not in self.__visited:
+            if y > 1 and self.__board.get(x, y - 2) == EntityType.WALL:
                 unvisited.append(self._UP)
-            if y < self.__board.height() - 2 and (x, y + 2) not in self.__visited:
+            if y < self.__board.height() - 2 and self.__board.get(x, y + 2) == EntityType.WALL:
                 unvisited.append(self._DOWN)
-            if x > 1 and (x - 2, y) not in self.__visited:
+            if x > 1 and self.__board.get(x - 2, y) == EntityType.WALL:
                 unvisited.append(self._LEFT)
-            if x < self.__board.width() - 2 and (x + 2, y) not in self.__visited:
+            if x < self.__board.width() - 2 and self.__board.get(x + 2, y) == EntityType.WALL:
                 unvisited.append(self._RIGHT)
 
             if len(unvisited) == 0:
@@ -69,7 +69,6 @@ class MazeGenerator:
                     next_x = x + 2
                     self.__board.set(x + 1, y, EntityType.EMPTY) # connection
 
-                self.__visited.append((next_x, next_y))
                 self.__visit(next_x, next_y)
 
 class Engine:
