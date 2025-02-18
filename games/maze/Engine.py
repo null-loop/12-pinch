@@ -76,7 +76,7 @@ class Engine:
         self.__board = board
         self.__board.set_cell_colour_func(self.__colour_cell_func)
         self.__generation_step = 1/500
-        self.__solver_step = 1/10
+        self.__solver_step = 1/20
         self.__maze_entrance = ()
         self.__maze_exit = ()
         self.__trail = []
@@ -142,8 +142,10 @@ class Engine:
             if head[0] != self.__returning_to.x and head[1] != self.__returning_to.y:
                 trimmed = self.__trail.pop()
                 self.__board.set(trimmed[0],trimmed[1],EntityType.EMPTY)
+                print(f'Trimmed {trimmed[0]},{trimmed[1]}')
             else:
                 self.__state = State.PROGRESSING
+                print('Continuing')
         # check when we've solved the maze - and start another one!
         if self.__trail[-1] == self.__maze_exit:
             time.sleep(10)
