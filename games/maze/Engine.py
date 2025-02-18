@@ -107,6 +107,7 @@ class Engine:
             # if we've returned to a previous turn - remove those turns from the possible moves
             if self.__returning_to is not None:
                 print(f'Excluding existing turns from pos {self.__returning_to.x},{self.__returning_to.y}')
+                print(f'{self.__returning_to.turns}')
                 for already_turned in self.__returning_to.turns:
                     print(can_move)
                     print(already_turned)
