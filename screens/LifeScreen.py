@@ -3,10 +3,9 @@ import math
 from PIL import Image
 from numpy import asarray
 
-from games.GameBoard import GameBoard
 from games.life.Engine import Engine, Position
-from games.life.GameOptions import GameOptions
 from screens.GameScreen import GameScreen
+
 
 def calculate_board_size(zoom_level:int):
     size = math.floor(128 / zoom_level)
@@ -18,7 +17,7 @@ class LifeScreen(GameScreen):
     label="Game of Life"
 
     def __init__(self, matrix):
-        super().__init__(matrix, calculate_board_size, lambda: Engine(self.__game_board))
+        super().__init__(matrix, calculate_board_size, lambda: Engine(super(LifeScreen, self)._game_board))
         self.__spawned = False
         self.__preset = 0
         self.__random_spawn_ratio = 3
@@ -26,7 +25,7 @@ class LifeScreen(GameScreen):
 
     def focus(self):
         if not self.__spawned:
-            super(LifeScreen, self).rebuild_board_and_engine()
+            super(LifeScreen, self)._rebuild_board_and_engine()
             self.__load_preset()
         else:
             self.__game_engine.fresh_render()

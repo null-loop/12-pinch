@@ -14,7 +14,7 @@ class SnakeScreen(GameScreen):
     label="Snake"
 
     def __init__(self, matrix: ScreenMatrix):
-        super().__init__(matrix, calculate_board_size, lambda : Engine(self.__game_board, self.__game_options))
+        super().__init__(matrix, calculate_board_size, lambda : Engine(super(SnakeScreen, self)._game_board, self.__game_options))
         self.__game_options = GameOptions()
         self.__game_options.min_snake_count = 100
         self.__game_options.food_count = 40
@@ -24,7 +24,7 @@ class SnakeScreen(GameScreen):
 
     def focus(self):
         if not self.__spawned:
-            super(SnakeScreen, self).rebuild_board_and_engine()
+            super(SnakeScreen, self)._rebuild_board_and_engine()
             self.__load_preset()
         self.__game_engine.fresh_render()
 
