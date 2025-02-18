@@ -1,4 +1,4 @@
-import random
+from random import randrange
 import sys
 import time
 from enum import Enum
@@ -114,3 +114,18 @@ class Engine:
         generator.generate()
         # Carves out the maze. Consider a slowdown
         # Then pick an entrance and an exit - carve from board - set __maze_entrance and __maze_exit
+        found_entrance = False
+        while not found_entrance:
+            pos_y = randrange(self.__board.height())
+            if self.__board.get(1, pos_y) == EntityType.EMPTY:
+                found_entrance = True
+                self.__maze_entrance = (0, pos_y)
+                self.__board.set(0, pos_y, EntityType.EMPTY)
+
+        found_exit = False
+        while not found_exit:
+            pos_y = randrange(self.__board.height())
+            if self.__board.get(self.__board.width() - 2, pos_y) == EntityType.EMPTY:
+                found_exit = True
+                self.__maze_entrance = (self.__board.width() - 1, pos_y)
+                self.__board.set(self.__board.width() - 1, pos_y, EntityType.EMPTY)
