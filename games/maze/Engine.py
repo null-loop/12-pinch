@@ -96,6 +96,7 @@ class Engine:
         return colour
 
     def turn(self):
+        fin = False
         # The solver runs in here! Consider a slowdown
         if self.__state == State.NOT_STARTED:
             self.__trail.append(self.__maze_entrance)
@@ -121,23 +122,26 @@ class Engine:
                 self.__returning_to = self.__turns[-1]
                 #print(f"Can't move - returning to {self.__returning_to.x},{self.__returning_to.y}")
             else:
-                next_move = can_move[0]
-                if self.__returning_to is not None:
-                    # now record the next turn we're making
-                    self.__returning_to.turns.append(next_move)
-                    self.__returning_to = None
+                if self.__maze_exit in can_move:
+                    fin = True
                 else:
-                    # if this is a turn we need to add that to our list
-                    if len(can_move) > 1:
-                        #print(f"Adding new turn at {current[0]},{current[1]} - first move to {next_move[0]},{next_move[1]}")
-                        this_turn = Turn()
-                        this_turn.x = current[0]
-                        this_turn.y = current[1]
-                        this_turn.turns = [next_move]
-                        self.__turns.append(this_turn)
-                self.__trail.append(next_move)
-                self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
-                #print(f'Moved to {next_move[0]},{next_move[1]}')
+                    next_move = can_move[0]
+                    if self.__returning_to is not None:
+                        # now record the next turn we're making
+                        self.__returning_to.turns.append(next_move)
+                        self.__returning_to = None
+                    else:
+                        # if this is a turn we need to add that to our list
+                        if len(can_move) > 1:
+                            #print(f"Adding new turn at {current[0]},{current[1]} - first move to {next_move[0]},{next_move[1]}")
+                            this_turn = Turn()
+                            this_turn.x = current[0]
+                            this_turn.y = current[1]
+                            this_turn.turns = [next_move]
+                            self.__turns.append(this_turn)
+                    self.__trail.append(next_move)
+                    self.__board.set(next_move[0],next_move[1],EntityType.SOLVER)
+                    #print(f'Moved to {next_move[0]},{next_move[1]}')
         elif self.__state == State.RETURNING:
             # keep trimming __trail until we hit __returning_to
             current = self.__trail[-1]
@@ -151,7 +155,7 @@ class Engine:
                 #print(f'Trimmed {trimmed[0]},{trimmed[1]}')
 
         # check when we've solved the maze - and start another one!
-        if self.__trail[-1] == self.__maze_exit:
+        if fin:
             time.sleep(10)
             self.spawn_maze()
         else:
