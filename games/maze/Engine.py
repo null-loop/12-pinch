@@ -32,6 +32,7 @@ class MazeGenerator:
     def generate(self):
         self.__visited = [(1, 1)]
         self.__visit(1,1)
+        print('MazeGenerator-Complete')
 
     def __visit(self, x, y):
         self.__board.set(x, y, EntityType.EMPTY)
@@ -111,5 +112,6 @@ class Engine:
         # The generator runs in here - write to the board as it goes
         generator = MazeGenerator(self.__board, self.__generation_step)
         generator.generate()
+        print("Engine-spawn_maze-Complete")
         # Carves out the maze. Consider a slowdown
         # Then pick an entrance and an exit - carve from board - set __maze_entrance and __maze_exit
