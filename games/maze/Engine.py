@@ -89,10 +89,7 @@ class Engine:
         if entity_type == EntityType.WALL:
             colour = [0,0,0]
         if entity_type == EntityType.SOLVER:
-            r = (x / self.__board.width()) * 256
-            b = 50
-            g = (y / self.__board.height()) * 256
-            colour = [r, g, b]
+            colour = [0, 255, 0]
         return colour
 
     def turn(self):
@@ -154,7 +151,7 @@ class Engine:
                 #print('Continuing')
             else:
                 trimmed = self.__trail.pop()
-                self.__board.set(trimmed[0],trimmed[1],EntityType.EMPTY)
+                self.__board.set_with_colour(trimmed[0],trimmed[1],EntityType.EMPTY,[255,0,0])
                 #print(f'Trimmed {trimmed[0]},{trimmed[1]}')
 
         # check when we've solved the maze - and start another one!
